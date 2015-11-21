@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<!-- eric testing ====== pls delete but keep same id names  -->
+    <h1>time capsule</h1>
+
+    <button id="sign-up">Sign up!</button><br>
+  	<button id="log-in">Login!</button><br>
+
+    <div id="form-container"></div>
+
+  <!-- LOGIN ============= -->
+  	<template id="login-template">
+
+  		<div id="login-container" data-id="{{_id}}">
+  			<input type="text" id="username" placeholder="username"/><br>
+  			<input type="text" id="password" placeholder="password"/><br>
+  			<button id="login-button" data-id="{{_id}}">Login!</button>
+  		</div>
+
+  	</template>
+
+  <!--  NEW USER ============= -->
+  	<template id="signup-template">
+
+  		<div id="signup-container" data-id="{{_id}}">
+  			<input type="text" id="username" placeholder="username"/><br>
+  			<input type="text" id="password" placeholder="password"/><br>
+  			<!-- <input type="text" id="secret1" placeholder="log your secret"/>
+  			<input type="text" id="secret2" placeholder="log another"/> -->
+  			<button id="register-button" data-id="{{_id}}">Register!</button>
+  		</div>
+
+  	</template>
+
+
+
+
+<!-- end eric testing ====== pls delete but keep same id names  -->
+
+  </body>
+</html>
