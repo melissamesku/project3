@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-// var ComplaintSchema = require('./complaint').schema;
+var capsuleSchema = require('./capsule').schema;
 
 var userSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true };
