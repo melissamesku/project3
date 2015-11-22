@@ -7,8 +7,8 @@ var userSchema = new mongoose.Schema({
 	password_hash: String,
 	age: Number,
 	location: String,
-	time_capsule: [capsuleSchema],
-	created_at: Date
+	time_capsules: [capsuleSchema],
+	created_at: { type:Date, default: Date.now }
 });
 
 var User = mongoose.model('User', userSchema);
