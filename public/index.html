@@ -5,12 +5,16 @@
   	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
   	<link rel="stylesheet" type="text/css" href="css/styles.css">
-  	
 </head>
+
 <body>
 	<nav>
 	</nav>
-	<div id="accordion-area">
+	<div id="accordion" data-toggle="collapse">
+		<a href="index.html#secret">login</a>
+		<div id="secret" class="collapse">
+			<p>Some text that only appears when a collapse link is clicked</p>
+		</div>
 	</div>
 
 	<div class="container row">
@@ -113,6 +117,7 @@
 			  		</div>
 
 			  	</template>
+			  	
 			</div>
 		</section>
 
