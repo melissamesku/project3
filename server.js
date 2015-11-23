@@ -9,15 +9,14 @@ var express      = require('express'),
 var port         = process.env.PORT || 3000;
 var app          = express();
 
-// var User = require('./models/user.js');
-// var Wish = require('./models/wish.js');
+var User = require('./models/user');
+var Capsule = require('./models/capsule');
+var Question = require('./models/question');
 
 // MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(express.static('public'));
-
 app.use(cookieParser());
 
 // DATABASE
@@ -25,18 +24,54 @@ mongoose.connect('mongodb://localhost/timecapsule_app');
 
 // LISTENER
 app.listen(port);
-
 console.log('server working');
 
-// LOGIN -------------------------
+// SEED -----------------------
+// var seed = require('./seed.js');
+
+// POST SIGN-UP -----------------------
+app.post('/users', function(req, res) {
+
+// console.log("at users post");
+
+  var password_hash = md5(req.body.password);
+
+  var user = new User({
+    username: req.body.username,
+    password_hash: password_hash,
+    // email: req.body.email,
+    // age: req.body.age,
+    // location: req.body.location
+  });
+
+  console.log("secrets " + user.secrets);
+
+  user.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.statusCode = 503;
+    } else {
+      console.log(user.username + " created server side");
+
+      res.cookie("loggedinId", user.id);
+
+      res.send(user);
+    }; // end if/else
+  }); // end save
+}); // end post
+
+// POST LOGIN -------------------------
 app.post('/login', function(req, res){
 
   var req_username = req.body.username;
   var req_password= req.body.password;
 
-  User.findOne( {'username' : req_username} ).exec(function(err, user){
+  console.log('username '+req_username);
+  console.log('password '+req_password);
 
-    req_password_hash = md5(req_password);
+  req_password_hash = md5(req_password);
+
+  User.findOne( {'username' : req_username} ).exec(function(err, user){
 
     if (user != null && req_password_hash  == user.password_hash){
       res.cookie("loggedinId", user.id);
