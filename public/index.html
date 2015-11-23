@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Time Capsule</title>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-  	<script type="text/javascript" src="js/app.js"></script>
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css"></script>
-  	<script type="text/javascript" src="css/styles.css"></script>
+    <title>Time Capsule</title>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+      <link rel="stylesheet" type="text/css" href="css/styles.css">
+
 </head>
 <body>
-	<nav>
-	</nav>
+    <nav>
+    </nav>
 
-	<div id="sidebar">
-	</div>
+    <div id="sidebar">
+    </div>
 
     <h1>time capsule</h1>
 
     <div id="main">
-		<button id="sign-up">Sign up!</button><br>
-	  	<button id="log-in">Login!</button><br>
+        <button id="sign-up">Sign up!</button><br>
+          <button id="log-in">Login!</button><br>
 
-	    <div id="form-container"></div>
+        <div id="form-container"></div>
 
-	  <!-- LOGIN ============= -->
-	  	<template id="login-template">
+      <!-- LOGIN ============= -->
+          <template id="login-template">
 
-	  		<div id="login-container" data-id="{{_id}}">
-	  			<input type="text" id="username" placeholder="username"/><br>
-	  			<input type="text" id="password" placeholder="password"/><br>
-	  			<button id="login-button" data-id="{{_id}}">Login!</button>
-	  		</div>
+              <div id="login-container" data-id="{{_id}}">
+                  <input type="text" id="username" placeholder="username"/><br>
+                  <input type="text" id="password" placeholder="password"/><br>
+                  <button id="login-button" data-id="{{_id}}">Login!</button>
+              </div>
 
-	  	</template>
+          </template>
 
-	  <!--  NEW USER ============= -->
-	  	<template id="signup-template">
+      <!--  NEW USER ============= -->
+          <template id="signup-template">
 
-	  		<div id="signup-container" data-id="{{_id}}">
-	  			<input type="text" id="username" placeholder="username"/><br>
-	  			<input type="text" id="password" placeholder="password"/><br>
-	  			<!-- <input type="text" id="secret1" placeholder="log your secret"/>
-	  			<input type="text" id="secret2" placeholder="log another"/> -->
-	  			<button id="register-button" data-id="{{_id}}">Register!</button>
-	  		</div>
+              <div id="signup-container" data-id="{{_id}}">
+                  <input type="text" id="username" placeholder="username"/><br>
+                  <input type="text" id="password" placeholder="password"/><br>
+                  <!-- <input type="text" id="secret1" placeholder="log your secret"/>
+                  <input type="text" id="secret2" placeholder="log another"/> -->
+                  <button id="register-button" data-id="{{_id}}">Register!</button>
+              </div>
 
-	  	</template>
-	</div>
+          </template>
+    </div>
 
-	<footer>
-	</footer>
-
+    <footer>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
+      <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
