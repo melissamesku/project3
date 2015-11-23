@@ -87,15 +87,14 @@ app.get('/questions', function(req, res) {
 
 	Question.find().then(function(questions) {
 
-    var shuffle = function(a) {
-      for(var j, x, i = a.length; i; j = Math.floor(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x);
-      return a;
-    };
-    shuffledDeck = deckOfCards.slice(0);
-    shuffle(shuffledDeck);
+    // var shuffle = function(a) {
+    //   for(var j, x, i = a.length; i; j = Math.floor(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x);
+    //   return a;
+    // };
+    // shuffledDeck = deckOfCards.slice(0);
+    // shuffle(shuffledDeck);
 
-
-    console.log(questions);
+    // console.log(questions);
 
 		res.send(questions);
 	});

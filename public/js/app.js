@@ -1,21 +1,30 @@
 $(function() {
 console.log('js loaded');
 
-// SIGN-UP BUTTON
-$('#sign-up').click(function(){
-  console.log('clicked sign-up');
-  signUpForm();
-  $('#sign-up').hide();
-  $('#log-in').hide();
-});
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in")
+    $('#sign-up').hide();
+    $('#log-in').hide();
+    getQuestions();
+  } else {
 
-// LOG-IN BUTTON
-$('#log-in').click(function(){
-  console.log('clicked log-in');
-  loginForm();
-  $('#sign-up').hide();
-  $('#log-in').hide();
-});
+    // SIGN-UP BUTTON
+    $('#sign-up').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
+    // LOG-IN BUTTON
+    $('#log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
+  };
 
 }); // end doc ready
 
@@ -102,9 +111,11 @@ var loginPost = function() {
 
 		user = Cookies.get("loggedinId");
 
-    // get main page form goes here
-    // formContainer.empty();
-    formContainer.append("<p>"+data+"</p>");
+    formContainer.empty();
+    formContainer.append("<p>"+data.username+" logged in.</p>");
+
+    // loads main page
+    getQuestions();
 
 	}).fail(function(){
 		var template = Handlebars.compile($('#status-template').html());
@@ -121,6 +132,7 @@ var getQuestions = function(){
 		method: 'GET',
 		dataType: 'json'
 	}).done(function(data) {
+    console.log("questions from database gotten");
     renderQuestions(data);
   });
 }; // end getQuestions
@@ -128,17 +140,26 @@ var getQuestions = function(){
 var renderQuestions = function(data) {
 	formContainer.empty();
 
-	var template = Handlebars.compile($('#questions-template').html());
+ var template =
+ Handlebars.compile($('#boxes-template').html());
+ formContainer.append(template);
 
-  var rand_quest =
+  $(data).each(function (index) {
+    console.log(this.question);
+  });
+  // console.log(data);
 
-	for(var i=0;i<data.length;i++) {
-		resultDiv.append(template(data[i]))
-	}
-
-	$('.box').click(function() {
-    var $id = $(this).attr("data-id");
-    console.log($id);
-		editInstructor($id);
-	});
+	// $('.box').click(function() {
+  //   var $id = $(this).attr("data-id");
+  //   console.log($id);
+	// });
 }; // end renderQuestions
+
+
+
+// // ACCORDION -------------------
+// $(function() {
+//     $( "#accordion" ).accordion({
+//       collapsible: true
+//     });
+//   }); // end accordion
