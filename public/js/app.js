@@ -5,14 +5,16 @@ console.log('js loaded');
 $('#sign-up').click(function(){
   console.log('clicked sign-up');
   signUpForm();
-  // $('#sign-up').hide();
+  $('#sign-up').hide();
+  $('#log-in').hide();
 });
 
 // LOG-IN BUTTON
 $('#log-in').click(function(){
   console.log('clicked log-in');
   loginForm();
-  // $('#log-in').hide();
+  $('#sign-up').hide();
+  $('#log-in').hide();
 });
 
 }); // end doc ready
@@ -70,7 +72,7 @@ var newUser = function() {
 // LOGIN ---------------------
 var loginForm = function() {
 	console.log('showing login form');
-	// formContainer.empty();
+	formContainer.empty();
 
 	var template = Handlebars.compile($('#login-template').html());
 	formContainer.append(template);
