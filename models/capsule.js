@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+// SCHEMA
 var capsuleSchema = new mongoose.Schema({
 	question: Array,
 	user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -7,5 +8,6 @@ var capsuleSchema = new mongoose.Schema({
 	created_at: { type: Date, default: Date.now }
 });
 
+// CREATE MODEL USING SCHEMA
 var Capsule = mongoose.model('Capsule', capsuleSchema);
 module.exports = Capsule;
