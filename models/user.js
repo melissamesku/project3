@@ -4,7 +4,7 @@ var capsuleSchema = require('./capsule').schema;
 // SCHEMA
 var userSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true };
-	email: { type: String, required: true, unique: true },
+	email: type: String,
 	password_hash: { type: String, required: true },
 	age: Number,
 	location: String,

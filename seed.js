@@ -1,3 +1,15 @@
+// ======================================
+// Note on running seed
+// ======================================
+// Include the following line in server.js (comment it out).
+// Uncomment to run seed, then re-comment in order to prevent
+// the seed from running multiple times.
+
+// var seed = require('./seed.js');
+// ======================================
+// ======================================
+
+
 // REQUIRE MONGOOSE AND MODELS
 var mongoose = require('mongoose'),
 	User = require('.models/user.js'),
@@ -5,7 +17,13 @@ var mongoose = require('mongoose'),
 	Capsule = require('./models/capsule.js');
 
 // DATABASE
-mongoose.connect('mongodb://localhost/timecapsule_app');
+mongoose.connect('mongodb://localhost/timecapsule_app'), function(err) {
+	if(err) {
+		console.log('Connection error: ', err);
+	} else {
+		console.log('Connection successful');
+	}
+});
 
 // SEED
 // create questions
@@ -66,11 +84,11 @@ var question14 = new Question({
 });
 
 var question15 = new Question({
-	question: "Would you like to stay where you live now or move somewhere else?"
+	question: "Would you like to remain where you live now or move somewhere else?"
 });
 
 var question16 = new Question({
-	question: "What's the next phase of your life that you're looking forward to?"
+	question: "Is there anything that's now illegal that you predict will become legal in the future? What about something legal that will be made illegal?"
 });
 
 var question17 = new Question({
@@ -102,7 +120,7 @@ var question23 = new Question({
 });
 
 var question24 = new Question({
-	question: 
+	question: "Where do you go to recharge your energy?"
 });
 
 // save questions to database
