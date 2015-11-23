@@ -12,8 +12,8 @@
 
 // REQUIRE MONGOOSE AND MODELS
 var mongoose = require('mongoose'),
-	User = require('.models/user.js'),
-	Question = require('.models/question.js'),
+	User = require('./models/user.js'),
+	Question = require('./models/question.js'),
 	Capsule = require('./models/capsule.js');
 
 // DATABASE
@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost/timecapsule_app'), function(err) {
 	} else {
 		console.log('Connection successful');
 	}
-});
+};
 
 // SEED
 // create questions
@@ -243,8 +243,3 @@ question24.save(function(err) {
 	if(err) return handleError(err);
 	console.log("Saved: " + question24);
 });
-
-
-
-
-

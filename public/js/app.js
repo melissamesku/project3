@@ -112,3 +112,33 @@ var loginPost = function() {
 	}); // end fail
 }; //end loginPost
 // END LOGIN ---------------------
+
+// GET QUESTIONS ----------------------
+var getQuestions = function(){
+	console.log("getting questions");
+	$.ajax({
+		url: 'http://localhost:3000/questions',
+		method: 'GET',
+		dataType: 'json'
+	}).done(function(data) {
+    renderQuestions(data);
+  });
+}; // end getQuestions
+
+var renderQuestions = function(data) {
+	formContainer.empty();
+
+	var template = Handlebars.compile($('#questions-template').html());
+
+  var rand_quest =
+
+	for(var i=0;i<data.length;i++) {
+		resultDiv.append(template(data[i]))
+	}
+
+	$('.box').click(function() {
+    var $id = $(this).attr("data-id");
+    console.log($id);
+		editInstructor($id);
+	});
+}; // end renderQuestions
