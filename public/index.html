@@ -83,14 +83,36 @@
         <!-- BOX ============ -->
 		<template id="boxes-template">
 			<div class="boxes-container" data-id="{{_id}}">stuff
-			{{#each questions}}
+				<div class="outer-box">
+					{{#each questions}}
+					<div class="inner-box" data-id="testing{{@index}}">
+						<p>{{@index}} : {{this}} </p>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+
+
+			<!-- <div class="boxes-container" data-id="{{_id}}">stuff
+			{{#each ids}}
 				<div id="outer_box">
 					<div id="inner_box">{{this}}
 					</div>
 				</div>
 			{{/each}}
-			</div>
+			</div> -->
+
 		</template>
+
+		<!-- ACTIVE BOX ============ -->
+        <template id="active-box-template">
+            <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
+                <h3>Question: {{questions}}</h3>
+                <textarea id="response" placeholder="What do you think?"></textarea> 
+                <input type="submit">Add to time capsule</input>
+            </div>
+        </template>
+
 <!-- END TEMPLATES ============= -->
 
 	</div>
