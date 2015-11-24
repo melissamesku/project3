@@ -150,32 +150,50 @@ var renderQuestions = function(data) {
 	formContainer.empty();
   console.log('trying to render questions');
 
+  // console.log(data);
 
+  // console.log(data)
 
- // var boxesTemplate =
- // Handlebars.compile($('#boxes-template').html());
- // console.log(boxesTemplate);
+var obj = {
+  questions: []
+};
+
+$.each(data, function(key, value) {
+  obj.questions.push(value.question);
+});
+
+console.log(obj);
+
+ var template =
+ Handlebars.compile($('#boxes-template').html());
+ formContainer.append(template(obj));
 
   // formContainer.append("Question Data: " + data[0].question);
 
-  for (i=0; i<data.length; i++) {
-    formContainer.append("<div class='box'>" + data[i].question + "</div>");
-
-    console.log(data[i].question);
-  };
-
+  // var id = 0;
+  //
+  // for (i=0; i<data.length; i++) {
+  //   formContainer.append("<div class='box' data-id='" + data[i]._id + "'>" + data[i].question + "</div>");
+  //   $('.box').click(function() {
+  //     id = $(this).attr("data-id");
+  //     console.log(id);
+  //   });
+  //   // console.log(data[i].question);
+  // };
+  //
   // $(data).each(function (index) {
   //   console.log(this.question);
   // });
   // console.log(data);
 
-	// $('.box').click(function() {
-  //   var $id = $(this).attr("data-id");
-  //   console.log($id);
-	// });
 }; // end renderQuestions
+// END QUESTIONS --------------------
+
+// GET ANSWERS ----------------------
 
 
+
+// END ANSWERS ----------------------
 
 // // ACCORDION -------------------
 // $(function() {
