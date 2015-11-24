@@ -18,7 +18,16 @@
 	    </div>
 	  </li>
 	</ul>
+<<<<<<< HEAD
 
+=======
+	<!-- <div id="accordion" data-toggle="collapse">
+		<a href="index.html#secret">login</a>
+		<div id="secret" class="collapse">
+			<p>Some text that only appears when a collapse link is clicked</p>
+		</div>
+	</div> -->
+>>>>>>> 0162d4683e3752d008d80a95ae7560e9148b0dad
 
 	<div class="container row">
 
@@ -59,7 +68,7 @@
 
 	  	</template>
 
-	  <!--  NEW USER ============= -->
+	    <!--  NEW USER ============= -->
 	  	<template id="signup-template">
 
 	  		<div id="signup-container" data-id="{{_id}}">
@@ -81,29 +90,16 @@
 
 	  	</template>
 
-			<!-- ACTIVE BOX ============ -->
-      <template id="active-box-template">
-          <div class="active-box-container" data-id="{{_id}}">
-              <h3>Question: {{question}}</h3>
-              <textarea id="response" placeholder="What do you think?"></textarea>
-              <input type="submit">Add to time capsule</input>
-          </div>
-      </template>
-
-
-			<!-- BOX ============ -->
-			<template id="boxes-template">
-					<div class="boxes-container" data-id="{{_id}}">stuff
-							{{#each questions}}
-								<p>
-									{{this}}
-								</p>
-							{{/each}}
-					</div>
-			</template>
-
-
-
+	  	<!-- BOX ============ -->
+        <template id="boxes-template">
+            <div class="boxes-container" data-id="{{_id}}">stuff
+                {{#each questions}}
+                    <p>
+                        {{this}}
+                    </p>
+                {{/each}}
+            </div>
+        </template>
 <!-- END TEMPLATES ============= -->
 
 	</div>

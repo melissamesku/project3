@@ -162,7 +162,7 @@ $.each(data, function(key, value) {
   obj.questions.push(value.question);
 });
 
-console.log(obj);
+// console.log(obj);
 
  var template =
  Handlebars.compile($('#boxes-template').html());
