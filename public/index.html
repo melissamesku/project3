@@ -10,13 +10,20 @@
 <body>
 	<nav>
 	</nav>
-	<div id="accordion" data-toggle="collapse">
+	<ul class="accordion" data-accordion>
+	  <li class="accordion-navigation" style="text-align:right;">
+	    <a href="#about">About</a>
+	    <div id="about" class="content">
+	      <em><span style="color:green">To the future!</span> Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</em>
+	    </div>
+	  </li>
+	</ul>
+	<!-- <div id="accordion" data-toggle="collapse">
 		<a href="index.html#secret">login</a>
 		<div id="secret" class="collapse">
 			<p>Some text that only appears when a collapse link is clicked</p>
 		</div>
-	</div>
-
+	</div> -->
 
 	<div class="container row">
 
@@ -57,7 +64,7 @@
 
 	  	</template>
 
-	  <!--  NEW USER ============= -->
+	    <!--  NEW USER ============= -->
 	  	<template id="signup-template">
 
 	  		<div id="signup-container" data-id="{{_id}}">
@@ -78,6 +85,17 @@
 	  		</div>
 
 	  	</template>
+
+	  	<!-- BOX ============ -->
+        <template id="boxes-template">
+            <div class="boxes-container" data-id="{{_id}}">stuff
+                {{#each questions}}
+                    <p>
+                        {{this}}
+                    </p>
+                {{/each}}
+            </div>
+        </template>
 <!-- END TEMPLATES ============= -->
 
 	</div>
@@ -89,5 +107,6 @@
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
   	<script type="text/javascript" src="js/app.js"></script>
   	<script src='https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js'></script>
+  	<script>$(document).foundation();</script>
   </body>
 </html>
