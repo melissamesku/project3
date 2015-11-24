@@ -1,9 +1,9 @@
 $(function() {
-console.log('js loaded');
+  console.log('js loaded');
 
-// GLOBAL VARIABLES --------------
-var user = null;
-var formContainer = $('#form-container');
+  // GLOBAL VARIABLES --------------
+  var user = null;
+  var formContainer = $('#form-container');
 
 
 // SETUP --------------
@@ -13,8 +13,9 @@ var formContainer = $('#form-container');
     $('#sign-up').hide();
     $('#log-in').hide();
     getQuestions();
-  } else {
-
+  } 
+  else {
+    
     // SIGN-UP BUTTON
     $('#sign-up').click(function(){
       console.log('clicked sign-up');
@@ -151,27 +152,40 @@ var renderQuestions = function(data) {
 	formContainer.empty();
   console.log('trying to render questions');
 
-  // console.log(data);
+  var template = Handlebars.compile($('#boxes-template').html());
+  for(var i=0;i<data.length;i++) {
+    formContainer.append(template(data[i]));
+  }
 
-  // console.log(data)
-
-  var obj = {
-    questions: [],
-    // ids: []
-  };
-
-  $.each(data, function(key, value) {
-    obj.questions.push(value.question);
-    // obj.ids.push(value._id);
-    console.log('MELISSA AND AMANDA ROCK ' + value._id);
+  $(".inner-box").on("click", function() {
+    var id = $(this).parent('.outer-box').attr('id');
+    console.log("the id should be here: " + id);
+    render(id);
   });
+  // console.log(data[0]._id, data[0].question);
+
+
+  // var obj = {
+  //   questions: []
+  //   // ids: []
+  // };
+
+  // $.each(data, function(key, value) {
+  //   obj.questions.push(value.question);
+  //   // obj.ids.push(value._id);
+  //   console.log('MELISSA AND AMANDA ROCK ' + value._id);
+  // });
 
   // console.log(obj);
 
-  var template = Handlebars.compile($('#boxes-template').html());
-  formContainer.append(template(obj));
+  // var template = Handlebars.compile($('#boxes-template').html());
+  // formContainer.append(template(obj));
 
 }; // end renderQuestions
+
+// var renderAnswer
+// var innerBox = $('.inner-box');
+//   innerBox.empty();
 
 
 // $('#inner-box').on('click', function() {
@@ -220,9 +234,4 @@ var renderQuestions = function(data) {
 
 // END ANSWERS ----------------------
 
-// // ACCORDION -------------------
-// $(function() {
-//     $( "#accordion" ).accordion({
-//       collapsible: true
-//     });
-//   }); // end accordion
+
