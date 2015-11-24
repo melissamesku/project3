@@ -1,8 +1,15 @@
 $(function() {
 console.log('js loaded');
 
+// GLOBAL VARIABLES --------------
+var user = null;
+var formContainer = $('#form-container');
+
+
+// SETUP --------------
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in")
+    formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
     getQuestions();
@@ -28,9 +35,6 @@ console.log('js loaded');
 
 }); // end doc ready
 
-// GLOBAL VARIABLES --------------
-var user = null;
-var formContainer = $('#form-container');
 
 // SIGN-UP -----------------------
 var signUpForm = function() {
@@ -81,6 +85,7 @@ var newUser = function() {
 // LOGIN ---------------------
 var loginForm = function() {
 	console.log('showing login form');
+  var formContainer = $('#form-container');
 	formContainer.empty();
 
 	var template = Handlebars.compile($('#login-template').html());
@@ -111,6 +116,7 @@ var loginPost = function() {
 
 		user = Cookies.get("loggedinId");
 
+    var formContainer = $('#form-container');
     formContainer.empty();
     formContainer.append("<p>"+data.username+" logged in.</p>");
 
@@ -127,6 +133,8 @@ var loginPost = function() {
 // GET QUESTIONS ----------------------
 var getQuestions = function(){
 	console.log("getting questions");
+  var formContainer = $('#form-container');
+
 	$.ajax({
 		url: 'http://localhost:3000/questions',
 		method: 'GET',
@@ -138,15 +146,27 @@ var getQuestions = function(){
 }; // end getQuestions
 
 var renderQuestions = function(data) {
+  var formContainer = $('#form-container');
 	formContainer.empty();
+  console.log('trying to render questions');
 
- var template =
- Handlebars.compile($('#boxes-template').html());
- formContainer.append(template);
 
-  $(data).each(function (index) {
-    console.log(this.question);
-  });
+
+ // var boxesTemplate =
+ // Handlebars.compile($('#boxes-template').html());
+ // console.log(boxesTemplate);
+
+  // formContainer.append("Question Data: " + data[0].question);
+
+  for (i=0; i<data.length; i++) {
+    formContainer.append("<div class='box'>" + data[i].question + "</div>");
+
+    console.log(data[i].question);
+  };
+
+  // $(data).each(function (index) {
+  //   console.log(this.question);
+  // });
   // console.log(data);
 
 	// $('.box').click(function() {
