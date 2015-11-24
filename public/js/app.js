@@ -1,9 +1,9 @@
 $(function() {
-console.log('js loaded');
+  console.log('js loaded');
 
-// GLOBAL VARIABLES --------------
-var user = null;
-var formContainer = $('#form-container');
+  // GLOBAL VARIABLES --------------
+  var user = null;
+  var formContainer = $('#form-container');
 
 
 // SETUP --------------
@@ -151,7 +151,18 @@ var renderQuestions = function(data) {
 	formContainer.empty();
   console.log('trying to render questions');
 
-  // console.log(data);
+  var template = Handlebars.compile($('#boxes-template').html());
+  for(var i=0;i<data.length;i++) {
+    formContainer.append(template(data[i]));
+  }
+
+  $(".inner-box").on("click", function() {
+    var id = $(this).parent('.outer-box').attr('id');
+    console.log("the id should be here: " + id);
+    render(id);
+  });
+  // console.log(data[0]._id, data[0].question);
+
 
   // var obj = {
   //   questions: []
@@ -166,10 +177,14 @@ var renderQuestions = function(data) {
 
   // console.log(obj);
 
-  var template = Handlebars.compile($('#boxes-template').html());
-  formContainer.append(template(obj));
+  // var template = Handlebars.compile($('#boxes-template').html());
+  // formContainer.append(template(obj));
 
 }; // end renderQuestions
+
+// var renderAnswer
+// var innerBox = $('.inner-box');
+//   innerBox.empty();
 
 
 // $('#testing0').click(function(){
