@@ -154,39 +154,58 @@ var renderQuestions = function(data) {
 
   // console.log(data)
 
-var obj = {
-  questions: []
-};
+  var obj = {
+    questions: [],
+    // ids: []
+  };
 
-$.each(data, function(key, value) {
-  obj.questions.push(value.question);
-});
+  $.each(data, function(key, value) {
+    obj.questions.push(value.question);
+    // obj.ids.push(value._id);
+    console.log('MELISSA AND AMANDA ROCK ' + value._id);
+  });
 
-// console.log(obj);
+  // console.log(obj);
 
- var template =
- Handlebars.compile($('#boxes-template').html());
- formContainer.append(template(obj));
-
-  // formContainer.append("Question Data: " + data[0].question);
-
-  // var id = 0;
-  //
-  // for (i=0; i<data.length; i++) {
-  //   formContainer.append("<div class='box' data-id='" + data[i]._id + "'>" + data[i].question + "</div>");
-  //   $('.box').click(function() {
-  //     id = $(this).attr("data-id");
-  //     console.log(id);
-  //   });
-  //   // console.log(data[i].question);
-  // };
-  //
-  // $(data).each(function (index) {
-  //   console.log(this.question);
-  // });
-  // console.log(data);
+  var template = Handlebars.compile($('#boxes-template').html());
+  formContainer.append(template(obj));
 
 }; // end renderQuestions
+
+
+// $('#testing0').click(function(){
+//   console.log('FUCK YEAH index 0 was clicked');
+// });
+
+
+
+
+
+
+
+// clicking on a question box replaces it with the active box template
+
+// users answer the question and click send
+
+// ‘send' click event activates function that gets:
+// the question _id
+// the answer
+// and saves that into a global variable
+
+
+
+
+// assign to RenderQuestions an id or counter for each item in array 
+// S.0. assign same click event
+
+
+
+
+
+
+
+
+
 // END QUESTIONS --------------------
 
 // GET ANSWERS ----------------------
