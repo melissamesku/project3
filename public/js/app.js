@@ -1,27 +1,40 @@
 $(function() {
 console.log('js loaded');
 
-// SIGN-UP BUTTON
-$('#sign-up').click(function(){
-  console.log('clicked sign-up');
-  signUpForm();
-  $('#sign-up').hide();
-  $('#log-in').hide();
-});
-
-// LOG-IN BUTTON
-$('#log-in').click(function(){
-  console.log('clicked log-in');
-  loginForm();
-  $('#sign-up').hide();
-  $('#log-in').hide();
-});
-
-}); // end doc ready
-
 // GLOBAL VARIABLES --------------
 var user = null;
 var formContainer = $('#form-container');
+
+
+// SETUP --------------
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in")
+    formContainer.empty();
+    $('#sign-up').hide();
+    $('#log-in').hide();
+    getQuestions();
+  } else {
+
+    // SIGN-UP BUTTON
+    $('#sign-up').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
+    // LOG-IN BUTTON
+    $('#log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
+  };
+
+}); // end doc ready
+
 
 // SIGN-UP -----------------------
 var signUpForm = function() {
@@ -72,6 +85,7 @@ var newUser = function() {
 // LOGIN ---------------------
 var loginForm = function() {
 	console.log('showing login form');
+  var formContainer = $('#form-container');
 	formContainer.empty();
 
 	var template = Handlebars.compile($('#login-template').html());
@@ -102,9 +116,12 @@ var loginPost = function() {
 
 		user = Cookies.get("loggedinId");
 
-    // get main page form goes here
-    // formContainer.empty();
-    formContainer.append("<p>"+data+"</p>");
+    var formContainer = $('#form-container');
+    formContainer.empty();
+    formContainer.append("<p>"+data.username+" logged in.</p>");
+
+    // loads main page
+    getQuestions();
 
 	}).fail(function(){
 		var template = Handlebars.compile($('#status-template').html());
@@ -112,3 +129,57 @@ var loginPost = function() {
 	}); // end fail
 }; //end loginPost
 // END LOGIN ---------------------
+
+// GET QUESTIONS ----------------------
+var getQuestions = function(){
+	console.log("getting questions");
+  var formContainer = $('#form-container');
+
+	$.ajax({
+		url: 'http://localhost:3000/questions',
+		method: 'GET',
+		dataType: 'json'
+	}).done(function(data) {
+    console.log("questions from database gotten");
+    renderQuestions(data);
+  });
+}; // end getQuestions
+
+var renderQuestions = function(data) {
+  var formContainer = $('#form-container');
+	formContainer.empty();
+  console.log('trying to render questions');
+
+
+
+ // var boxesTemplate =
+ // Handlebars.compile($('#boxes-template').html());
+ // console.log(boxesTemplate);
+
+  // formContainer.append("Question Data: " + data[0].question);
+
+  for (i=0; i<data.length; i++) {
+    formContainer.append("<div class='box'>" + data[i].question + "</div>");
+
+    console.log(data[i].question);
+  };
+
+  // $(data).each(function (index) {
+  //   console.log(this.question);
+  // });
+  // console.log(data);
+
+	// $('.box').click(function() {
+  //   var $id = $(this).attr("data-id");
+  //   console.log($id);
+	// });
+}; // end renderQuestions
+
+
+
+// // ACCORDION -------------------
+// $(function() {
+//     $( "#accordion" ).accordion({
+//       collapsible: true
+//     });
+//   }); // end accordion

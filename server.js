@@ -26,9 +26,6 @@ mongoose.connect('mongodb://localhost/timecapsule_app');
 app.listen(port);
 console.log('server working');
 
-// SEED -----------------------
-// var seed = require('./seed.js');
-
 // POST SIGN-UP -----------------------
 app.post('/users', function(req, res) {
 
@@ -82,3 +79,23 @@ app.post('/login', function(req, res){
     }; // end if/else
   }); // end findOne
 }); // end post
+
+
+// GET QUESTIONS --------------------
+app.get('/questions', function(req, res) {
+  console.log('got questions request');
+
+	Question.find().then(function(questions) {
+
+    // var shuffle = function(a) {
+    //   for(var j, x, i = a.length; i; j = Math.floor(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x);
+    //   return a;
+    // };
+    // shuffledDeck = deckOfCards.slice(0);
+    // shuffle(shuffledDeck);
+
+    // console.log(questions);
+
+		res.send(questions);
+	});
+});

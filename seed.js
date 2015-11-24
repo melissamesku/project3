@@ -242,8 +242,3 @@ question24.save(function(err) {
 	if(err) return handleError(err);
 	console.log("Saved: " + question24);
 });
-
-
-
-
-
