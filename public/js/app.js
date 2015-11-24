@@ -13,8 +13,9 @@ var formContainer = $('#form-container');
     $('#sign-up').hide();
     $('#log-in').hide();
     getQuestions();
-  } else {
-
+  } 
+  else {
+    
     // SIGN-UP BUTTON
     $('#sign-up').click(function(){
       console.log('clicked sign-up');
@@ -152,10 +153,8 @@ var renderQuestions = function(data) {
 
   // console.log(data);
 
-  // console.log(data)
-
   var obj = {
-    questions: [],
+    questions: []
     // ids: []
   };
 
@@ -214,9 +213,4 @@ var renderQuestions = function(data) {
 
 // END ANSWERS ----------------------
 
-// // ACCORDION -------------------
-// $(function() {
-//     $( "#accordion" ).accordion({
-//       collapsible: true
-//     });
-//   }); // end accordion
+
