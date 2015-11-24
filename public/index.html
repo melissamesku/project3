@@ -78,6 +78,30 @@
 	  		</div>
 
 	  	</template>
+
+			<!-- ACTIVE BOX ============ -->
+      <template id="active-box-template">
+          <div class="active-box-container" data-id="{{_id}}">
+              <h3>Question: {{question}}</h3>
+              <textarea id="response" placeholder="What do you think?"></textarea>
+              <input type="submit">Add to time capsule</input>
+          </div>
+      </template>
+
+
+			<!-- BOX ============ -->
+			<template id="boxes-template">
+					<div class="boxes-container" data-id="{{_id}}">stuff
+							{{#each questions}}
+								<p>
+									{{this}}
+								</p>
+							{{/each}}
+					</div>
+			</template>
+
+
+
 <!-- END TEMPLATES ============= -->
 
 	</div>
