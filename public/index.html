@@ -15,13 +15,11 @@
 
 		<section class="small-12 large-9 columns">
 
-		    <div id="main">
 		    	<h1>time capsule main area</h1>
 
 			    <div id="form-container">
 			    </div>
 
-			</div>
 		</section>
 
 		<section class="small-12 large-3 columns" id="sidebar-area">
@@ -35,42 +33,45 @@
 				<button id="sign-up">Sign up!</button><br>
 			  	<button id="log-in">Login!</button><br>
 
-				<!-- LOGIN ============= -->
-			  	<template id="login-template">
-
-			  		<div id="login-container" data-id="{{_id}}">
-			  			<label for="username">Username</label><br/>
-			  			<input type="text" id="username" placeholder="username"/><br>
-			  			<label for="username">Password</label><br/>
-			  			<input type="text" id="password" placeholder="password"/><br>
-			  			<button id="login-button" data-id="{{_id}}">Login!</button>
-			  		</div>
-
-			  	</template>
-
-			  <!--  NEW USER ============= -->
-			  	<template id="signup-template">
-
-			  		<div id="signup-container" data-id="{{_id}}">
-			  			<label for="username">Username *</label><br/>
-			  			<input type="text" id="username" placeholder="username"/><br>
-			  			<label for="username">Password *</label><br/>
-			  			<input type="text" id="password" placeholder="password"/><br>
-			  			<label for="username">Email</label><br/>
-			  			<input type="text" id="email" placeholder="email"/><br>
-			  			<label for="username">Age</label><br/>
-			  			<input type="text" id="age" placeholder="age"/><br>
-			  			<label for="username">Location</label><br/>
-			  			<input type="text" id="location" placeholder="location"/><br>
-			  			<p>* Required</p>
-			  			<!-- <input type="text" id="secret1" placeholder="log your secret"/>
-			  			<input type="text" id="secret2" placeholder="log another"/> -->
-			  			<button id="register-button" data-id="{{_id}}">Register!</button>
-			  		</div>
-
-			  	</template>
 			</div>
 		</section>
+
+<!-- TEMPLATES BELOW ============= -->
+		<!-- LOGIN ============= -->
+	  	<template id="login-template">
+
+	  		<div id="login-container" data-id="{{_id}}">
+	  			<label for="username">Username</label><br/>
+	  			<input type="text" id="username" placeholder="username"/><br>
+	  			<label for="username">Password</label><br/>
+	  			<input type="text" id="password" placeholder="password"/><br>
+	  			<button id="login-button" data-id="{{_id}}">Login!</button>
+	  		</div>
+
+	  	</template>
+
+	  <!--  NEW USER ============= -->
+	  	<template id="signup-template">
+
+	  		<div id="signup-container" data-id="{{_id}}">
+	  			<label for="username">Username *</label><br/>
+	  			<input type="text" id="username" placeholder="username"/><br>
+	  			<label for="username">Password *</label><br/>
+	  			<input type="text" id="password" placeholder="password"/><br>
+	  			<label for="username">Email</label><br/>
+	  			<input type="text" id="email" placeholder="email"/><br>
+	  			<label for="username">Age</label><br/>
+	  			<input type="text" id="age" placeholder="age"/><br>
+	  			<label for="username">Location</label><br/>
+	  			<input type="text" id="location" placeholder="location"/><br>
+	  			<p>* Required</p>
+	  			<!-- <input type="text" id="secret1" placeholder="log your secret"/>
+	  			<input type="text" id="secret2" placeholder="log another"/> -->
+	  			<button id="register-button" data-id="{{_id}}">Register!</button>
+	  		</div>
+
+	  	</template>
+<!-- END TEMPLATES ============= -->
 
 	</div>
 
