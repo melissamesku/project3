@@ -153,16 +153,16 @@ var renderQuestions = function(data) {
 
   // console.log(data);
 
-  var obj = {
-    questions: []
-    // ids: []
-  };
+  // var obj = {
+  //   questions: []
+  //   // ids: []
+  // };
 
-  $.each(data, function(key, value) {
-    obj.questions.push(value.question);
-    // obj.ids.push(value._id);
-    console.log('MELISSA AND AMANDA ROCK ' + value._id);
-  });
+  // $.each(data, function(key, value) {
+  //   obj.questions.push(value.question);
+  //   // obj.ids.push(value._id);
+  //   console.log('MELISSA AND AMANDA ROCK ' + value._id);
+  // });
 
   // console.log(obj);
 
