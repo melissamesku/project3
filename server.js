@@ -41,8 +41,6 @@ app.post('/users', function(req, res) {
     // location: req.body.location
   });
 
-  console.log("secrets " + user.secrets);
-
   user.save(function(err) {
     if (err) {
       console.log(err);
@@ -55,7 +53,7 @@ app.post('/users', function(req, res) {
       res.send(user);
     }; // end if/else
   }); // end save
-}); // end post
+}); // end sign-up
 
 // POST LOGIN -------------------------
 app.post('/login', function(req, res){
@@ -78,7 +76,40 @@ app.post('/login', function(req, res){
       console.log("let's try this again!");
     }; // end if/else
   }); // end findOne
-}); // end post
+}); // end login
+
+// GET USER -----------------------
+// gets and sends user info
+app.get('/user/:id', function(req, res) {
+	User.findById(req.params.id).then(function(user) {
+		res.send(user);
+	});
+});
+
+
+// EDIT USER -----------------------
+app.put('/user/:id', function(req, res) {
+
+  // var updated_user = new User({
+  //   username: req.body.username,
+  //   password_hash: password_hash,
+  //   email: req.body.email,
+  //   age: req.body.age,
+  //   location: req.body.location
+  // });
+
+	User.findOneAndUpdate( {_id: req.params.id},  req.body, function(err, user) {
+		res.send('User Updated');
+	});
+});
+
+
+// DELETE USER ---------------------
+app.delete('/user/:id', function(req, res) {
+	User.findOneAndRemove({_id: req.params.id}, function(err) {
+		res.send('Account Deleted');
+	});
+});
 
 
 // GET QUESTIONS --------------------
@@ -87,6 +118,7 @@ app.get('/questions', function(req, res) {
 
 	Question.find().then(function(questions) {
 
+// randomization code BONUS
     // var shuffle = function(a) {
     //   for(var j, x, i = a.length; i; j = Math.floor(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x);
     //   return a;
@@ -94,8 +126,46 @@ app.get('/questions', function(req, res) {
     // shuffledDeck = deckOfCards.slice(0);
     // shuffle(shuffledDeck);
 
-    // console.log(questions);
+    console.log(questions);
 
 		res.send(questions);
 	});
 });
+
+// GET TIME-CAPSULES ---------------
+app.get('/capsules', function(req, res) {
+  console.log('got time capsules request');
+
+	Capsules.find().then(function(capsules) {
+		res.send(capsules);
+	});
+});
+// END GET TIME-CAPSULES ------------
+
+
+
+// need to correct with foreign keys
+// POST TIME-CAPSULES --------------
+app.post('/capsules', function(req, res) {
+
+console.log("at capsules post");
+
+  var capsule = new Capsule({
+    question: req.body.questions,
+    user: req.body.username,
+    date: req.body.date,
+  });
+
+console.log("server capsule data: "+capsule);
+
+  capsule.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.statusCode = 503;
+    } else {
+      console.log("capsule created server side");
+
+      res.send("capsule creation complete");
+    }; // end if/else
+  }); // end save
+}); // end post time-capsule
