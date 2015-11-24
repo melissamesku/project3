@@ -41,6 +41,7 @@ var signUpForm = function() {
 		console.log('showing sign up form');
 		// formContainer.show();
 
+    var formContainer = $('#form-container');
 		var template = Handlebars.compile($('#signup-template').html());
 		formContainer.append(template);
 
@@ -171,6 +172,11 @@ var renderQuestions = function(data) {
   formContainer.append(template(obj));
 
 }; // end renderQuestions
+
+
+// $('#inner-box').on('click', function() {
+//   alert("test");
+// });
 
 
 // $('#testing0').click(function(){
