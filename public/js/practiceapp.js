@@ -307,13 +307,13 @@ var renderCapsules = function(data) {
 ////////////////////
 
 }; // end renderCapsules
-// END QUESTIONS --------------------
+// END GET CAPSULES -----------------
 
 var answered_questions = [
   // {question: answer}, {question: answer}
 ];
 
-// CREATE TCs -----------------------
+// CREATE CAPSULES -----------------------
 var questionsList = function() {
 	console.log('showing questions list');
 	var listContainer = $('#list-container');
@@ -362,4 +362,4 @@ var newCapsule = function(capsule_data) {
     console.log(data);
 	});
 }; // end newCapsule
-// END CREATE TCs -----------------------
+// END CREATE CAPSULES -----------------------

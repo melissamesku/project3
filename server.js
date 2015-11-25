@@ -126,7 +126,7 @@ app.get('/questions', function(req, res) {
     // shuffledDeck = deckOfCards.slice(0);
     // shuffle(shuffledDeck);
 
-    console.log(questions);
+    console.log("sending "+questions.length+" questions");
 
 		res.send(questions);
 	});
@@ -141,8 +141,6 @@ app.get('/capsules', function(req, res) {
 	});
 });
 // END GET TIME-CAPSULES ------------
-
-
 
 // need to correct with foreign keys
 // POST TIME-CAPSULES --------------
