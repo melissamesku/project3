@@ -18,12 +18,6 @@
 	    </div>
 	  </li>
 	</ul>
-	<!-- <div id="accordion" data-toggle="collapse">
-		<a href="index.html#secret">login</a>
-		<div id="secret" class="collapse">
-			<p>Some text that only appears when a collapse link is clicked</p>
-		</div>
-	</div> -->
 
 	<div class="container row">
 
@@ -86,16 +80,36 @@
 
 	  	</template>
 
-	  	<!-- BOX ============ -->
+        <!-- BOX ============ -->
         <template id="boxes-template">
-            <div class="boxes-container" data-id="{{_id}}">stuff
-                {{#each questions}}
-                    <p>
-                        {{this}}
-                    </p>
-                {{/each}}
+        	<div class="outer-box" data-id="{{_id}}" id="{{_id}}">
+		        <div class="inner-box" data-id="{{_id}}" id="{{_id}}">
+					<h3>{{question}}</h3>
+				</div>
+			</div>
+		</template>
+
+		<!-- <template id="boxes-template">
+			<div class="boxes-container" data-id="{{_id}}">
+				<div class="outer-box">
+					{{#each questions}}
+					<div class="inner-box" data-id="testing{{@index}}">
+						<p>{{@index}} : {{this}}</p>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</template> -->
+
+		<!-- ACTIVE BOX ============ -->
+        <template id="active-box-template">
+            <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
+                <h3>Question: {{questions}}</h3>
+                <textarea id="response" placeholder="What do you think?"></textarea> 
+                <input type="submit">Add to time capsule</input>
             </div>
         </template>
+
 <!-- END TEMPLATES ============= -->
 
 	</div>
