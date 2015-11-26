@@ -197,15 +197,10 @@ var renderTextInput = function(id) {
   console.log("I'm just console logging the id: " + id);
   var innerBoxById = $('#' + id);
   // innerBoxById.empty();
+  var template = Handlebars.compile($('#active-box-template').html());
+  innerBoxById.append(template);
   $(this).addClass('inner-box-active');
 
-  var template = Handlebars.compile($('#active-box-template').html());
-  // for(var i=0;i<data.length;i++) {
-    innerBoxById.append(template);
-    // $('.inner-box').each(function(i){
-    //   this.style.backgroundColor = getRandomColor();
-    // });
-  // }
 
   // $('.outer-box').each(function(i) {
   //     $(this).addClass('outer-box-active');
@@ -227,11 +222,6 @@ var renderTextInput = function(id) {
 
 // $('#inner-box').on('click', function() {
 //   alert("test");
-// });
-
-
-// $('#testing0').click(function(){
-//   console.log('FUCK YEAH index 0 was clicked');
 // });
 
 

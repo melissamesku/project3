@@ -12,9 +12,6 @@ nav {
 #sidebar-area {
 	border-left: 1px solid #000;
 }
-.inner-box #testing0 {
-	color: blue;
-}
 .outer-box {
 	border: 1px solid #000;
 	width: 19%;
@@ -28,12 +25,8 @@ nav {
 	height: 135px;
 	padding: 10px;
 }
-.inner-box p{
-	font-size: 1em;
-}
 .inner-box:hover {
-	background-color: #fff;
-	color: #000;
+	color: #000; /* this is what allows you to see the questions when you hover */
 }
 .outer-box-active {
 	width: 38.5%;
@@ -41,9 +34,6 @@ nav {
 }
 .inner-box-active {
 	color:transparent;
-}
-.inner-box-active p {
-	font-size: 1em;
 }
 .active-box-container {
 	background-color: none;
