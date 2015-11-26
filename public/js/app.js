@@ -42,6 +42,7 @@ var signUpForm = function() {
 		console.log('showing sign up form');
 		// formContainer.show();
 
+    var formContainer = $('#form-container');
 		var template = Handlebars.compile($('#signup-template').html());
 		formContainer.append(template);
 
@@ -210,10 +211,21 @@ var renderTextInput = function(id) {
   // innerBoxById.style.color = getRandomColor(); //this doesn't work
   // innerBoxById.css("background-color", "#fff"); //this doesn't work either
 
+
   // $('.inner-box').each(function(i){
   //     // innerBox.css("font-color", "#fff")
   //     this.style.color = getRandomColor();
   //   });
+
+// $('#inner-box').on('click', function() {
+//   alert("test");
+// });
+
+
+// $('#testing0').click(function(){
+//   console.log('FUCK YEAH index 0 was clicked');
+// });
+
 
 };
 
