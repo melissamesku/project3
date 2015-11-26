@@ -33,9 +33,12 @@ nav {
 	width: 38.5%;
 	font-size: 1em;
 }
-.inner-box-active {   /* NOT SURE WHETHER THIS DOES ANYTHING YET, it was added in js by click event */
-	vertical-align: bottom;
+.inner-box-active {   
 	color: transparent;
+} 
+.inner-box-active p {   
+	font-size: .6em;
+	color: #fff;
 }
 .active-box-container {
 	background-color: none; /*  this class works but this line doesn't work */
@@ -46,7 +49,7 @@ nav {
 	font-size: .7em;
 	padding: 7px;
 	width: 88%;
-	margin: 5px auto;
+	margin: 3px auto;
 }
 .active-box-container input[type=submit] {
 	color: #fff;

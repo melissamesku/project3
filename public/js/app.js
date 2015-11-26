@@ -171,6 +171,8 @@ var renderQuestions = function(data) {
     var id = $(this).parent('.outer-box').attr('id');
     console.log(".on event! the id of this box is: " + id);
     renderTextInput(id);
+    $(this).addClass('inner-box-active');
+    $(this).removeClass('inner-box');
   });
 
   // console.log(data[0]._id, data[0].question);
@@ -194,7 +196,8 @@ var renderQuestions = function(data) {
 }; // end renderQuestions
 
 var renderTextInput = function(id) {
-  $(this).addClass('inner-box-active');
+  // $(this).addClass('inner-box-active');
+  // $(this).removeClass('inner-box');
   console.log("I'm just console logging the id: " + id);
   var innerBoxById = $('#' + id);
   // innerBoxById.empty();
