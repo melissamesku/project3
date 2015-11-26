@@ -36,9 +36,9 @@ app.post('/users', function(req, res) {
   var user = new User({
     username: req.body.username,
     password_hash: password_hash,
-    // email: req.body.email,
-    // age: req.body.age,
-    // location: req.body.location
+    email: req.body.email,
+    age: req.body.age,
+    location: req.body.location
   });
 
   user.save(function(err) {
@@ -90,6 +90,8 @@ app.get('/user/:id', function(req, res) {
 // EDIT USER -----------------------
 app.put('/user/:id', function(req, res) {
 
+console.log("got user edit request")
+// don't need the below - ust getting everyting from req.body
   // var updated_user = new User({
   //   username: req.body.username,
   //   password_hash: password_hash,
@@ -99,18 +101,23 @@ app.put('/user/:id', function(req, res) {
   // });
 
 	User.findOneAndUpdate( {_id: req.params.id},  req.body, function(err, user) {
-		res.send('User Updated');
+    console.log('User Updated');
+		res.send(user);
 	});
 });
 
 
 // DELETE USER ---------------------
 app.delete('/user/:id', function(req, res) {
+  console.log('got delete request on server');
+
 	User.findOneAndRemove({_id: req.params.id}, function(err) {
-		res.send('Account Deleted');
+    console.log('user deleted from db');
+		res.clearCookie('loggedinId');
+    console.log('user cookie cleared');
+    res.send();
 	});
 });
-
 
 // GET QUESTIONS --------------------
 app.get('/questions', function(req, res) {

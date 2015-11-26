@@ -4,18 +4,34 @@ $(function() {
   // GLOBAL VARIABLES --------------
   var user = null;
   var formContainer = $('#form-container');
+  var statusBar = $('#status-bar');
+  var answered_questions = [];
+    // {question: answer}, {question: answer}
+setUp();
+
+}); // end doc ready
+
 
 
 // SETUP --------------
+var setUp = function() {
+  console.log('setting up');
+  $('#form-container').empty();
+  $('#edit-user-button').hide();
+  $('#delete-user-button').hide();
+  $('#sign-up').show();
+  $('#log-in').show();
+
   if (Cookies.get("loggedinId") != undefined) {
-    console.log("already logged in")
+    console.log("already logged in");
+    var formContainer = $('#form-container');
     formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
     getQuestions();
-  } 
+  }
   else {
-    
+
     // SIGN-UP BUTTON
     $('#sign-up').click(function(){
       console.log('clicked sign-up');
@@ -31,16 +47,18 @@ $(function() {
       $('#sign-up').hide();
       $('#log-in').hide();
     });
-
   };
-
-}); // end doc ready
+}; // end setUp
 
 
 // SIGN-UP -----------------------
 var signUpForm = function() {
 		console.log('showing sign up form');
-		// formContainer.show();
+
+    // updating status bar
+    var status = $('#status-bar');
+    status.empty();
+    status.append('Sign Up!');
 
     var formContainer = $('#form-container');
 		var template = Handlebars.compile($('#signup-template').html());
@@ -50,20 +68,25 @@ var signUpForm = function() {
 		$('#register-button').click(function(){
 			console.log('clicked register');
 			newUser();
-			// $('#sign-up').hide();
 		});
 	}; // sign up form
 
 
+
 var newUser = function() {
+  // turning age into a number :)
+  var ageNum = parseInt($('#age').val())
+   console.log(age);
+
 	user = {
 		username: $('#username').val(),
 		password: $('#password').val(),
-    // email: 'test@test.com',
-    // age: 20,
-    // location: 'New York'
+    email: $('#email').val(),
+    age: ageNum,
+    location: $('#location').val()
 	};
 	console.log(user.username+" created app side");
+  console.log(user);
 
 	$.ajax({
 		url: "http://localhost:3000/users",
@@ -74,22 +97,31 @@ var newUser = function() {
     console.log("sent sign-up info to server");
     console.log(data.username+" signup successful");
 
-    // get main page form goes here
+    // showing sign-up template
+    var formContainer = $('#form-container');
     formContainer.empty();
     console.log(data);
     formContainer.append("<p> name: "+data.username+"</p>");
-	});
 
-	user = Cookies.get("loggedinId");
+    // setting cookie and back to questions
+    user = Cookies.get("loggedinId");
+    getQuestions();
+	}); // end ajax request
 }; // end newUser
 // END SIGN-UP -----------------------
 
 // LOGIN ---------------------
 var loginForm = function() {
 	console.log('showing login form');
+
+  // updating status bar
+  var status = $('#status-bar');
+  status.empty();
+  status.append('Login!');
+
+  // showing login template
   var formContainer = $('#form-container');
 	formContainer.empty();
-
 	var template = Handlebars.compile($('#login-template').html());
 	formContainer.append(template);
 
@@ -116,8 +148,6 @@ var loginPost = function() {
 		console.log("sent login info to server");
 		console.log(data.username+" login successful");
 
-		user = Cookies.get("loggedinId");
-
     var formContainer = $('#form-container');
     formContainer.empty();
     formContainer.append("<p>"+data.username+" logged in.</p>");
@@ -135,7 +165,15 @@ var loginPost = function() {
 // GET QUESTIONS ----------------------
 var getQuestions = function(){
 	console.log("getting questions");
-  var formContainer = $('#form-container');
+
+  //showing edit/delete buttons
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+
+  // updating status bar
+  var status = $('#status-bar');
+  status.empty();
+  status.append('time capsule main area');
 
 	$.ajax({
 		url: 'http://localhost:3000/questions',
@@ -215,7 +253,7 @@ var renderQuestions = function(data) {
 
 
 
-// assign to RenderQuestions an id or counter for each item in array 
+// assign to RenderQuestions an id or counter for each item in array
 // S.0. assign same click event
 
 
@@ -234,4 +272,200 @@ var renderQuestions = function(data) {
 
 // END ANSWERS ----------------------
 
+// EDIT USER -------------------------
+$('#edit-user-button').click(function(){
+  console.log('clicked edit user');
+  editForm();
+});
 
+var editForm = function() {
+	console.log('showing edit form');
+
+  // clean up
+  $('#form-container').empty();
+  $('#status-bar').empty();
+  $('#status-bar').append("Edit your information");
+
+  // get user infp to populate form
+  $.ajax({
+		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+		method: "GET",
+    dataType: 'json',
+	}).done(function(data){
+    console.log(data);
+    var template = Handlebars.compile($('#edit-user-template').html());
+    $('#form-container').append(template(data));
+
+    // update button
+    $('#update-user-button').click(function(){
+      console.log('clicked update user');
+      editUser();
+    });
+  }); // end ajax
+}; // end editForm
+
+
+var editUser = function() {
+	var user_edit = {
+		email: $('#email').val(),
+		age: $('#age').val(),
+    location: $('#location').val(),
+	};
+
+  console.log(user_edit);
+
+	console.log("user edit sending");
+
+	$.ajax({
+		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+		method: "PUT",
+    dataType: 'json',
+		data: user_edit
+	}).done(function(data){
+    // returns string "User updated"
+    console.log("edit ajax completed")
+    console.log("from server: "+data);
+    getQuestions();
+  }); // end put
+}; // end editUser
+
+// END EDIT UESR ---------------------
+
+
+// DELETE USER -------------------------
+// delete button
+$('#delete-user-button').click(function(){
+  console.log('clicked delete user');
+  areYouSure();
+});
+
+// double checks if wants to delete
+var areYouSure = function() {
+  console.log('showing delete form');
+
+  var delContainer = $('#delete-user-container');
+  var template = Handlebars.compile($('#delete-user-template').html());
+  delContainer.append(template);
+
+  // delete user confirm button
+  $('#delete-user-confirm-button').click(function(){
+    console.log('clicked confirm delete user');
+    deleteUser();
+    delContainer.empty();
+  });
+}; // end areYouSure
+
+var deleteUser = function() {
+	console.log("deleting user");
+
+  var id = Cookies.get("loggedinId");
+  console.log('id: '+ id);
+
+	$.ajax({
+		url: "http://localhost:3000/user/"+id,
+		method: "DELETE",
+	}).done(function(){
+    //removes cookie
+    Cookies.remove('loggedinID');
+    console.log('Account Deleted server');
+    setUp();
+  });
+  // Cookies.remove('loggedinId');
+  // console.log('Account Deleted js');
+  //
+  // // takes us back to beginning
+  // setUp();
+}; // end editUser
+// END DELETE UESR ---------------------
+
+
+// GET CAPSULES  ----------------------
+var getCapsules = function(){
+	console.log("getting capsules");
+
+	$.ajax({
+		url: 'http://localhost:3000/capsules',
+		method: 'GET',
+		dataType: 'json'
+	}).done(function(data) {
+    console.log("capsules from database gotten");
+    // returns array of capsule objects
+    renderCapsules(data);
+  });
+}; // end getCapsules
+
+var renderCapsules = function(data) {
+  var listContainer = $('#list-container');
+	listContainer.empty();
+  console.log('rendering capsules');
+
+////////////////////
+// copy handlebars stuff
+// from Melissa's getQuestions
+////////////////////
+
+  var template = Handlebars.compile($('#boxes-template').html());
+  for(var i=0;i<data.length;i++) {
+    formContainer.append(template(data[i]));
+  };
+
+  $(".inner-box").on("click", function() {
+    var id = $(this).parent('.outer-box').attr('id');
+    console.log("the id should be here: " + id);
+    render(id);
+  });
+
+}; // end renderCapsules
+// END GET CAPSULES -----------------
+
+
+// CREATE CAPSULES -----------------------
+var questionsList = function() {
+	console.log('showing questions list');
+	var listContainer = $('#list-container');
+
+  if (answered_questions == 0) {
+    // show "answer some questions instead of Date / submit buttons
+  };
+
+  ////////////////////
+  // copy handlebars stuff
+  // from Melissa's getQuestions
+  // iterate through answered_questions
+  ////////////////////
+
+	var template = Handlebars.compile($('#questions-template').html());
+	listContainer.append(template());
+
+  ////// need date/calendar or button/input
+
+  // submit button
+	$('#submit_capsule-button').click(function(){
+		console.log('clicked register');
+
+    var capsule_data = {
+      questions: answered_questions,
+      user: Cookies.get('loggedinId'),
+      date: $('#date').val(), // match date input id
+    };
+
+		newCapsule(capsule_data);
+	});
+}; // sign up form
+
+
+var newCapsule = function(capsule_data) {
+	console.log("capsule created app side");
+
+	$.ajax({
+		url: "http://localhost:3000/capsules",
+		method: "POST",
+    dataType: 'json',
+		data: capsule_data
+	}).done(function(data){
+    console.log("sent capsule to server");
+    // returns "capsule creation complete"
+    console.log(data);
+	});
+}; // end newCapsule
+// END CREATE CAPSULES -----------------------

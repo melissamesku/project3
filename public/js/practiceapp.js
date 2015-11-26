@@ -80,7 +80,7 @@ var newUser = function() {
 
 	user = Cookies.get("loggedinId");
 }; // end newUser
-// END SIGN-UP -----------------------
+
 
 // LOGIN ---------------------
 var loginForm = function() {
@@ -229,7 +229,7 @@ var editUser = function() {
     location: $('#location').val(),
 	};
 
-	console.log("user edited");
+	console.log("user edit sending");
 
 	$.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
