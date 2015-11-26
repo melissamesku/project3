@@ -12,13 +12,13 @@ setUp();
 }); // end doc ready
 
 
-
 // SETUP --------------
 var setUp = function() {
   console.log('setting up');
   $('#form-container').empty();
   $('#edit-user-button').hide();
   $('#delete-user-button').hide();
+  $('#logout-button').hide();
   $('#sign-up').show();
   $('#log-in').show();
 
@@ -168,8 +168,10 @@ var getQuestions = function(){
 	console.log("getting questions");
 
   //showing edit/delete buttons
+  $('#logout-button').show();
   $('#edit-user-button').show();
   $('#delete-user-button').show();
+
 
   // updating status bar
   var status = $('#status-bar');
@@ -300,6 +302,19 @@ getRandomColor = function() {
 // END ANSWERS ----------------------
 
 
+// LOGOUT ---------------------------
+$('#logout-button').click(function(){
+  console.log('clicked logout');
+  //removes cookie
+  Cookies.remove('loggedinId');
+  console.log('cookie deleted, logged out');
+  // takes us back to beginning
+  setUp();
+});
+
+
+// END LOGOUT -----------------------
+
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
   console.log('clicked edit user');
@@ -387,23 +402,16 @@ var areYouSure = function() {
 var deleteUser = function() {
 	console.log("deleting user");
 
-  var id = Cookies.get("loggedinId");
-  console.log('id: '+ id);
-
 	$.ajax({
-		url: "http://localhost:3000/user/"+id,
+		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
 		method: "DELETE",
 	}).done(function(){
     //removes cookie
     Cookies.remove('loggedinID');
-    console.log('Account Deleted server');
+    console.log('Account deleted');
+    // takes us back to beginning
     setUp();
   });
-  // Cookies.remove('loggedinId');
-  // console.log('Account Deleted js');
-  //
-  // // takes us back to beginning
-  // setUp();
 }; // end editUser
 // END DELETE UESR ---------------------
 

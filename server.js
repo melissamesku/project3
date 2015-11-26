@@ -86,19 +86,10 @@ app.get('/user/:id', function(req, res) {
 	});
 });
 
-
 // EDIT USER -----------------------
 app.put('/user/:id', function(req, res) {
 
 console.log("got user edit request")
-// don't need the below - ust getting everyting from req.body
-  // var updated_user = new User({
-  //   username: req.body.username,
-  //   password_hash: password_hash,
-  //   email: req.body.email,
-  //   age: req.body.age,
-  //   location: req.body.location
-  // });
 
 	User.findOneAndUpdate( {_id: req.params.id},  req.body, function(err, user) {
     console.log('User Updated');
