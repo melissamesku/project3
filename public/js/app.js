@@ -199,6 +199,14 @@ var renderTextInput = function(id) {
   // innerBoxById.empty();
   $(this).addClass('inner-box-active');
 
+  var template = Handlebars.compile($('#active-box-template').html());
+  // for(var i=0;i<data.length;i++) {
+    innerBoxById.append(template);
+    // $('.inner-box').each(function(i){
+    //   this.style.backgroundColor = getRandomColor();
+    // });
+  // }
+
   // $('.outer-box').each(function(i) {
   //     $(this).addClass('outer-box-active');
   //   });

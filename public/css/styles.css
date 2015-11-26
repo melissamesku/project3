@@ -18,7 +18,6 @@ nav {
 .outer-box {
 	border: 1px solid #000;
 	width: 19%;
-	height: 19%;
 	overflow: hidden;
 	display: inline-block;
 	background-color: black;
@@ -26,7 +25,7 @@ nav {
 .inner-box {
 	background-color: #000;
 	color: transparent;
-	height: 150px;
+	height: 135px;
 	padding: 10px;
 }
 .inner-box p{
@@ -45,7 +44,13 @@ nav {
 }
 .inner-box-active p {
 	font-size: 1em;
-
+}
+.active-box-container {
+	background-color: none;
+}
+.active-box-container #response {
+	padding:0px;
+	margin: 10px;
 }
 /*.inner-box {
 	background-color: #fff;
