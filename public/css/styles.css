@@ -17,8 +17,8 @@ nav {
 }
 .outer-box {
 	border: 1px solid #000;
-	width: 150px;
-	height: 150px;
+	width: 19%;
+	height: 19%;
 	overflow: hidden;
 	display: inline-block;
 	background-color: black;
@@ -37,7 +37,7 @@ nav {
 	color: #000;
 }
 .outer-box-active {
-	width: 304px;
+	width: 38.5%;
 	font-size: 1em;
 }
 .inner-box-active {
