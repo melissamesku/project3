@@ -15,32 +15,49 @@ nav {
 .outer-box {
 	border: 1px solid #000;
 	width: 19%;
+	height: 135px;
 	overflow: hidden;
 	display: inline-block;
-	background-color: black;
 }
 .inner-box {
-	background-color: #000;
-	color: transparent;
-	height: 135px;
+	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
 	padding: 10px;
 }
+.inner-box p {
+	font-size: .9em;
+}
 .inner-box:hover {
-	color: #000; /* this is what allows you to see the questions when you hover */
+	color: #000;   /* part 2 of 2: see the questions ONLY when you hover */
 }
 .outer-box-active {
 	width: 38.5%;
 	font-size: 1em;
 }
-.inner-box-active {
-	color:transparent;
+.inner-box-active {   /* NOT SURE WHETHER THIS DOES ANYTHING YET, it was added in js by click event */
+	vertical-align: bottom;
+	color: transparent;
 }
 .active-box-container {
-	background-color: none;
+	background-color: none; /*  this class works but this line doesn't work */
 }
-.active-box-container #response {
-	padding:0px;
-	margin: 10px;
+.active-box-container input[type=text] {
+	color: #666;
+	border: 1px solid #666;
+	font-size: .7em;
+	padding: 7px;
+	width: 88%;
+	margin: 5px auto;
+}
+.active-box-container input[type=submit] {
+	color: #fff;
+	background-color: #666;
+	border: none;
+	font-size: .7em;
+	padding: 7px;
+	margin: 5px;
+}
+.active-box-container input[type=submit]:hover {
+	background-color: #000;
 }
 /*.inner-box {
 	background-color: #fff;

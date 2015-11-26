@@ -194,12 +194,12 @@ var renderQuestions = function(data) {
 }; // end renderQuestions
 
 var renderTextInput = function(id) {
+  $(this).addClass('inner-box-active');
   console.log("I'm just console logging the id: " + id);
   var innerBoxById = $('#' + id);
   // innerBoxById.empty();
   var template = Handlebars.compile($('#active-box-template').html());
   innerBoxById.append(template);
-  $(this).addClass('inner-box-active');
 
 
   // $('.outer-box').each(function(i) {
