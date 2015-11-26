@@ -131,6 +131,7 @@ var loginPost = function() {
 }; //end loginPost
 // END LOGIN ---------------------
 
+
 // GET QUESTIONS ----------------------
 var getQuestions = function(){
 	console.log("getting questions");
@@ -146,6 +147,7 @@ var getQuestions = function(){
   });
 }; // end getQuestions
 
+
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
 	formContainer.empty();
@@ -154,15 +156,23 @@ var renderQuestions = function(data) {
   var template = Handlebars.compile($('#boxes-template').html());
   for(var i=0;i<data.length;i++) {
     formContainer.append(template(data[i]));
+    // $('.outer-box').each(function(i){
+    //    this.style.backgroundColor = getRandomColor();
+    // });
+    $('.inner-box').each(function(i){
+      this.style.backgroundColor = getRandomColor();
+    });
+    // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
   }
 
   $(".inner-box").on("click", function() {
+    $(this).parent('.outer-box').addClass('outer-box-active');
     var id = $(this).parent('.outer-box').attr('id');
-    console.log("the id should be here: " + id);
-    render(id);
+    console.log(".on event! the id of this box is: " + id);
+    renderTextInput(id);
   });
-  // console.log(data[0]._id, data[0].question);
 
+  // console.log(data[0]._id, data[0].question);
 
   // var obj = {
   //   questions: []
@@ -182,15 +192,30 @@ var renderQuestions = function(data) {
 
 }; // end renderQuestions
 
-// var renderAnswer
-// var innerBox = $('.inner-box');
-//   innerBox.empty();
+var renderTextInput = function(id) {
+  console.log("I'm just console logging the id: " + id);
+  var innerBoxById = $('#' + id);
+  // innerBoxById.empty();
+  $(this).addClass('inner-box-active');
+
+  // $('.outer-box').each(function(i) {
+  //     $(this).addClass('outer-box-active');
+  //   });
+
+  // $(this).animate({width:'toggle'},500); //USE THIS WHEN SENDING SUBMISSION
 
 
-// $('#testing0').click(function(){
-//   console.log('FUCK YEAH index 0 was clicked');
-// });
 
+
+  // innerBoxById.style.color = getRandomColor(); //this doesn't work
+  // innerBoxById.css("background-color", "#fff"); //this doesn't work either
+
+  // $('.inner-box').each(function(i){
+  //     // innerBox.css("font-color", "#fff")
+  //     this.style.color = getRandomColor();
+  //   });
+
+};
 
 
 
@@ -228,4 +253,19 @@ var renderQuestions = function(data) {
 
 // END ANSWERS ----------------------
 
+// function getRandomColor() {
+//   var letters = '0123456789ABCDEF'.split('');
+//   var color = '#';
+//   for (var i = 0; i < 6; i++ ) {
+//       color += letters[Math.floor(Math.random() * 12)]; //could put up to 16, but I prefer these hues
+//   }
+//   return color;
+// }
+
+getRandomColor = function() {
+  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
+  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
+  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+  return colors[Math.floor(Math.random()*colors.length)];
+}
 
