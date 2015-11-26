@@ -16,29 +16,30 @@ nav {
 .outer-box {
 	border: 1px solid #000;
 	width: 24%;
-	height: 165px;
+	height: 163px;
 	overflow: hidden;
 	display: inline-block;
 }
 .inner-box {
 	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
 	padding: 10px;
+	height: 163px;
 }
 .inner-box p {
-	font-size: .9em;
+	font-size: 1.4em;
+	line-height: 1.3em;
 }
 .inner-box:hover {
 	color: #000;   /* part 2 of 2: see the questions ONLY when you hover */
 }
 .outer-box-active {
 	width: 48.5%;
-	font-size: 1em;
 }
 .inner-box-active {   
 	color: transparent;
 } 
 .inner-box-active p {   
-	font-size: .8em;
+	font-size: .9em;
 	color: #fff;
 	padding: 5px;
 }
@@ -51,7 +52,7 @@ nav {
 	font-size: .7em;
 	padding: 7px;
 	width: 94%;
-	margin: 3px auto;
+	margin: 0px auto;
 }
 .active-box-container input[type=submit] {
 	color: #fff;

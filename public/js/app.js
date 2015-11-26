@@ -161,6 +161,8 @@ var renderQuestions = function(data) {
     //    this.style.backgroundColor = getRandomColor();
     // });
     $('.inner-box').each(function(i){
+      // this.addClass('random-background-color');
+      // ('random-background-color').css(getRandomColor());
       this.style.backgroundColor = getRandomColor();
     });
     // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
