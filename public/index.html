@@ -40,6 +40,7 @@
 				</ul>
 
 				<button id="edit-user-button">Edit User</button><br>
+			  <button id="logout-button">Logout</button><br>
 			  <button id="delete-user-button">Delete Account</button><br>
 				<!-- added container for 'are you sure?' -->
 				<div id="delete-user-container">
@@ -123,10 +124,11 @@
 		</template>
 
         <!-- BOX ============ -->
+
     <template id="boxes-template">
-    	<div class="outer-box" data-id="{{_id}}" id="{{_id}}">
-        <div class="inner-box" data-id="{{_id}}" id="{{_id}}">
-					<h3>{{question}}</h3>
+      <div class="outer-box" data-id="{{_id}}" id="{{_id}}">
+		    <div class="inner-box" data-id="{{_id}}" id="{{_id}}">
+					<p>{{question}}<br/>{{_id}}</p>
 				</div>
 			</div>
 		</template>
