@@ -9,12 +9,13 @@
 </head>
 <body>
 	<nav>
+		<h1 class="logo">time<em>capsule</em></h1>
 	</nav>
 	<ul class="accordion" data-accordion>
 	  <li class="accordion-navigation" style="text-align:right;">
 	    <a href="#about">About</a>
 	    <div id="about" class="content">
-	      <em><span style="color:green">To the future!</span> Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</em>
+	      <em><span style="color:#4b3b4b">To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
 	    </div>
 	  </li>
 	</ul>
@@ -23,7 +24,7 @@
 
 		<section class="small-12 large-9 columns">
 
-		    	<h1>time capsule main area</h1>
+		    	<h2>main area</h2>
 
 			    <div id="form-container">
 			    </div>
@@ -32,7 +33,7 @@
 
 		<section class="small-12 large-3 columns" id="sidebar-area">
 			<div>
-				<h2>Sidebar area</h2>
+				<h2>sidebar area</h2>
 				<ul>
 					<li>first question</li>
 					<li>second question</li>
@@ -84,7 +85,7 @@
         <template id="boxes-template">
         	<div class="outer-box" data-id="{{_id}}" id="{{_id}}">
 		        <div class="inner-box" data-id="{{_id}}" id="{{_id}}">
-					<p>{{question}}<br/>{{_id}}</p>
+					<p><em>{{question}}</em> <span style="display:none">{{_id}}</span></p>
 				</div>
 			</div>
 		</template>
@@ -104,9 +105,8 @@
 		<!-- ACTIVE BOX ============ -->
         <template id="active-box-template">
             <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
-                <h3>Question: {{questions}}</h3>
-                <textarea id="response" placeholder="What do you think?"></textarea> 
-                <input type="submit">Add to time capsule</input>
+                <input type="text" id="response" placeholder="my response"></input>
+                <input type="submit" value="Add to time capsule"></input>
             </div>
         </template>
 

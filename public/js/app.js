@@ -161,6 +161,8 @@ var renderQuestions = function(data) {
     //    this.style.backgroundColor = getRandomColor();
     // });
     $('.inner-box').each(function(i){
+      // this.addClass('random-background-color');
+      // ('random-background-color').css(getRandomColor());
       this.style.backgroundColor = getRandomColor();
     });
     // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
@@ -171,6 +173,8 @@ var renderQuestions = function(data) {
     var id = $(this).parent('.outer-box').attr('id');
     console.log(".on event! the id of this box is: " + id);
     renderTextInput(id);
+    $(this).addClass('inner-box-active');
+    $(this).removeClass('inner-box');
   });
 
   // console.log(data[0]._id, data[0].question);
@@ -194,10 +198,14 @@ var renderQuestions = function(data) {
 }; // end renderQuestions
 
 var renderTextInput = function(id) {
+  // $(this).addClass('inner-box-active');
+  // $(this).removeClass('inner-box');
   console.log("I'm just console logging the id: " + id);
   var innerBoxById = $('#' + id);
   // innerBoxById.empty();
-  $(this).addClass('inner-box-active');
+  var template = Handlebars.compile($('#active-box-template').html());
+  innerBoxById.append(template);
+
 
   // $('.outer-box').each(function(i) {
   //     $(this).addClass('outer-box-active');
@@ -219,11 +227,6 @@ var renderTextInput = function(id) {
 
 // $('#inner-box').on('click', function() {
 //   alert("test");
-// });
-
-
-// $('#testing0').click(function(){
-//   console.log('FUCK YEAH index 0 was clicked');
 // });
 
 

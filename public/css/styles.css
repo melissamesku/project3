@@ -1,51 +1,77 @@
-@import url(https://fonts.googleapis.com/css?family=Noto+Sans:700,400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,900,400italic,700);
 
 body {
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Playfair Display', sans-serif;
 	background-color: #eee;
 }
 nav {
 	width: 100%;
 	height: 70px;
 	background-color: #000;
+	opacity: 1;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Playfair Display';
+	font-weight: 800;
+	color: #4b3b4b;
+}
+.logo {
+	padding-left: 10px;
 }
 #sidebar-area {
 	border-left: 1px solid #000;
 }
-.inner-box #testing0 {
-	color: blue;
-}
 .outer-box {
 	border: 1px solid #000;
-	width: 150px;
-	height: 150px;
+	width: 24%;
+	height: 163px;
 	overflow: hidden;
 	display: inline-block;
-	background-color: black;
 }
 .inner-box {
-	background-color: #000;
-	color: transparent;
-	height: 150px;
+	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
 	padding: 10px;
+	height: 163px;
 }
-.inner-box p{
-	font-size: 1em;
+.inner-box p {
+	font-size: 1.4em;
+	line-height: 1.3em;
 }
 .inner-box:hover {
-	background-color: #fff;
-	color: #000;
+	color: #000;   /* part 2 of 2: see the questions ONLY when you hover */
 }
 .outer-box-active {
-	width: 304px;
-	font-size: 1em;
+	width: 48.5%;
 }
-.inner-box-active {
-	color:transparent;
+.inner-box-active {   
+	color: transparent;
+} 
+.inner-box-active p {   
+	font-size: .9em;
+	color: #fff;
+	padding: 5px;
 }
-.inner-box-active p {
-	font-size: 1em;
-
+.active-box-container {
+	background-color: none; /*  this class works but this line doesn't work */
+}
+.active-box-container input[type=text] {
+	color: #666;
+	border: 1px solid #666;
+	font-size: .7em;
+	padding: 7px;
+	width: 94%;
+	margin: 0px auto;
+}
+.active-box-container input[type=submit] {
+	color: #fff;
+	background-color: #4b3b4b;
+	border: none;
+	font-size: .7em;
+	padding: 7px;
+	margin: 5px;
+}
+.active-box-container input[type=submit]:hover {
+	background-color: #000;
 }
 /*.inner-box {
 	background-color: #fff;
