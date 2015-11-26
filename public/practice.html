@@ -1,0 +1,50 @@
+
+<!--  EDIT USER ============= -->
+<template id="edit-user-template">
+
+  <div id="edit-user-container" data-id="{{_id}}">
+    <label for="email">Email</label><br/>
+    <input type="text" id="email" placeholder="email"/><br>
+
+    <label for="age">Age</label><br/>
+    <input type="text" id="age" placeholder="age"/><br>
+
+    <label for="location">Location</label><br/>
+    <input type="text" id="location" placeholder="location"/><br>
+
+    <button id="update-user-button" data-id="{{_id}}">Update</button>
+
+    <button id="delete-user-button" data-id="{{_id}}">Delete Account</button>
+  </div>
+
+</template>
+
+
+<!--  CAPSULE LIST ============= -->
+<!-- add "list-container" to sidebar-area -->
+<template id="capsule-template">
+
+  <div id="capsule-container" data-id="{{_id}}">
+
+<!-- add handlebars stuff from get questions -->
+
+  </div>
+
+</template>
+
+
+<!--  QUESTIONS LIST ============= -->
+
+<template id="questions-template">
+
+  <div id="questions-container" data-id="{{_id}}">
+
+<!-- add handlebars stuff from get questions -->
+
+<!-- add date calendar field -->
+
+<button id="submit_capsule-button" data-id="{{_id}}">Create Time Capsule!</button>
+
+  </div>
+
+</template>
