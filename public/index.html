@@ -25,6 +25,8 @@
 		<section class="small-12 large-9 columns">
 
 		    	<h2>main area</h2>
+					<!-- added a status bar that displays messages to user when action occur -->
+		    	<h3 id="status-bar">status bar</h3>
 
 			    <div id="form-container">
 			    </div>
@@ -39,47 +41,92 @@
 					<li>second question</li>
 				</ul>
 
+				<button id="logout-button">Logout</button><br>
+
+				<button id="edit-user-button">Edit User</button><br>
+
+			  <button id="delete-user-button">Delete Account</button><br>
+				<!-- added container for 'are you sure?' -->
+				<div id="delete-user-container">
+				</div>
+
 				<button id="sign-up">Sign up!</button><br>
-			  	<button id="log-in">Login!</button><br>
+
+				<button id="log-in">Login!</button><br>
 
 			</div>
 		</section>
 
 <!-- TEMPLATES BELOW ============= -->
 		<!-- LOGIN ============= -->
-	  	<template id="login-template">
+  	<template id="login-template">
 
-	  		<div id="login-container" data-id="{{_id}}">
-	  			<label for="username">Username</label><br/>
-	  			<input type="text" id="username" placeholder="username"/><br>
-	  			<label for="username">Password</label><br/>
-	  			<input type="text" id="password" placeholder="password"/><br>
-	  			<button id="login-button" data-id="{{_id}}">Login!</button>
-	  		</div>
+  		<div id="login-container" data-id="{{_id}}">
+				<h3>Login</h3>
+  			<label for="username">Username</label><br/>
+  			<input type="text" id="username" placeholder="username"/><br>
+  			<label for="username">Password</label><br/>
+  			<input type="text" id="password" placeholder="password"/><br>
+  			<button id="login-button" data-id="{{_id}}">Login!</button>
+  		</div>
 
-	  	</template>
+  	</template>
 
 	    <!--  NEW USER ============= -->
-	  	<template id="signup-template">
+  	<template id="signup-template">
 
-	  		<div id="signup-container" data-id="{{_id}}">
-	  			<label for="username">Username *</label><br/>
-	  			<input type="text" id="username" placeholder="username"/><br>
-	  			<label for="username">Password *</label><br/>
-	  			<input type="text" id="password" placeholder="password"/><br>
-	  			<label for="username">Email</label><br/>
-	  			<input type="text" id="email" placeholder="email"/><br>
-	  			<label for="username">Age</label><br/>
-	  			<input type="text" id="age" placeholder="age"/><br>
-	  			<label for="username">Location</label><br/>
-	  			<input type="text" id="location" placeholder="location"/><br>
-	  			<p>* Required</p>
-	  			<!-- <input type="text" id="secret1" placeholder="log your secret"/>
-	  			<input type="text" id="secret2" placeholder="log another"/> -->
-	  			<button id="register-button" data-id="{{_id}}">Register!</button>
-	  		</div>
+  		<div id="signup-container" data-id="{{_id}}">
 
-	  	</template>
+  			<label for="username">Username *</label><br/>
+  			<input type="text" id="username" placeholder="username"/><br>
+
+  			<label for="password">Password *</label><br/>
+  			<input type="text" id="password" placeholder="password"/><br>
+
+  			<label for="email">Email</label><br/>
+  			<input type="text" id="email" placeholder="email"/><br>
+
+  			<label for="age">Age</label><br/>
+  			<input type="text" id="age" placeholder="age"/><br>
+
+  			<label for="location">Location</label><br/>
+  			<input type="text" id="location" placeholder="location"/><br>
+  			<p>* Required</p>
+
+  			<button id="register-button" data-id="{{_id}}">Register!</button>
+  		</div>
+
+  	</template>
+
+		<!--  EDIT USER ============= -->
+		<template id="edit-user-template">
+
+		  <div id="edit-user-container" data-id="{{_id}}">
+
+		    <label for="email">Email</label><br/>
+		    <input type="text" id="email" placeholder="{{{email}}}"/><br>
+
+		    <label for="age">Age</label><br/>
+		    <input type="text" id="age" placeholder="{{{age}}}"/><br>
+
+		    <label for="location">Location</label><br/>
+		    <input type="text" id="location" placeholder="{{{location}}}"/><br>
+
+		    <button id="update-user-button" data-id="{{{_id}}}">Update</button>
+
+		  </div>
+
+		</template>
+
+		<!--  DELETE USER ============= -->
+		<template id="delete-user-template">
+
+		  <div id="delete-user-container" data-id="{{_id}}">
+				<h3>Are you sure?</h3>
+		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
+			</div>
+
+		</template>
 
         <!-- BOX ============ -->
         <template id="boxes-template">
