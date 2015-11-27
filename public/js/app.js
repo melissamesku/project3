@@ -31,7 +31,8 @@ var setUp = function() {
     getQuestions();
   }
   else {
-
+    getQuestions();
+    
     // SIGN-UP BUTTON
     $('#sign-up').click(function(){
       console.log('clicked sign-up');
@@ -172,7 +173,6 @@ var getQuestions = function(){
   $('#edit-user-button').show();
   $('#delete-user-button').show();
 
-
   // updating status bar
   var status = $('#status-bar');
   status.empty();
@@ -208,33 +208,23 @@ var renderQuestions = function(data) {
     // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
   }
 
-  $(".inner-box").on("click", function() {
-    $(this).parent('.outer-box').addClass('outer-box-active');
-    var id = $(this).parent('.outer-box').attr('id');
-    console.log(".on event! the id of this box is: " + id);
-    renderTextInput(id);
-    $(this).addClass('inner-box-active');
-    $(this).removeClass('inner-box');
-  });
-
-  // console.log(data[0]._id, data[0].question);
-
-  // var obj = {
-  //   questions: []
-  //   // ids: []
-  // };
-
-  // $.each(data, function(key, value) {
-  //   obj.questions.push(value.question);
-  //   // obj.ids.push(value._id);
-  //   console.log('MELISSA AND AMANDA ROCK ' + value._id);
-  // });
-
-  // console.log(obj);
-
-  // var template = Handlebars.compile($('#boxes-template').html());
-  // formContainer.append(template(obj));
-
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in");
+    $(".inner-box").on("click", function() {
+      $(this).parent('.outer-box').addClass('outer-box-active');
+      var id = $(this).parent('.outer-box').attr('id');
+      console.log(".on event! the id of this box is: " + id);
+      renderTextInput(id);
+      $(this).addClass('inner-box-active');
+      $(this).removeClass('inner-box');
+    });
+  }
+  else {
+    $(".inner-box").on("click", function() {
+      $('#form-container').empty();
+      // $('#modal').toggle(); // this calls the login modal
+    });
+  };
 }; // end renderQuestions
 
 var renderTextInput = function(id) {
