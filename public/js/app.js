@@ -222,10 +222,46 @@ var renderQuestions = function(data) {
   else {
     $(".inner-box").on("click", function() {
       $('#form-container').empty();
+      showModal();
       // $('#modal').toggle(); // this calls the login modal
     });
   };
 }; // end renderQuestions
+
+var showModal = function() {
+  // LOGIN MODAL ----------------------
+    
+    $('#modal').toggle(); // this calls the login modal
+
+    $('#close').on('click', function(){
+      $('#modal').toggle();
+    });
+
+    $('#modal-sign-up').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      $('#modal').toggle();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+
+    // LOG-IN BUTTON
+    $('#modal-log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#modal').toggle();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+
+    // END LOGIN MODAL ----------------------
+
+    // $('#sign-up').hide();
+    // $('#log-in').hide();
+};
+
+
+
 
 var renderTextInput = function(id) {
   // $(this).addClass('inner-box-active');
