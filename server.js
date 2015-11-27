@@ -130,15 +130,6 @@ app.get('/questions', function(req, res) {
 	});
 });
 
-// GET TIME-CAPSULES ---------------
-app.get('/capsules', function(req, res) {
-  console.log('got time capsules request');
-
-	Capsules.find().then(function(capsules) {
-		res.send(capsules);
-	});
-});
-// END GET TIME-CAPSULES ------------
 
 // need to correct with foreign keys
 // POST TIME-CAPSULES --------------
@@ -165,3 +156,14 @@ console.log("server capsule data: "+capsule);
     }; // end if/else
   }); // end save
 }); // end post time-capsule
+
+
+// GET TIME-CAPSULES ---------------
+app.get('/capsules', function(req, res) {
+  console.log('got time capsules request');
+
+	Capsules.find().then(function(capsules) {
+		res.send(capsules);
+	});
+});
+// END GET TIME-CAPSULES ------------
