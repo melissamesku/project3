@@ -1,16 +1,16 @@
 $(function() {
   console.log('js loaded');
 
-  // GLOBAL VARIABLES --------------
-  var user = null;
-  var formContainer = $('#form-container');
-  var statusBar = $('#status-bar');
-  var answered_questions = [];
-    // {question: answer}, {question: answer}
 setUp();
 
 }); // end doc ready
 
+// GLOBAL VARIABLES --------------
+var user = null;
+var formContainer = $('#form-container');
+var statusBar = $('#status-bar');
+var answeredQuestions = [];
+  // {question: answer}, {question: answer}
 
 // SETUP --------------
 var setUp = function() {
@@ -208,6 +208,7 @@ var renderQuestions = function(data) {
     // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
   }
 
+  // if clicked, loads renderTextInput
   $(".inner-box").on("click", function() {
     $(this).parent('.outer-box').addClass('outer-box-active');
     var id = $(this).parent('.outer-box').attr('id');
@@ -237,6 +238,7 @@ var renderQuestions = function(data) {
 
 }; // end renderQuestions
 
+  // loads answer/submit template
 var renderTextInput = function(id) {
   // $(this).addClass('inner-box-active');
   // $(this).removeClass('inner-box');
@@ -265,6 +267,29 @@ var renderTextInput = function(id) {
   // $('#testing0').click(function(){
   //   console.log('FUCK YEAH index 0 was clicked');
   // });
+
+  $('#submit-answer').click(function(){
+    console.log('clicked submit answer');
+
+    var temp_id = this;
+    // .parent('.outer-box-active').attr('id');
+    var temp_q = $('em').val();
+    var temp_ans = "still working on it";
+    // $('#inner-box-active').attr('data-id')
+
+    var tempQA = {
+      // id: temp_id,
+      // question: temp_id,
+      // answer: temp_ans
+      id: 12345,
+      question: "temp question",
+      answer: "temp answer"
+    };
+
+    console.log(tempQA);
+
+    saveQuestion(tempQA);
+  });
 
 }; // end renderTextInput
 
@@ -415,10 +440,74 @@ var deleteUser = function() {
     setUp();
   });
 }; // end editUser
-// END DELETE UESR ---------------------
+// END DELETE UESR -----------------------
 
 
-// GET CAPSULES  ----------------------
+// SAVE QUESTIONS -----------------------
+// saves Q/A to temp array & appends to sidebar
+var saveQuestion = function(tempQA) {
+	console.log('showing questions list');
+	var answeredContainer = $('#answered-container');
+
+  if (answeredQuestions == 0) {
+    // show "answer some questions instead of Date / submit buttons
+    answeredContainer = "Answer some questions!"
+  } else {
+
+    ////////////////////
+    // copy handlebars stuff
+    // from Melissa's getQuestions
+    // iterate through answered_questions
+    ////////////////////
+
+    answeredContainer.prepend(tempQA);
+
+    answeredQuestions.push(tempQA);
+
+    console.log("answered questions: "+answeredQuestions);
+
+  	var template = Handlebars.compile($('#questions-template').html());
+  	listContainer.append(template());
+
+    ////// need date/calendar or button/input
+
+    // submit button
+  	$('#submit-capsule').click(function(){
+  		console.log('submitted capsule');
+
+      var capsuleData = {
+        questions: answeredQuestions,
+        user: Cookies.get('loggedinId'),
+        // date: $('#date').val(), // match date input id
+      };
+
+      console.log(capsuleData);
+  		// newCapsule(capsuleData);
+    }); // end
+	}; // end submit capsule button
+}; // sign up form
+// SAVE QUESTIONS -----------------------
+
+
+// CREATE CAPSULES -----------------------
+var newCapsule = function(capsuleData) {
+	console.log("capsule created app side");
+
+	$.ajax({
+		url: "http://localhost:3000/capsules",
+		method: "POST",
+    dataType: 'json',
+		data: capsuleData
+	}).done(function(data){
+    console.log("sent capsule to server");
+    // returns "capsule creation complete"
+    console.log(data);
+	});
+}; // end newCapsule
+// END CREATE CAPSULES -------------------
+
+
+// GET CAPSULES  -------------------------
 var getCapsules = function(){
 	console.log("getting capsules");
 
@@ -456,55 +545,3 @@ var renderCapsules = function(data) {
 
 }; // end renderCapsules
 // END GET CAPSULES -----------------
-
-
-// CREATE CAPSULES -----------------------
-var questionsList = function() {
-	console.log('showing questions list');
-	var listContainer = $('#list-container');
-
-  if (answered_questions == 0) {
-    // show "answer some questions instead of Date / submit buttons
-  };
-
-  ////////////////////
-  // copy handlebars stuff
-  // from Melissa's getQuestions
-  // iterate through answered_questions
-  ////////////////////
-
-	var template = Handlebars.compile($('#questions-template').html());
-	listContainer.append(template());
-
-  ////// need date/calendar or button/input
-
-  // submit button
-	$('#submit_capsule-button').click(function(){
-		console.log('clicked register');
-
-    var capsule_data = {
-      questions: answered_questions,
-      user: Cookies.get('loggedinId'),
-      date: $('#date').val(), // match date input id
-    };
-
-		newCapsule(capsule_data);
-	});
-}; // sign up form
-
-
-var newCapsule = function(capsule_data) {
-	console.log("capsule created app side");
-
-	$.ajax({
-		url: "http://localhost:3000/capsules",
-		method: "POST",
-    dataType: 'json',
-		data: capsule_data
-	}).done(function(data){
-    console.log("sent capsule to server");
-    // returns "capsule creation complete"
-    console.log(data);
-	});
-}; // end newCapsule
-// END CREATE CAPSULES -----------------------
