@@ -22,6 +22,8 @@ var setUp = function() {
   $('#sign-up').show();
   $('#log-in').show();
 
+  $('#nav-log-in').show();
+
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
     var formContainer = $('#form-container');
@@ -31,6 +33,7 @@ var setUp = function() {
     getQuestions();
   }
   else {
+    getQuestions();
 
     // SIGN-UP BUTTON
     $('#sign-up').click(function(){
@@ -47,6 +50,15 @@ var setUp = function() {
       $('#sign-up').hide();
       $('#log-in').hide();
     });
+
+    // DUPLICATE NAV BAR LOG-IN BUTTON
+    $('#nav-log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
   };
 }; // end setUp
 
@@ -61,6 +73,7 @@ var signUpForm = function() {
     status.append('Sign Up!');
 
     var formContainer = $('#form-container');
+    formContainer.empty();
 		var template = Handlebars.compile($('#signup-template').html());
 		formContainer.append(template);
 
@@ -172,7 +185,6 @@ var getQuestions = function(){
   $('#edit-user-button').show();
   $('#delete-user-button').show();
 
-
   // updating status bar
   var status = $('#status-bar');
   status.empty();
@@ -208,35 +220,67 @@ var renderQuestions = function(data) {
     // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
   }
 
-  // if clicked, loads renderTextInput
-  $(".inner-box").on("click", function() {
-    $(this).parent('.outer-box').addClass('outer-box-active');
-    var id = $(this).parent('.outer-box').attr('id');
-    console.log(".on event! the id of this box is: " + id);
-    renderTextInput(id);
-    $(this).addClass('inner-box-active');
-    $(this).removeClass('inner-box');
-  });
 
-  // console.log(data[0]._id, data[0].question);
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in");
 
-  // var obj = {
-  //   questions: []
-  //   // ids: []
-  // };
+    //showing DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-in').hide();
 
-  // $.each(data, function(key, value) {
-  //   obj.questions.push(value.question);
-  //   // obj.ids.push(value._id);
-  //   console.log('MELISSA AND AMANDA ROCK ' + value._id);
-  // });
+    $(".inner-box").one("click", function() {
+      $(this).parent('.outer-box').addClass('outer-box-active');
+      var id = $(this).parent('.outer-box').attr('id');
+      console.log(".on event! the id of this box is: " + id);
+      renderTextInput(id);
+      $(this).addClass('inner-box-active');
+      $(this).removeClass('inner-box');
+    });
+  }
+  else {
+    //hiding DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-out').hide();
 
-  // console.log(obj);
-
-  // var template = Handlebars.compile($('#boxes-template').html());
-  // formContainer.append(template(obj));
-
+    $(".inner-box").on("click", function() {
+      $('#form-container').empty();
+      showModal();
+      // $('#modal').toggle(); // this calls the login modal
+    });
+  };
 }; // end renderQuestions
+
+var showModal = function() {
+  // LOGIN MODAL ----------------------
+
+    $('#modal').toggle(); // this calls the login modal
+
+    $('#close').on('click', function(){
+      $('#modal').toggle();
+    });
+
+    $('#modal-sign-up').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      $('#modal').toggle();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+
+    $('#modal-log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#modal').toggle();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+
+    // END LOGIN MODAL ----------------------
+
+    // $('#sign-up').hide();
+    // $('#log-in').hide();
+};
+
+
+
 
   // loads answer/submit template
 var renderTextInput = function(id) {
