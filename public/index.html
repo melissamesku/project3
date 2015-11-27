@@ -60,7 +60,7 @@
 
 				<button id="log-in">Login!</button><br>
 
-				<button id="submit-capsule">Submit Capsule!</button><br>
+				<!-- <button id="submit-capsule">Submit Capsule!</button><br> -->
 
 			</div>
 		</section>
@@ -164,6 +164,18 @@
                 <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
             </div>
         </template>
+
+		<!--  QUESTIONS LIST ============= -->
+
+		<template id="questions-template">
+		  <div id="questions-container" data-id="{{_id}}">
+				<div class="list-questions">{{question}}</div><br>
+		<!-- add handlebars stuff from get questions -->
+
+		<!-- add date calendar field -->
+
+		  </div>
+		</template>
 
 <!-- END TEMPLATES ============= -->
 

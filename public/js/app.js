@@ -1,13 +1,14 @@
 $(function() {
   console.log('js loaded');
 
-setUp();
+  setUp();
 
 }); // end doc ready
 
 // GLOBAL VARIABLES --------------
 var user = null;
 var formContainer = $('#form-container');
+var answeredContainer = $('#answered-container');
 var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
@@ -321,22 +322,20 @@ var renderTextInput = function(id, quest) {
     console.log('clicked submit answer');
 
     var temp_id = id;
-    // console.log(quest);
-
-    // .parent('.outer-box-active').attr('id');
     var temp_q = quest;
     var temp_ans = $('#response').val();
-    //$('em').val();
-    // $('#inner-box-active').attr('data-id')
 
     var tempQA = {
       id: temp_id,
       question: temp_q,
       answer: temp_ans
-      // id: 12345,
-      // question: "temp question",
-      // answer: "temp answer"
     };
+
+    //clears answered box
+    $(innerBoxById).empty();
+
+    // clears sidebar
+    answeredContainer.empty();
 
     console.log(tempQA);
 
@@ -500,7 +499,7 @@ var deleteUser = function() {
 var saveQuestion = function(tempQA) {
 	console.log('showing questions list');
 
-  console.log(tempQA);
+  // console.log(tempQA);
 
 	var answeredContainer = $('#answered-container');
 
@@ -508,10 +507,10 @@ var saveQuestion = function(tempQA) {
 
   console.log(answeredQuestions);
 
-  if (answeredQuestions == 0) {
-    // show "answer some questions instead of Date / submit buttons
-    answeredContainer.append("Answer some questions!");
-  } else {
+  // if (answeredQuestions == 0) {
+  //   // show "answer some questions instead of Date / submit buttons
+  //   answeredContainer.append("Answer some questions!");
+  // } else {
 
     ////////////////////
     // copy handlebars stuff
@@ -519,16 +518,16 @@ var saveQuestion = function(tempQA) {
     // iterate through answered_questions
     ////////////////////
 
-    answeredContainer.prepend(tempQA);
-
-
-
     // console.log("answered questions: "+answeredQuestions);
 
   	var template = Handlebars.compile($('#questions-template').html());
-  	listContainer.append(template());
+    for(var i=0;i<answeredQuestions.length;i++) {
+  	   answeredContainer.append(template(answeredQuestions[i]))
+    };
 
     ////// need date/calendar or button/input
+
+    answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
 
     // submit button
   	$('#submit-capsule').click(function(){
@@ -541,9 +540,9 @@ var saveQuestion = function(tempQA) {
       };
 
       console.log(capsuleData);
-  		// newCapsule(capsuleData);
+  		newCapsule(capsuleData);
     }); // end
-	}; // end submit capsule button
+	// }; // end submit capsule button
 }; // sign up form
 // SAVE QUESTIONS -----------------------
 
