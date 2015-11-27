@@ -210,7 +210,7 @@ var renderQuestions = function(data) {
 
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
-    $(".inner-box").on("click", function() {
+    $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
       var id = $(this).parent('.outer-box').attr('id');
       console.log(".on event! the id of this box is: " + id);
@@ -245,7 +245,6 @@ var showModal = function() {
       // $('#log-in').hide();
     });
 
-    // LOG-IN BUTTON
     $('#modal-log-in').click(function(){
       console.log('clicked log-in');
       loginForm();
