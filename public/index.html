@@ -10,6 +10,11 @@
 <body>
 	<nav>
 		<h1 class="logo">time<em>capsule</em></h1>
+		<ul>
+			<li id="nav-edit-user-button">My profile</li>
+			<li id="nav-log-in">Log in</li>
+			<li id="nav-logout-button">Log out</li>
+		</ul>
 	</nav>
 	<ul class="accordion" data-accordion>
 	  <li class="accordion-navigation" style="text-align:right;">
@@ -17,8 +22,8 @@
 	    <div id="about" class="content">
 	      <em><span style="color:#4b3b4b">To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
 	    </div>
-	  </li>
 	</ul>
+
 
 	<div class="container row">
 
@@ -58,7 +63,7 @@
 		</section>
 
 <!-- TEMPLATES BELOW ============= -->
-		<!-- LOGIN ============= -->
+	<!-- LOGIN ============= -->
   	<template id="login-template">
 
   		<div id="login-container" data-id="{{_id}}">
@@ -72,7 +77,7 @@
 
   	</template>
 
-	    <!--  NEW USER ============= -->
+	<!--  NEW USER ============= -->
   	<template id="signup-template">
 
   		<div id="signup-container" data-id="{{_id}}">
@@ -158,6 +163,23 @@
         </template>
 
 <!-- END TEMPLATES ============= -->
+
+<!-- LOGIN MODAL ============= -->
+		<div id="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>TITLE</h3>
+					<button id='close'>x</button>
+				</div>
+				<div class='modal-body'>
+					<p>lkhjaiuyx xhsd, asdnsadjlasf sf  fdsa fasd swwrt afs  sfd  fdsa asf fs fs  fds afsd afd  afsd fsda fdas adf fads fsd </p>
+					<button id="modal-sign-up">Sign up!</button><br>
+					<button id="modal-log-in">Login!</button><br>
+				</div>	
+			</div>
+		</div>
+<!-- END MODAL ============= -->
+
 
 	</div>
 
