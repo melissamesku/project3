@@ -149,7 +149,7 @@ console.log("at capsules post");
   var capsule = new Capsule({
     question: req.body.questions,
     user: req.body.username,
-    date: req.body.date,
+    // date: req.body.date,
   });
 
 console.log("server capsule data: "+capsule);

@@ -41,10 +41,11 @@
 		<section class="small-12 large-3 columns" id="sidebar-area">
 			<div>
 				<h2>sidebar area</h2>
-				<ul>
+				<!-- <ul>
 					<li>first question</li>
 					<li>second question</li>
-				</ul>
+				</ul> -->
+				<div id="answered-container"></div>
 
 				<button id="logout-button">Logout</button><br>
 
@@ -58,6 +59,8 @@
 				<button id="sign-up">Sign up!</button><br>
 
 				<button id="log-in">Login!</button><br>
+
+				<button id="submit-capsule">Submit Capsule!</button><br>
 
 			</div>
 		</section>
@@ -136,10 +139,10 @@
         <!-- BOX ============ -->
         <template id="boxes-template">
         	<div class="outer-box" data-id="{{_id}}" id="{{_id}}">
-		        <div class="inner-box" data-id="{{_id}}" id="{{_id}}">
-					<p><em>{{question}}</em> <span style="display:none">{{_id}}</span></p>
-				</div>
-			</div>
+		      	<div class="inner-box" data-id="{{_id}}" id="{{_id}}">
+							<p><em>{{question}}</em> <span style="display:none">{{_id}}</span></p>
+						</div>
+					</div>
 		</template>
 
 		<!-- <template id="boxes-template">
@@ -158,7 +161,7 @@
         <template id="active-box-template">
             <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
                 <input type="text" id="response" placeholder="my response"></input>
-                <input type="submit" value="Add to time capsule"></input>
+                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
             </div>
         </template>
 
@@ -175,7 +178,7 @@
 					<p>lkhjaiuyx xhsd, asdnsadjlasf sf  fdsa fasd swwrt afs  sfd  fdsa asf fs fs  fds afsd afd  afsd fsda fdas adf fads fsd </p>
 					<button id="modal-sign-up">Sign up!</button><br>
 					<button id="modal-log-in">Login!</button><br>
-				</div>	
+				</div>
 			</div>
 		</div>
 <!-- END MODAL ============= -->
