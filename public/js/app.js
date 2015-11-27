@@ -22,6 +22,8 @@ var setUp = function() {
   $('#sign-up').show();
   $('#log-in').show();
 
+  $('#nav-log-in').show();
+
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
     var formContainer = $('#form-container');
@@ -48,6 +50,15 @@ var setUp = function() {
       $('#sign-up').hide();
       $('#log-in').hide();
     });
+
+    // DUPLICATE NAV BAR LOG-IN BUTTON
+    $('#nav-log-in').click(function(){
+      console.log('clicked log-in');
+      loginForm();
+      $('#sign-up').hide();
+      $('#log-in').hide();
+    });
+
   };
 }; // end setUp
 
@@ -62,6 +73,7 @@ var signUpForm = function() {
     status.append('Sign Up!');
 
     var formContainer = $('#form-container');
+    formContainer.empty();
 		var template = Handlebars.compile($('#signup-template').html());
 		formContainer.append(template);
 
@@ -210,6 +222,10 @@ var renderQuestions = function(data) {
 
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
+
+    //showing DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-in').hide();
+
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
       var id = $(this).parent('.outer-box').attr('id');
@@ -220,6 +236,9 @@ var renderQuestions = function(data) {
     });
   }
   else {
+    //hiding DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-out').hide();
+
     $(".inner-box").on("click", function() {
       $('#form-container').empty();
       showModal();
