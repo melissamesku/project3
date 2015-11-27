@@ -83,6 +83,12 @@ var signUpForm = function() {
 			console.log('clicked register');
 			newUser();
 		});
+
+    // LOG-IN BUTTON - through signup form
+    $('#login-through-signup').click(function() {
+      console.log("clicked login through signup button");
+      loginForm();
+    });
 	}; // sign up form
 
 

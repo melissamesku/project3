@@ -71,12 +71,12 @@
 
   		<div id="login-container" data-id="{{_id}}">
 				<h3>Login</h3>
+			<button id="signup-through-login">Not registered yet? Sign up!</button>
   			<label for="username">Username</label><br/>
   			<input type="text" id="username" placeholder="username"/><br>
   			<label for="username">Password</label><br/>
   			<input type="text" id="password" placeholder="password"/><br>
-  			<button id="login-button" data-id="{{_id}}">Login!</button><br>
-  			<button id="signup-through-login">Not registered yet? Sign up!</button>
+  			<button id="login-button" data-id="{{_id}}">Login!</button>
   		</div>
 
   	</template>
@@ -85,6 +85,7 @@
   	<template id="signup-template">
 
   		<div id="signup-container" data-id="{{_id}}">
+  			<button id="login-through-signup">Already registered? Log in!</button>
 
   			<label for="username">Username *</label><br/>
   			<input type="text" id="username" placeholder="username"/><br>
@@ -103,6 +104,7 @@
   			<p>* Required</p>
 
   			<button id="register-button" data-id="{{_id}}">Register!</button>
+  		
   		</div>
 
   	</template>
