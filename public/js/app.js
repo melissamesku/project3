@@ -534,13 +534,13 @@ var saveQuestion = function(tempQA) {
   		console.log('submitted capsule');
 
       var capsuleData = {
-        questions: answeredQuestions,
+        question: answeredQuestions,
         user: Cookies.get('loggedinId'),
         // date: $('#date').val(), // match date input id
       };
 
       console.log(capsuleData);
-  		newCapsule(capsuleData);
+  		newCapsule(answeredQuestions);
     }); // end
 	// }; // end submit capsule button
 }; // sign up form
@@ -548,18 +548,18 @@ var saveQuestion = function(tempQA) {
 
 
 // CREATE CAPSULES -----------------------
-var newCapsule = function(capsuleData) {
+var newCapsule = function(answeredQuestions) {
 	console.log("capsule created app side");
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
     dataType: 'json',
-		data: capsuleData
+		data: answeredQuestions
 	}).done(function(data){
     console.log("sent capsule to server");
     // returns "capsule creation complete"
-    console.log(data);
+    console.log("data from server: "+data);
 	});
 }; // end newCapsule
 // END CREATE CAPSULES -------------------
