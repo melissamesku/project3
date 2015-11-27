@@ -229,9 +229,14 @@ var renderQuestions = function(data) {
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
+
       var id = $(this).parent('.outer-box').attr('id');
       console.log(".on event! the id of this box is: " + id);
-      renderTextInput(id);
+
+      var quest =  $(this).parent('.outer-box').attr('data-id');
+      console.log(".on event! the question of this box is: " + quest);
+
+      renderTextInput(id, quest);
       $(this).addClass('inner-box-active');
       $(this).removeClass('inner-box');
     });
@@ -283,7 +288,7 @@ var showModal = function() {
 
 
   // loads answer/submit template
-var renderTextInput = function(id) {
+var renderTextInput = function(id, quest) {
   // $(this).addClass('inner-box-active');
   // $(this).removeClass('inner-box');
   console.log("I'm just console logging the id: " + id);
@@ -315,19 +320,22 @@ var renderTextInput = function(id) {
   $('#submit-answer').click(function(){
     console.log('clicked submit answer');
 
-    var temp_id = this;
+    var temp_id = id;
+    // console.log(quest);
+
     // .parent('.outer-box-active').attr('id');
-    var temp_q = $('em').val();
-    var temp_ans = "still working on it";
+    var temp_q = quest;
+    var temp_ans = $('#response').val();
+    //$('em').val();
     // $('#inner-box-active').attr('data-id')
 
     var tempQA = {
-      // id: temp_id,
-      // question: temp_id,
-      // answer: temp_ans
-      id: 12345,
-      question: "temp question",
-      answer: "temp answer"
+      id: temp_id,
+      question: temp_q,
+      answer: temp_ans
+      // id: 12345,
+      // question: "temp question",
+      // answer: "temp answer"
     };
 
     console.log(tempQA);
@@ -491,11 +499,18 @@ var deleteUser = function() {
 // saves Q/A to temp array & appends to sidebar
 var saveQuestion = function(tempQA) {
 	console.log('showing questions list');
+
+  console.log(tempQA);
+
 	var answeredContainer = $('#answered-container');
+
+  answeredQuestions.push(tempQA);
+
+  console.log(answeredQuestions);
 
   if (answeredQuestions == 0) {
     // show "answer some questions instead of Date / submit buttons
-    answeredContainer = "Answer some questions!"
+    answeredContainer.append("Answer some questions!");
   } else {
 
     ////////////////////
@@ -506,9 +521,9 @@ var saveQuestion = function(tempQA) {
 
     answeredContainer.prepend(tempQA);
 
-    answeredQuestions.push(tempQA);
 
-    console.log("answered questions: "+answeredQuestions);
+
+    // console.log("answered questions: "+answeredQuestions);
 
   	var template = Handlebars.compile($('#questions-template').html());
   	listContainer.append(template());
