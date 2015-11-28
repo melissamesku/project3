@@ -334,16 +334,11 @@ var renderTextInput = function(id, quest) {
       id: temp_id,
       question: temp_q,
       answer: temp_ans
-      // id: 12345,
-      // question: "temp question",
-      // answer: "temp answer"
     };
 
     //clears answered box
     $(innerBoxById).empty();
 
-
-    $(innerBoxById).empty();
     console.log(tempQA);
 
     saveQuestion(tempQA);
@@ -519,13 +514,7 @@ var saveQuestion = function(tempQA) {
   //   answeredContainer.append("Answer some questions!");
   // } else {
 
-    ////////////////////
-    // copy handlebars stuff
-    // from Melissa's getQuestions
-    // iterate through answered_questions
-    ////////////////////
-
-    // console.log("answered questions: "+answeredQuestions);
+    answeredContainer.empty();
 
   	var template = Handlebars.compile($('#questions-template').html());
     for(var i=0;i<answeredQuestions.length;i++) {
@@ -539,14 +528,15 @@ var saveQuestion = function(tempQA) {
     // submit button
   	$('#submit-capsule').click(function(){
       //
-      // var capsuleData = {
-      //   questions: answeredQuestions,
-      //   user: Cookies.get('loggedinId'),
-      //   // date: $('#date').val(), // match date input id
-      // };
+      var capsuleData = {
+        questions: answeredQuestions,
+        // user: Cookies.get('loggedinId'),
+        // date: $('#date').val(), // match date input id
+      };
 
       // console.log(capsuleData);
-  		newCapsule(answeredQuestions);
+  		newCapsule(capsuleData);
+
     }); // end
 	// }; // end submit capsule button
 }; // sign up form
@@ -556,13 +546,13 @@ var saveQuestion = function(tempQA) {
 // CREATE CAPSULES -----------------------
 var newCapsule = function(capsuleData) {
 	console.log("capsule created app side");
-  console.log(answeredQuestions);
+  console.log(capsuleData);
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
     dataType: 'json',
-		data: capsuleData,
+		data: capsuleData
 	}).done(function(data){
     console.log("sent capsule to server");
     // returns "capsule creation complete"
