@@ -139,8 +139,10 @@ console.log("at capsules post");
 // console.log("THIS IS THE REQ: " + req);
 console.log(req.body);
 
-// console.log(req.body.question);
+// var qa_array = [];
 //
+// for (i=0;i<req.body)
+
   var capsule = new Capsule({
     qa: req.body,
     user: req.cookies.loggedinId,
