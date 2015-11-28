@@ -137,6 +137,8 @@ app.post('/capsules', function(req, res) {
 
 console.log("at capsules post");
 
+console.log(req.body);
+
 // console.log(req.body.question);
 //
   var capsule = new Capsule({
@@ -147,12 +149,12 @@ console.log("at capsules post");
 
 console.log("server capsule data: "+capsule);
 
-  capsule.save( function(err) {
+  capsule.save( function(err, capsule) {
     if (err) {
       console.log(err);
       res.statusCode = 503;
     } else {
-      console.log("capsule created server side");
+      // console.log(capsule);
 
       res.send(capsule);
     }; // end if/else

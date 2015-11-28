@@ -335,7 +335,7 @@ var renderTextInput = function(id, quest) {
     var temp_ans = $('#response').val();
 
     var tempQA = {
-      id: temp_id,
+      question_id: temp_id,
       question: temp_q,
       answer: temp_ans
     };
@@ -532,7 +532,7 @@ var saveQuestion = function(tempQA) {
 
   answeredQuestions.push(tempQA);
 
-  console.log(answeredQuestions);
+  // console.log(answeredQuestions);
 
   // if (answeredQuestions == 0) {
   //   // show "answer some questions instead of Date / submit buttons
@@ -560,13 +560,13 @@ var saveQuestion = function(tempQA) {
   	$('#submit-capsule').click(function(){
   		console.log('submitted capsule');
 
-      var capsuleData = {
-        question: answeredQuestions,
-        user: Cookies.get('loggedinId'),
-        // date: $('#date').val(), // match date input id
-      };
+      // var capsuleData = {
+      //   question: answeredQuestions,
+      //   user: Cookies.get('loggedinId'),
+      //   // date: $('#date').val(), // match date input id
+      // };
 
-      console.log(capsuleData);
+      // console.log(capsuleData);
   		newCapsule(answeredQuestions);
     }); // end
 	// }; // end submit capsule button
@@ -576,7 +576,9 @@ var saveQuestion = function(tempQA) {
 
 // CREATE CAPSULES -----------------------
 var newCapsule = function(answeredQuestions) {
-	console.log("capsule created app side");
+	console.log("at newCapsule");
+
+  console.log(answeredQuestions);
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
@@ -585,7 +587,7 @@ var newCapsule = function(answeredQuestions) {
 		data: answeredQuestions
 	}).done(function(data){
     console.log("sent capsule to server");
-    // returns "capsule creation complete"
+
     console.log("data from server: "+data);
 	});
 }; // end newCapsule
