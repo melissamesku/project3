@@ -8,8 +8,8 @@ var userSchema = new mongoose.Schema({
 	password_hash: { type: String, required: true },
 	age: Number,
 	location: String,
-	// time_capsules: [capsuleSchema],
-	capsules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Capsule' }],
+	time_capsules: [capsuleSchema],
+	// capsules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Capsule' }],
 	created_at: { type:Date, default: Date.now }
 });
 

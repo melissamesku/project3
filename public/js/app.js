@@ -131,7 +131,7 @@ var loginForm = function() {
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  // status.append('Login!');
+  status.append('Login!');
 
   // showing login template
   var formContainer = $('#form-container');
@@ -144,13 +144,7 @@ var loginForm = function() {
 		console.log('clicked login-button');
 		loginPost();
 	});
-
-  // SIGN-UP BUTTON - through login form
-  $('#signup-through-login').click(function() {
-    console.log("clicked signup through login button");
-    signUpForm();
-  });
-}; // log in form
+}; // sign up form
 
 
 var loginPost = function() {
@@ -233,8 +227,6 @@ var renderQuestions = function(data) {
 
     //showing DUPLICATE NAV BAR edit/delete buttons
     $('#nav-log-in').hide();
-    $('nav-edit-user-button').show();
-    $('nav-logout-button').show();
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -252,8 +244,7 @@ var renderQuestions = function(data) {
   }
   else {
     //hiding DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-logout-button').hide();
-    $('#nav-edit-user-button').hide();
+    $('#nav-log-out').hide();
 
     $(".inner-box").on("click", function() {
       $('#form-container').empty();
@@ -331,21 +322,28 @@ var renderTextInput = function(id, quest) {
     console.log('clicked submit answer');
 
     var temp_id = id;
+    // console.log(quest);
+
+    // .parent('.outer-box-active').attr('id');
     var temp_q = quest;
     var temp_ans = $('#response').val();
+    //$('em').val();
+    // $('#inner-box-active').attr('data-id')
 
     var tempQA = {
-      question_id: temp_id,
+      id: temp_id,
       question: temp_q,
       answer: temp_ans
+      // id: 12345,
+      // question: "temp question",
+      // answer: "temp answer"
     };
 
     //clears answered box
     $(innerBoxById).empty();
 
-    // clears sidebar
-    answeredContainer.empty();
 
+    $(innerBoxById).empty();
     console.log(tempQA);
 
     saveQuestion(tempQA);
@@ -397,13 +395,10 @@ $('#logout-button').click(function(){
   console.log('cookie deleted, logged out');
   // takes us back to beginning
   setUp();
-
-  // adds delete language to status bar
-  $('#status-bar').empty();
-  $('#status-bar').append("Successfully logged out");
 });
-// END LOGOUT -----------------------
 
+
+// END LOGOUT -----------------------
 
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
@@ -419,11 +414,7 @@ var editForm = function() {
   $('#status-bar').empty();
   $('#status-bar').append("Edit your information");
 
-  $('#logout-button').show();
-  $('#edit-user-button').hide();
-  $('#delete-user-button').show();
-
-  // get user info to populate form
+  // get user infp to populate form
   $.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: "GET",
@@ -471,12 +462,8 @@ var editUser = function() {
 
 // DELETE USER -------------------------
 // delete button
-$('#delete-user-button').one("click", function() {
+$('#delete-user-button').click(function(){
   console.log('clicked delete user');
-  $('#form-container').empty();
-  // adds delete language to status bar
-  $('#status-bar').empty();
-  $('#status-bar').append("Would you like to delete your account?");
   areYouSure();
 });
 
@@ -499,10 +486,6 @@ var areYouSure = function() {
 
 var deleteUser = function() {
 	console.log("deleting user");
-  $('#form-container').empty();
-
-  // confirms successful deletion of account
-  $('#status-bar').empty();
 
 	$.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
@@ -511,9 +494,6 @@ var deleteUser = function() {
     //removes cookie
     Cookies.remove('loggedinID');
     console.log('Account deleted');
-
-  $('#status-bar').append("Account successfully deleted");
-
     // takes us back to beginning
     setUp();
   });
@@ -532,7 +512,7 @@ var saveQuestion = function(tempQA) {
 
   answeredQuestions.push(tempQA);
 
-  // console.log(answeredQuestions);
+  console.log(answeredQuestions);
 
   // if (answeredQuestions == 0) {
   //   // show "answer some questions instead of Date / submit buttons
@@ -558,10 +538,9 @@ var saveQuestion = function(tempQA) {
 
     // submit button
   	$('#submit-capsule').click(function(){
-  		console.log('submitted capsule');
-
+      //
       // var capsuleData = {
-      //   question: answeredQuestions,
+      //   questions: answeredQuestions,
       //   user: Cookies.get('loggedinId'),
       //   // date: $('#date').val(), // match date input id
       // };
@@ -575,20 +554,19 @@ var saveQuestion = function(tempQA) {
 
 
 // CREATE CAPSULES -----------------------
-var newCapsule = function(answeredQuestions) {
-	console.log("at newCapsule");
-
+var newCapsule = function(capsuleData) {
+	console.log("capsule created app side");
   console.log(answeredQuestions);
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
     dataType: 'json',
-		data: answeredQuestions
+		data: capsuleData,
 	}).done(function(data){
     console.log("sent capsule to server");
-
-    console.log("data from server: "+data);
+    // returns "capsule creation complete"
+    console.log(data);
 	});
 }; // end newCapsule
 // END CREATE CAPSULES -------------------
