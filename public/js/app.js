@@ -13,6 +13,10 @@ var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
 
+$('#logo').click(function(){
+  setUp();
+});
+
 // SETUP --------------
 var setUp = function() {
   console.log('setting up');
@@ -26,12 +30,19 @@ var setUp = function() {
   $('#sign-up').show();
   $('#log-in').show();
 
+<<<<<<< HEAD
+=======
+  $('#nav-sign-up-button').show();
+  $('#nav-log-in').show();
+
+>>>>>>> master
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
     var formContainer = $('#form-container');
     formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
+<<<<<<< HEAD
 
     // nav bar for logged-in users
     $('#nav-view-user-capsules-button').show();
@@ -40,6 +51,11 @@ var setUp = function() {
     $('#nav-signup-button').hide();
     $('#nav-login-button').hide();
 
+=======
+    // DUPLICATE NAV BAR BUTTONS
+    $('#nav-sign-up-button').hide();
+    $('#nav-log-in').hide();
+>>>>>>> master
     getQuestions();
   }
   else {
@@ -55,6 +71,9 @@ var setUp = function() {
       signUpForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').hide();
+      // $('#nav-log-in').hide();
     });
 
     // LOG-IN BUTTON
@@ -63,14 +82,25 @@ var setUp = function() {
       loginForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      $('#nav-sign-up-button').hide();
+      $('#nav-log-in').hide();
     });
 
     // DUPLICATE NAV BAR LOG-IN BUTTON
     $('#nav-login-button').click(function(){
       console.log('clicked log-in');
       loginForm();
-      $('#sign-up').hide();
-      $('#log-in').hide();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+    // DUPLICATE NAV BAR SIGN-UP BUTTON
+    $('#nav-sign-up-button').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').show();
+      // $('#nav-log-in').show();
     });
 
   };
@@ -228,13 +258,32 @@ var loginPost = function() {
 var getQuestions = function(){
 	console.log("getting questions");
 
+<<<<<<< HEAD
   // dev buttons - to be removed once nav bar is working 100%
+=======
+  // this conditional is only about which nav buttons to show
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in");
+    $('#nav-log-out-button').show();
+    $('#nav-edit-user-button').show();
+    $('#nav-sign-up-button').hide();
+  }
+  else {
+
+  }
+
+  //showing edit/delete buttons
+>>>>>>> master
   $('#logout-button').show();
   $('#edit-user-button').show();
   $('#delete-user-button').show();
   $('#view-user-capsules-button').show();
   $('#sign-up').show();
   $('#log-in').show();
+
+  //DUPLICATE NAV BAR BUTTONS
+  $('#nav-log-out-button').show();
+  $('#nav-edit-user-button').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -283,12 +332,19 @@ var renderQuestions = function(data) {
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
 
+<<<<<<< HEAD
     // nav bar for logged-in users
     $('#nav-view-user-capsules-button').show();
     $('#nav-edit-user-button').show();
     $('#nav-logout-button').show();
     $('#nav-login-button').hide();
     $('#nav-signup-button').hide();
+=======
+    //showing DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-in').hide();
+    $('#nav-edit-user-button').show();
+    $('#nav-log-out-button').show();
+>>>>>>> master
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -305,15 +361,19 @@ var renderQuestions = function(data) {
     });
   }
   else {
+<<<<<<< HEAD
     // nav bar for non-logged-in users
     $('#nav-login-button').show();
     $('#nav-signup-button').show();
     $('#nav-logout-button').hide();
+=======
+    //hiding DUPLICATE NAV BAR edit/delete buttons
+    $('#nav-log-out-button').hide();
+>>>>>>> master
     $('#nav-edit-user-button').hide();
     $('#nav-view-user-capsules-button').hide();
 
     $(".inner-box").on("click", function() {
-      $('#form-container').empty();
       showModal();
       // $('#modal').toggle(); // this calls the login modal
     });
@@ -459,11 +519,36 @@ $('#logout-button').click(function(){
   $('#status-bar').empty();
   $('#status-bar').append("Successfully logged out");
 });
+
+
+//////THIS IS WHERE MELISSA LEFT OFF!!! 
+// 
+//
+//
+//
+
+$('#nav-log-out-button').click(function(){
+  console.log('clicked logout');
+  //removes cookie
+  Cookies.remove('loggedinId');
+  console.log('cookie deleted, logged out');
+  // takes us back to beginning
+  setUp();
+
+  // adds delete language to status bar
+  $('#status-bar').empty();
+  $('#status-bar').append("Successfully logged out");
+});
 // END LOGOUT -----------------------
 
 
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
+  console.log('clicked edit user');
+  editForm();
+});
+//DUPLICATE EDIT USER BUTTON -- it's called 'MY PROFILE' in HTML
+$('#nav-edit-user-button').click(function(){
   console.log('clicked edit user');
   editForm();
 });
