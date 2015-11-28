@@ -131,7 +131,7 @@ var loginForm = function() {
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('Login!');
+  // status.append('Login!');
 
   // showing login template
   var formContainer = $('#form-container');
@@ -144,7 +144,13 @@ var loginForm = function() {
 		console.log('clicked login-button');
 		loginPost();
 	});
-}; // sign up form
+
+  // SIGN-UP BUTTON - through login form
+  $('#signup-through-login').click(function() {
+    console.log("clicked signup through login button");
+    signUpForm();
+  });
+}; // log in form
 
 
 var loginPost = function() {
@@ -227,6 +233,8 @@ var renderQuestions = function(data) {
 
     //showing DUPLICATE NAV BAR edit/delete buttons
     $('#nav-log-in').hide();
+    $('nav-edit-user-button').show();
+    $('nav-logout-button').show();
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -244,7 +252,8 @@ var renderQuestions = function(data) {
   }
   else {
     //hiding DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-log-out').hide();
+    $('#nav-logout-button').hide();
+    $('#nav-edit-user-button').hide();
 
     $(".inner-box").on("click", function() {
       $('#form-container').empty();
@@ -388,10 +397,13 @@ $('#logout-button').click(function(){
   console.log('cookie deleted, logged out');
   // takes us back to beginning
   setUp();
+
+  // adds delete language to status bar
+  $('#status-bar').empty();
+  $('#status-bar').append("Successfully logged out");
 });
-
-
 // END LOGOUT -----------------------
+
 
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
@@ -407,7 +419,11 @@ var editForm = function() {
   $('#status-bar').empty();
   $('#status-bar').append("Edit your information");
 
-  // get user infp to populate form
+  $('#logout-button').show();
+  $('#edit-user-button').hide();
+  $('#delete-user-button').show();
+
+  // get user info to populate form
   $.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: "GET",
@@ -455,8 +471,12 @@ var editUser = function() {
 
 // DELETE USER -------------------------
 // delete button
-$('#delete-user-button').click(function(){
+$('#delete-user-button').one("click", function() {
   console.log('clicked delete user');
+  $('#form-container').empty();
+  // adds delete language to status bar
+  $('#status-bar').empty();
+  $('#status-bar').append("Would you like to delete your account?");
   areYouSure();
 });
 
@@ -479,6 +499,10 @@ var areYouSure = function() {
 
 var deleteUser = function() {
 	console.log("deleting user");
+  $('#form-container').empty();
+
+  // confirms successful deletion of account
+  $('#status-bar').empty();
 
 	$.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
@@ -487,6 +511,9 @@ var deleteUser = function() {
     //removes cookie
     Cookies.remove('loggedinID');
     console.log('Account deleted');
+
+  $('#status-bar').append("Account successfully deleted");
+
     // takes us back to beginning
     setUp();
   });
