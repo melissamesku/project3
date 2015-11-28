@@ -135,9 +135,22 @@
 		  <div id="delete-user-container" data-id="{{_id}}">
 				<h3>Are you sure?</h3>
 		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
-			</div>
+		  </div>
 
 		</template>
+
+		<!--  VIEW USER CAPSULES ============= -->
+		<template id="view-user-capsules-template">
+			<div id="view-user-capsules-container" data-id="{{_id}}">
+				<h3>View your time capsules</h3>
+				{{#each time_capsules}}
+					Created on: {{created_at}}
+					{{question}}
+				{{/each}}
+
+			</div>
+		</template>
+
 
         <!-- BOX ============ -->
         <template id="boxes-template">
