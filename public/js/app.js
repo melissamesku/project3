@@ -233,8 +233,8 @@ var renderQuestions = function(data) {
 
     //showing DUPLICATE NAV BAR edit/delete buttons
     $('#nav-log-in').hide();
-    $('nav-edit-user-button').show();
-    $('nav-logout-button').show();
+    $('#nav-edit-user-button').show();
+    $('#nav-logout-button').show();
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -374,6 +374,7 @@ var renderTextInput = function(id, quest) {
 //   }
 //   return color;
 // }
+
 
 getRandomColor = function() {
   // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
