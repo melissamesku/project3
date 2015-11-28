@@ -13,6 +13,10 @@ var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
 
+$('#logo').click(function(){
+  setUp();
+});
+
 // SETUP --------------
 var setUp = function() {
   console.log('setting up');

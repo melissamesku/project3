@@ -24,15 +24,17 @@ nav ul li {
 nav ul li:hover {
 	color: #000;
 	background-color: #eee;
+	cursor: pointer;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Playfair Display';
 	font-weight: 800;
 	color: #4b3b4b;
 }
-.logo {
+#logo {
 	padding-left: 10px;
 	display: inline;
+	cursor: pointer;
 }
 #sidebar-area {
 	border-left: 1px solid #000;
@@ -43,6 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 163px;
 	overflow: hidden;
 	display: inline-block;
+	cursor: pointer;
 }
 .inner-box {
 	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
