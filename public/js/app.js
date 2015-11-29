@@ -791,12 +791,3 @@ var renderCapsules = function(data) {
 
 // END GET CAPSULES -----------------
 
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> master
