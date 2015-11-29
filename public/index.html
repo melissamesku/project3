@@ -11,10 +11,18 @@
 	<nav>
 		<h1 id="logo">time<em>capsule</em></h1>
 		<ul>
+<<<<<<< HEAD
+			<li id="nav-view-user-capsules-button">My Time Capsules</li>
+			<li id="nav-edit-user-button">My Account</li>
+			<li id="nav-signup-button">Sign up</li>
+			<li id="nav-login-button">Log in</li>
+			<li id="nav-logout-button">Log out</li>
+=======
 			<li id="nav-edit-user-button">My profile</li>
 			<li id="nav-sign-up-button">Sign up</li>
 			<li id="nav-log-in">Log in</li>
 			<li id="nav-log-out-button">Log out</li>
+>>>>>>> master
 		</ul>
 	</nav>
 	<ul class="accordion" data-accordion>
@@ -51,7 +59,10 @@
 
 				<button id="edit-user-button">Edit User</button><br>
 
-			  <button id="delete-user-button">Delete Account</button><br>
+			 	<button id="delete-user-button">Delete Account</button><br>
+
+			 	<button id="view-user-capsules-button">View my capsules</button>
+
 				<!-- added container for 'are you sure?' -->
 				<div id="delete-user-container">
 				</div>
@@ -71,12 +82,12 @@
 
   		<div id="login-container" data-id="{{_id}}">
 				<h3>Login</h3>
+			<button id="signup-through-login">Not registered yet? Sign up!</button>
   			<label for="username">Username</label><br/>
   			<input type="text" id="username" placeholder="username"/><br>
   			<label for="username">Password</label><br/>
   			<input type="text" id="password" placeholder="password"/><br>
-  			<button id="login-button" data-id="{{_id}}">Login!</button><br>
-  			<button id="signup-through-login">Not registered yet? Sign up!</button>
+  			<button id="login-button" data-id="{{_id}}">Login!</button>
   		</div>
 
   	</template>
@@ -85,6 +96,7 @@
   	<template id="signup-template">
 
   		<div id="signup-container" data-id="{{_id}}">
+  			<button id="login-through-signup">Already registered? Log in!</button>
 
   			<label for="username">Username *</label><br/>
   			<input type="text" id="username" placeholder="username"/><br>
@@ -103,6 +115,7 @@
   			<p>* Required</p>
 
   			<button id="register-button" data-id="{{_id}}">Register!</button>
+  		
   		</div>
 
   	</template>
@@ -133,9 +146,22 @@
 		  <div id="delete-user-container" data-id="{{_id}}">
 				<h3>Are you sure?</h3>
 		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
-			</div>
+		  </div>
 
 		</template>
+
+		<!--  VIEW USER CAPSULES ============= -->
+		<template id="view-user-capsules-template">
+			<div id="view-user-capsules-container" data-id="{{_id}}">
+				<h3>View your time capsules</h3>
+<!-- 				{{#each time_capsules}}
+					Created on: {{created_at}}
+					{{question}}
+				{{/each}} -->
+
+			</div>
+		</template>
+
 
         <!-- BOX ============ -->
         <template id="boxes-template">
