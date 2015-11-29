@@ -551,7 +551,7 @@ var newCapsule = function(capsuleData) {
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
-    dataType: 'json',
+    dataType: JSON.stringify(capsuleData),
 		data: capsuleData
 	}).done(function(data){
     console.log("sent capsule to server");

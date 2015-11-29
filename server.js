@@ -139,15 +139,11 @@ console.log("at capsules post");
 // console.log("THIS IS THE REQ: " + req);
 console.log(req.body);
 
-// var qa_array = [];
-//
-// for (i=0;i<req.body)
-
-  var capsule = new Capsule({
-    qa: req.body,
-    user: req.cookies.loggedinId,
-    // date: req.body.date,
-  });
+var capsule = new Capsule({
+  qa: req.body,
+  user: req.cookies.loggedinId,
+  // date: req.body.date,
+});
 
 console.log("server capsule data: "+capsule);
 
