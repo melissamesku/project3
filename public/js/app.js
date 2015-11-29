@@ -617,12 +617,18 @@ var newCapsule = function(capsuleData) {
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
-    dataType: JSON.stringify(capsuleData),
+    dataType: JSON,
+    processData: false,
 		data: capsuleData
 	}).done(function(data){
     console.log("sent capsule to server");
-    // returns "capsule creation complete"
+
     console.log(data);
+
+    formContainer.empty();
+  	var template = Handlebars.compile($('#capsules-template').html());
+    formContainer.append(template(data));
+
 	});
 }; // end newCapsule
 // END CREATE CAPSULES -------------------

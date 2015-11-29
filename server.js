@@ -137,22 +137,21 @@ app.post('/capsules', function(req, res) {
 
 console.log("at capsules post");
 // console.log("THIS IS THE REQ: " + req);
-console.log(req.body);
+console.log(req.body.questions);
 
 var capsule = new Capsule({
   qa: req.body,
   user: req.cookies.loggedinId,
   // date: req.body.date,
 });
-
-console.log("server capsule data: "+capsule);
+// console.log("server capsule data: "+capsule);
 
   capsule.save( function(err, capsule) {
     if (err) {
       console.log(err);
       res.statusCode = 503;
     } else {
-      // console.log(capsule);
+      console.log(capsule);
 
       res.send(capsule);
     }; // end if/else
