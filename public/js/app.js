@@ -455,7 +455,7 @@ var renderTextInput = function(id, quest) {
 getRandomColor = function() {
   // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
   // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
-  colors = ['#996600', '#b5b700',  '#666666', '#009999', '#99004c', '#859900', '#990097' ]
+  colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 // END QUESTIONS --------------------
