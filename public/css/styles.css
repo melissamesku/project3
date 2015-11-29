@@ -126,7 +126,9 @@ button#logo:hover {
 	font-size: .8em;
 }
 
-
+#signup-through-login {
+	float:right;
+}
 .list-questions {
 	height: 38px;
 	overflow: hidden;

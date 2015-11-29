@@ -12,7 +12,7 @@
 		<button id="logo"><h1>time<em>capsule</em><h1></button>
 		<ul>
 			<button id="nav-my-capsules-button">My Time Capsules</button>
-			<button id="nav-edit-user-button">My Account</button>
+			<button id="nav-my-account-button">My Account</button>
 			<button id="nav-signup-button">Sign up</button>
 			<button id="nav-login-button">Log in</button>
 			<button id="nav-logout-button">Log out</button>
@@ -46,7 +46,7 @@
 				</ul> -->
 				<div id="answered-container"></div>
 
-				<button id="logout-button">Logout</button><br>
+<!-- 				<button id="logout-button">Logout</button><br>
 
 				<button id="edit-user-button">Edit User</button><br>
 
@@ -56,7 +56,7 @@
 
 				<button id="sign-up">Sign up!</button><br>
 
-				<button id="log-in">Login!</button><br>
+				<button id="log-in">Login!</button><br> -->
 
 				<!-- <button id="submit-capsule">Submit Capsule!</button><br> -->
 
@@ -68,7 +68,6 @@
   	<template id="login-template">
 
   		<div id="login-container" data-id="{{_id}}">
-				<h3>Login</h3>
 			<button id="signup-through-login">Not registered yet? Sign up!</button>
   			<label for="username">Username</label><br/>
   			<input type="text" id="username" placeholder="username"/><br>
@@ -107,12 +106,25 @@
 
   	</template>
 
-		<!--  EDIT USER ============= -->
-		<template id="edit-user-template">
+  	<!--  ACCOUNT INFO ========== -->
+  	<template id="account-info-template">
+  		<div id="account-info-container" data-id={{_id}}>
 
-		  <div id="edit-user-container" data-id="{{_id}}">
+  			<button id="toplevel-view-capsules-button" data-id="{{_id}}">View my time capsules</button><br>
 
-		    <label for="email">Email</label><br/>
+  			<button id="toplevel-update-user-info-button" data-id="{{_id}}">Update account information</button><br>
+
+  			<button id="toplevel-delete-account-button" data-id="{{_id}}">Delete account</button>
+
+  		</div>
+  	</template>
+
+	<!--  EDIT USER ============= -->
+	<template id="edit-user-template">
+
+		<div id="edit-user-container" data-id="{{_id}}">
+
+			<label for="email">Email</label><br/>
 		    <input type="text" id="email" placeholder="{{{email}}}"/><br>
 
 		    <label for="age">Age</label><br/>
@@ -123,84 +135,68 @@
 
 		    <button id="update-user-button" data-id="{{{_id}}}">Update</button>
 
-		  </div>
+		 </div>
 
-		</template>
+	</template>
 
-		<!--  DELETE USER ============= -->
-		<template id="delete-user-template">
-
-		  <div id="delete-user-container" data-id="{{_id}}">
-				<h3>Are you sure?</h3>
+	<!--  DELETE USER ============= -->
+	<template id="delete-user-template">
+		<div id="delete-user-container" data-id="{{_id}}">
+			<h3>Are you sure?</h3>
 		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
-		  </div>
+		 </div>
+	</template>
 
-		</template>
+	<!--  VIEW USER CAPSULES ============= -->
+	<template id="view-my-capsules-template">
+		<div id="view-my-capsules-container" data-id="{{_id}}">
+			<h3>View your time capsules</h3>
+			{{#each time_capsules}}
+			Created on: {{created_at}}
+			{{qa}}
+			{{/each}}
+		</div>
+	</template>
 
-		<!--  VIEW USER CAPSULES ============= -->
-		<template id="view-user-capsules-template">
-			<div id="view-user-capsules-container" data-id="{{_id}}">
-				<h3>View your time capsules</h3>
-<!-- 				{{#each time_capsules}}
-					Created on: {{created_at}}
-					{{question}}
-				{{/each}} -->
-
+    <!-- BOX ============ -->
+    <template id="boxes-template">
+        <div class="outer-box" data-id="{{question}}" id="{{_id}}">
+		    <div class="inner-box" data-id="{{question}}" id="{{_id}}">
+				<p><em>{{question}}</em> <span style="display:none">{{_id}}</span></p>
 			</div>
-		</template>
+		</div>
+	</template>
 
+	<!-- ACTIVE BOX ============ -->
+    <template id="active-box-template">
+        <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
+            <input type="text" id="response" placeholder="my response"></input>
+            <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
+        </div>
+    </template>
 
-        <!-- BOX ============ -->
-        <template id="boxes-template">
-        	<div class="outer-box" data-id="{{question}}" id="{{_id}}">
-		      	<div class="inner-box" data-id="{{question}}" id="{{_id}}">
-							<p><em>{{question}}</em> <span style="display:none">{{_id}}</span></p>
-						</div>
-					</div>
-		</template>
+	<!--  QUESTIONS LIST ============= -->
+	<template id="questions-template">
+		<div id="questions-container" data-id="{{_id}}">
+			<div class="list-questions">{{question}}</div><br>
+		<!-- add date calendar field -->
+		 </div>
+	</template>
 
-		<!-- <template id="boxes-template">
-			<div class="boxes-container" data-id="{{_id}}">
-				<div class="outer-box">
-					{{#each questions}}
-					<div class="inner-box" data-id="testing{{@index}}">
-						<p>{{@index}} : {{this}}</p>
-					</div>
-					{{/each}}
-				</div>
-			</div>
-		</template> -->
-
-		<!-- ACTIVE BOX ============ -->
-        <template id="active-box-template">
-            <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
-                <input type="text" id="response" placeholder="my response">
-                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule">
-            </div>
-        </template>
-
-		<!--  QUESTIONS LIST ============= -->
-
-		<template id="questions-template">
-		  <div id="questions-container" data-id="{{_id}}">
-				<div class="list-questions"><em>{{question}}</em></div><br>
+	<!-- DISPLAY CAPSULES ============= -->
+	<template id="capsules-template">
+		<div id="capsules-container" data-id="{{_id}}">
+			{{#each qa}}
+			<div class="list-capsules">
+				{{question}}
+				{{date_of_return}}
+			</div><br>
+			{{/each}}
 
 		<!-- add date calendar field -->
 
-		  </div>
-		</template>
-
-		<!-- DISPLAY CAPSULES ============= -->
-		<template id="capsules-template">
-			<div id="capsules-container" data-id="{{_id}}">
-				{{#each qa}}
-				<div class="list-capsules">{{question}}</div><br>
-				{{/each}}
-
-		<!-- add date calendar field -->
-
-			</div>
-		</template>
+		</div>
+	</template>
 
 <!-- END TEMPLATES ============= -->
 
