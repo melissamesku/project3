@@ -115,7 +115,7 @@
   			<p>* Required</p>
 
   			<button id="register-button" data-id="{{_id}}">Register!</button>
-  		
+
   		</div>
 
   	</template>
@@ -194,9 +194,16 @@
 
 		<!--  QUESTIONS LIST ============= -->
 
-		<template id="questions-template">
-		  <div id="questions-container" data-id="{{_id}}">
-				<div class="list-questions">{{question}}</div><br>
+		<!--  VIEW USER CAPSULES ============= -->
+		<template id="view-my-capsules-template">
+			<div id="view-my-capsules-container" data-id="{{_id}}">
+				<h3>View your time capsules</h3>
+				{{#each time_capsules}}
+				Created on: {{created_at}}
+				{{qa}}
+				{{/each}}
+			</div>
+		</template>
 
 		<!-- add date calendar field -->
 
