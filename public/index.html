@@ -5,39 +5,31 @@
   	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
   	<link rel="stylesheet" type="text/css" href="css/styles.css">
-
 </head>
+
 <body>
 	<nav>
-		<h1 id="logo">time<em>capsule</em></h1>
+		<button id="logo"><h1>time<em>capsule</em><h1></button>
 		<ul>
-<<<<<<< HEAD
-			<li id="nav-view-user-capsules-button">My Time Capsules</li>
-			<li id="nav-edit-user-button">My Account</li>
-			<li id="nav-signup-button">Sign up</li>
-			<li id="nav-login-button">Log in</li>
-			<li id="nav-logout-button">Log out</li>
-=======
-			<li id="nav-edit-user-button">My profile</li>
-			<li id="nav-sign-up-button">Sign up</li>
-			<li id="nav-log-in">Log in</li>
-			<li id="nav-log-out-button">Log out</li>
->>>>>>> master
+			<button id="nav-my-capsules-button">My Time Capsules</button>
+			<button id="nav-edit-user-button">My Account</button>
+			<button id="nav-signup-button">Sign up</button>
+			<button id="nav-login-button">Log in</button>
+			<button id="nav-logout-button">Log out</button>
 		</ul>
 	</nav>
-	<ul class="accordion" data-accordion>
+
+	<!-- <ul class="accordion" data-accordion>
 	  <li class="accordion-navigation" style="text-align:right;">
 	    <a href="#about">About</a>
 	    <div id="about" class="content">
-	      <em><span style="color:#4b3b4b">To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
+	      <em>To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
 	    </div>
-	</ul>
+	</ul> -->
 
 	<div class="container row">
 
 		<section class="small-12 large-9 columns">
-
-	    	<h2>main area</h2>
 				<!-- added a status bar that displays messages to user when action occur -->
 	    	<h3 id="status-bar">status bar</h3>
 
@@ -48,7 +40,6 @@
 
 		<section class="small-12 large-3 columns" id="sidebar-area">
 			<div>
-				<h2>sidebar area</h2>
 				<!-- <ul>
 					<li>first question</li>
 					<li>second question</li>
@@ -62,10 +53,6 @@
 			 	<button id="delete-user-button">Delete Account</button><br>
 
 			 	<button id="view-user-capsules-button">View my capsules</button>
-
-				<!-- added container for 'are you sure?' -->
-				<div id="delete-user-container">
-				</div>
 
 				<button id="sign-up">Sign up!</button><br>
 
@@ -187,23 +174,16 @@
 		<!-- ACTIVE BOX ============ -->
         <template id="active-box-template">
             <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
-                <input type="text" id="response" placeholder="my response"></input>
-                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
+                <input type="text" id="response" placeholder="my response">
+                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule">
             </div>
         </template>
 
 		<!--  QUESTIONS LIST ============= -->
 
-		<!--  VIEW USER CAPSULES ============= -->
-		<template id="view-my-capsules-template">
-			<div id="view-my-capsules-container" data-id="{{_id}}">
-				<h3>View your time capsules</h3>
-				{{#each time_capsules}}
-				Created on: {{created_at}}
-				{{qa}}
-				{{/each}}
-			</div>
-		</template>
+		<template id="questions-template">
+		  <div id="questions-container" data-id="{{_id}}">
+				<div class="list-questions"><em>{{question}}</em></div><br>
 
 		<!-- add date calendar field -->
 
@@ -211,30 +191,30 @@
 		</template>
 
 		<!-- DISPLAY CAPSULES ============= -->
-		<template id="capsules-template">
-			<div id="capsules-container" data-id="{{_id}}">
+		<template id="view-my-capsules-template">
+			<div id="view-my-capsules-container" data-id="{{_id}}">
+				<h3>View your time capsules</h3>
 				{{#each qa}}
-				<div class="list-capsules">{{question}}</div><br>
+				Created on: {{created_at}}
+				{{qa}}
 				{{/each}}
-
-		<!-- add date calendar field -->
-
 			</div>
 		</template>
 
 <!-- END TEMPLATES ============= -->
 
-<!-- LOGIN MODAL ============= -->
+<!-- LOGIN / SIGNUP MODAL ============= -->
 		<div id="modal">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>TITLE</h3>
 					<button id='close'>x</button>
 				</div>
 				<div class='modal-body'>
-					<p>lkhjaiuyx xhsd, asdnsadjlasf sf  fdsa fasd swwrt afs  sfd  fdsa asf fs fs  fds afsd afd  afsd fsda fdas adf fads fsd </p>
-					<button id="modal-sign-up">Sign up!</button><br>
-					<button id="modal-log-in">Login!</button><br>
+					<h3>Sign up or log in <br/>to create your time capsule! </h3>
+					<div class="modal-button-area">
+						<button id="modal-sign-up">Sign up</button>
+						<button id="modal-log-in">Login</button>
+					</div>
 				</div>
 			</div>
 		</div>

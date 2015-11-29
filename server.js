@@ -127,7 +127,7 @@ app.get('/questions', function(req, res) {
 // NEW CAPSULE --------------
 app.post('/capsules', function(req, res) {
 
-console.log("at capsules post");
+console.log("making new capsule");
 // console.log("THIS IS THE REQ: " + req);
 console.log(req.body);
 
@@ -156,7 +156,7 @@ var capsule = new Capsule({
 // ADD TO CAPSULE ---------------
 app.put('/capsules/:id', function(req, res) {
 
-console.log("got new question for capsule");
+console.log("adding to current capsule");
 
 	Capsule.findByIdAndUpdate(
     req.params.id,
@@ -169,10 +169,15 @@ console.log("got new question for capsule");
 });
 
 // GET TIME-CAPSULES ---------------
-app.get('/capsules', function(req, res) {
+app.get('/capsules/:id', function(req, res) {
   console.log('got time capsules request');
 
-	Capsules.find().then(function(capsules) {
+	Capsule.find({ 'user': req.params.id }).exec(function(err, capsules) {
+
+    console.log('sending time capsules');
+    console.log(capsules);
+
+
 		res.send(capsules);
 	});
 });
