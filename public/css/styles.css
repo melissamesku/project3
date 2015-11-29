@@ -14,6 +14,8 @@ nav {
 nav ul {
 	text-align: right; 
 	padding-bottom: 20px;
+	display: inline;
+	float:right;
 }
 nav ul li {
 	display: inline;
@@ -33,17 +35,35 @@ h1, h2, h3, h4, h5, h6 {
 }  
 button {
 	background-color: transparent;
-	color: #660066;
-	padding: 15px;
-	border: 1px solid #660066;
+	color: #4b3b4b;
+	padding: 9px 11px;
+	border: 1px solid #4b3b4b;
+	font-family: 'Pontano Sans';
 }
-.logo {
-	padding-left: 10px;
-	display: inline;
+button:hover {
+	background-color: #4b3b4b;
+}
+nav ul button {
+	color: #eee;
+	margin: 20px 20px 0 0;
+}
+button#logo {
+	padding: 0 0 0 10px;
 	cursor: pointer;
+	font-family: 'Playfair Display';
+	border: none;
+}
+button#logo:hover {
+	opacity: .8;
+	color: #fff;
+	background-color: #000;
+}
+.content {
+	color:#4b3b4b;
+	line-height: 10px;
 }
 #sidebar-area {
-	border-left: 1px solid #000;
+	padding-top:50px;
 }
 .outer-box {
 	border: 1px solid #000;
@@ -73,36 +93,44 @@ button {
 } 
 .inner-box-active p {   
 	font-size: .9em;
-	color: #fff;
+	color: #000;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
 	padding: 5px;
 }
 .active-box-container {
 	background-color: none; /*  this class works but this line doesn't work */
 }
+.active-box-container input {
+	color: #4b3b4b;
+	border: 1px solid #4b3b4b;
+	font-size: .8em;
+	padding: 7px 9px;
+	font-family: 'Pontano Sans';
+}
 .active-box-container input[type=text] {
-	color: #666;
-	border: 1px solid #666;
-	font-size: .7em;
-	padding: 7px;
 	width: 94%;
 	margin: 0px auto;
 }
 .active-box-container input[type=submit] {
-	color: #fff;
-	background-color: #4b3b4b;
-	border: none;
-	font-size: .7em;
-	padding: 7px;
+	background-color: transparent;
 	margin: 5px;
 }
 .active-box-container input[type=submit]:hover {
-	background-color: #000;
+	background-color: #4b3b4b;
+	color:#eee;
 }
 /*.inner-box {
 	background-color: #fff;
 }*/
 #answered-container {
 	font-size: .8em;
+}
+
+
+.list-questions {
+	height: 38px;
+	overflow: hidden;
+	opacity: .5;
 }
 
 
@@ -119,24 +147,24 @@ button {
 	background-color: rgba(0,0,0,.4);
 }
 .modal-content {
-  position: relative;
-  margin: 0 30%;
-  background-color: white;
-  top: 150px;
-  width: 35%;
+	position: relative;
+	margin: 0 30%;
+	background-color: white;
+	top: 150px;
+	width: 35%;
 }
 .modal-header {
-  /*position: absolute;*/
-  background-color: white;
-  width: 100%;
+	/*position: absolute;*/
+	background-color: white;
+	width: 100%;
 }
 .modal-body {
-  /*position: absolute;
-  width: 100%;
-  top: 50px;*/
-  background-color: white;
-  border-top: 1px solid #eee;
-  margin: 0 auto;
+	/*position: absolute;
+	width: 100%;
+	top: 50px;*/
+	background-color: white;
+	border-top: 1px solid #eee;
+	margin: 0 auto;
 	text-align: center;
 	display: block;
 }
