@@ -296,7 +296,7 @@ var getQuestions = function(){
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('time capsule main area');
+  // status.append('time capsule main area');
 
 	$.ajax({
 		url: 'http://localhost:3000/questions',

@@ -58,12 +58,15 @@ button#logo:hover {
 	color: #fff;
 	background-color: #000;
 }
-.content {
-	color:#4b3b4b;
-	line-height: 10px;
+#form-container {
+	padding-top: 40px;
 }
 #sidebar-area {
-	padding-top:50px;
+	padding-top:40px;
+}
+#accordion.content {
+	color:#4b3b4b;
+	line-height: 10px;
 }
 .outer-box {
 	border: 1px solid #000;
@@ -128,6 +131,11 @@ button#logo:hover {
 
 #signup-through-login {
 	float:right;
+	display: block;
+}
+#login-through-signup {
+	float:right;
+	display: block;
 }
 .list-questions {
 	height: 38px;
@@ -175,9 +183,10 @@ button#logo:hover {
 	margin: 30px;
 }
 #close {
+	position: absolute;
 	font-size: 20px;
 	padding: 6px 14px 6px 14px;
-	position: relative;
+	/*position: relative;*/
 	margin: 0 30%;
 	background-color: white;
 	top: 150px;
