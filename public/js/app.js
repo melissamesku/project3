@@ -325,7 +325,6 @@ var renderQuestions = function(data) {
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
 
-<<<<<<< HEAD
     // nav bar for logged-in users
     $('#nav-view-user-capsules-button').show();
     $('#nav-edit-user-button').show();
