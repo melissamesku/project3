@@ -790,13 +790,3 @@ var renderCapsules = function(data) {
 }; // end renderCapsules
 
 // END GET CAPSULES -----------------
-
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> master
