@@ -13,6 +13,10 @@ var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
 
+$('#logo').click(function(){
+  setUp();
+});
+
 // SETUP --------------
 var setUp = function() {
   console.log('setting up');
@@ -23,6 +27,7 @@ var setUp = function() {
   $('#sign-up').show();
   $('#log-in').show();
 
+  $('#nav-sign-up-button').show();
   $('#nav-log-in').show();
 
   if (Cookies.get("loggedinId") != undefined) {
@@ -31,6 +36,9 @@ var setUp = function() {
     formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
+    // DUPLICATE NAV BAR BUTTONS
+    $('#nav-sign-up-button').hide();
+    $('#nav-log-in').hide();
     getQuestions();
   }
   else {
@@ -42,6 +50,9 @@ var setUp = function() {
       signUpForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').hide();
+      // $('#nav-log-in').hide();
     });
 
     // LOG-IN BUTTON
@@ -50,14 +61,25 @@ var setUp = function() {
       loginForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      $('#nav-sign-up-button').hide();
+      $('#nav-log-in').hide();
     });
 
     // DUPLICATE NAV BAR LOG-IN BUTTON
     $('#nav-log-in').click(function(){
       console.log('clicked log-in');
       loginForm();
-      $('#sign-up').hide();
-      $('#log-in').hide();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+    // DUPLICATE NAV BAR SIGN-UP BUTTON
+    $('#nav-sign-up-button').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').show();
+      // $('#nav-log-in').show();
     });
 
   };
@@ -181,10 +203,25 @@ var loginPost = function() {
 var getQuestions = function(){
 	console.log("getting questions");
 
+  // this conditional is only about which nav buttons to show
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in");
+    $('#nav-log-out-button').show();
+    $('#nav-edit-user-button').show();
+    $('#nav-sign-up-button').hide();
+  }
+  else {
+
+  }
+
   //showing edit/delete buttons
   $('#logout-button').show();
   $('#edit-user-button').show();
   $('#delete-user-button').show();
+
+  //DUPLICATE NAV BAR BUTTONS
+  $('#nav-log-out-button').show();
+  $('#nav-edit-user-button').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -227,6 +264,9 @@ var renderQuestions = function(data) {
 
     //showing DUPLICATE NAV BAR edit/delete buttons
     $('#nav-log-in').hide();
+    $('#nav-edit-user-button').show();
+    $('#nav-log-out-button').show();
+
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -244,10 +284,11 @@ var renderQuestions = function(data) {
   }
   else {
     //hiding DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-log-out').hide();
+    $('#nav-log-out-button').hide();
+    $('#nav-edit-user-button').hide();
+
 
     $(".inner-box").on("click", function() {
-      $('#form-container').empty();
       showModal();
       // $('#modal').toggle(); // this calls the login modal
     });
@@ -392,11 +433,36 @@ $('#logout-button').click(function(){
   setUp();
 });
 
+//////THIS IS WHERE MELISSA LEFT OFF!!!
+//
+//
+//
+//
+
+$('#nav-log-out-button').click(function(){
+  console.log('clicked logout');
+  //removes cookie
+  Cookies.remove('loggedinId');
+  console.log('cookie deleted, logged out');
+  // takes us back to beginning
+  setUp();
+
+  // adds delete language to status bar
+  $('#status-bar').empty();
+  $('#status-bar').append("Successfully logged out");
+});
+// END LOGOUT -----------------------
+
 
 // END LOGOUT -----------------------
 
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
+  console.log('clicked edit user');
+  editForm();
+});
+//DUPLICATE EDIT USER BUTTON -- it's called 'MY PROFILE' in HTML
+$('#nav-edit-user-button').click(function(){
   console.log('clicked edit user');
   editForm();
 });
