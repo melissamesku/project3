@@ -45,12 +45,12 @@ var setUp = function() {
   $('#form-container').empty();
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   $('#nav-signup-button').show();
   $('#nav-login').show();
@@ -59,8 +59,8 @@ var setUp = function() {
     console.log("already logged in");
     var formContainer = $('#form-container');
     formContainer.empty();
-    $('#sign-up').hide();
-    $('#log-in').hide();
+    // $('#sign-up').hide();
+    // $('#log-in').hide();
 
     // nav bar for logged-in users
     $('#nav-my-capsules-button').show();
@@ -121,12 +121,12 @@ var signUpForm = function() {
 		console.log('showing sign up form');
 
     // dev buttons - to be removed once nav bar is working 100%
-    $('#logout-button').show();
-    $('#edit-user-button').show();
-    $('#delete-user-button').show();
-    $('#view-user-capsules-button').show();
-    $('#sign-up').show();
-    $('#log-in').show();
+    // $('#logout-button').show();
+    // $('#edit-user-button').show();
+    // $('#delete-user-button').show();
+    // $('#view-user-capsules-button').show();
+    // $('#sign-up').show();
+    // $('#log-in').show();
 
     // nav bar for non-logged-in users
     $('#nav-signup-button').hide();
@@ -208,12 +208,12 @@ var loginForm = function() {
   $('#nav-logout-button').hide();
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -286,12 +286,12 @@ var getQuestions = function(){
   }
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -315,12 +315,12 @@ var renderQuestions = function(data) {
   console.log('trying to render questions');
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   var template = Handlebars.compile($('#boxes-template').html());
   for(var i=0;i<data.length;i++) {
@@ -564,15 +564,14 @@ var editForm = function() {
   $('#status-bar').append("Manage my account");
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   // get user info to populate form
-
   $.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: "GET",
@@ -780,12 +779,12 @@ var renderCapsules = function(data) {
 	formContainer.empty();
 
   // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
+  // $('#logout-button').show();
+  // $('#edit-user-button').show();
+  // $('#delete-user-button').show();
+  // $('#view-user-capsules-button').show();
+  // $('#sign-up').show();
+  // $('#log-in').show();
 
   // nav bar for logged-in users
   $('#nav-my-account-button').show();
