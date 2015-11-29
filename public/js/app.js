@@ -13,9 +13,31 @@ var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
 
-$('#logo').click(function(){
+// NAV BAR LINK FUNCTIONS
+$('#logo').click(function() {
   setUp();
 });
+
+$('#nav-my-capsules-button').click(function() {
+  getCapsules();
+});
+
+$('#nav-login-button').click(function() {
+  loginForm();
+});
+
+$('#nav-logout-button').click(function() {
+  areYouSure();
+});
+
+$('#nav-signup-button').click(function() {
+  signUpForm();
+});
+
+$('#nav-edit-user-button').click(function() {
+  editForm();
+});
+
 
 // SETUP --------------
 var setUp = function() {
@@ -30,32 +52,23 @@ var setUp = function() {
   $('#sign-up').show();
   $('#log-in').show();
 
-<<<<<<< HEAD
-=======
-  $('#nav-sign-up-button').show();
-  $('#nav-log-in').show();
+  $('#nav-signup-button').show();
+  $('#nav-login').show();
 
->>>>>>> master
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
     var formContainer = $('#form-container');
     formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
-<<<<<<< HEAD
 
     // nav bar for logged-in users
-    $('#nav-view-user-capsules-button').show();
+    $('#nav-my-capsules-button').show();
     $('#nav-edit-user-button').show();
     $('#nav-logout-button').show();
     $('#nav-signup-button').hide();
     $('#nav-login-button').hide();
 
-=======
-    // DUPLICATE NAV BAR BUTTONS
-    $('#nav-sign-up-button').hide();
-    $('#nav-log-in').hide();
->>>>>>> master
     getQuestions();
   }
   else {
@@ -71,9 +84,6 @@ var setUp = function() {
       signUpForm();
       $('#sign-up').hide();
       $('#log-in').hide();
-      // DUPLICATE NAV BUTTONS
-      // $('#nav-sign-up-button').hide();
-      // $('#nav-log-in').hide();
     });
 
     // LOG-IN BUTTON
@@ -83,24 +93,20 @@ var setUp = function() {
       $('#sign-up').hide();
       $('#log-in').hide();
       // DUPLICATE NAV BUTTONS
-      $('#nav-sign-up-button').hide();
-      $('#nav-log-in').hide();
+      $('#nav-signup-button').hide();
+      $('#nav-login-button').hide();
     });
 
     // DUPLICATE NAV BAR LOG-IN BUTTON
     $('#nav-login-button').click(function(){
       console.log('clicked log-in');
       loginForm();
-      // $('#sign-up').hide();
-      // $('#log-in').hide();
     });
+
     // DUPLICATE NAV BAR SIGN-UP BUTTON
-    $('#nav-sign-up-button').click(function(){
+    $('#nav-signup-button').click(function(){
       console.log('clicked sign-up');
       signUpForm();
-      // DUPLICATE NAV BUTTONS
-      // $('#nav-sign-up-button').show();
-      // $('#nav-log-in').show();
     });
 
   };
@@ -258,32 +264,25 @@ var loginPost = function() {
 var getQuestions = function(){
 	console.log("getting questions");
 
-<<<<<<< HEAD
-  // dev buttons - to be removed once nav bar is working 100%
-=======
   // this conditional is only about which nav buttons to show
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
-    $('#nav-log-out-button').show();
+    $('#nav-my-capsules-button').show();
+    $('#nav-logout-button').show();
     $('#nav-edit-user-button').show();
-    $('#nav-sign-up-button').hide();
+    $('#nav-signup-button').hide();
   }
   else {
 
   }
 
-  //showing edit/delete buttons
->>>>>>> master
+  // dev buttons - to be removed once nav bar is working 100%
   $('#logout-button').show();
   $('#edit-user-button').show();
   $('#delete-user-button').show();
   $('#view-user-capsules-button').show();
   $('#sign-up').show();
   $('#log-in').show();
-
-  //DUPLICATE NAV BAR BUTTONS
-  $('#nav-log-out-button').show();
-  $('#nav-edit-user-button').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -332,19 +331,12 @@ var renderQuestions = function(data) {
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
 
-<<<<<<< HEAD
     // nav bar for logged-in users
     $('#nav-view-user-capsules-button').show();
     $('#nav-edit-user-button').show();
     $('#nav-logout-button').show();
     $('#nav-login-button').hide();
     $('#nav-signup-button').hide();
-=======
-    //showing DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-log-in').hide();
-    $('#nav-edit-user-button').show();
-    $('#nav-log-out-button').show();
->>>>>>> master
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -361,15 +353,11 @@ var renderQuestions = function(data) {
     });
   }
   else {
-<<<<<<< HEAD
     // nav bar for non-logged-in users
     $('#nav-login-button').show();
     $('#nav-signup-button').show();
     $('#nav-logout-button').hide();
-=======
-    //hiding DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-log-out-button').hide();
->>>>>>> master
+
     $('#nav-edit-user-button').hide();
     $('#nav-view-user-capsules-button').hide();
 
@@ -406,9 +394,6 @@ var showModal = function() {
     });
 
     // END LOGIN MODAL ----------------------
-
-    // $('#sign-up').hide();
-    // $('#log-in').hide();
 };
 
 
@@ -518,6 +503,8 @@ $('#logout-button').click(function(){
   // adds delete language to status bar
   $('#status-bar').empty();
   $('#status-bar').append("Successfully logged out");
+
+  $('#nav-my-capsules-button').hide();
 });
 
 
@@ -527,7 +514,7 @@ $('#logout-button').click(function(){
 //
 //
 
-$('#nav-log-out-button').click(function(){
+$('#nav-logout-button').click(function(){
   console.log('clicked logout');
   //removes cookie
   Cookies.remove('loggedinId');
@@ -625,7 +612,7 @@ $('#delete-user-button').one("click", function() {
   $('#form-container').empty();
 
   // nav bar
-  $('#nav-view-user-capsules-button').show();
+  $('#nav-my-capsules-button').show();
   $('#nav-edit-user-button').show();
   $('#nav-logout-button').show();
 
@@ -639,9 +626,8 @@ $('#delete-user-button').one("click", function() {
 var areYouSure = function() {
   console.log('showing delete form');
 
-  var delContainer = $('#delete-user-container');
   var template = Handlebars.compile($('#delete-user-template').html());
-  delContainer.append(template);
+  $('#form-container').append(template);
 
   // delete user confirm button
   $('#delete-user-confirm-button').click(function(){
@@ -785,7 +771,7 @@ var renderCapsules = function(data) {
   $('#nav-logout-button').show();
   $('#nav-login-button').hide();
   $('#nav-signup-button').hide();
-  $('#nav-view-user-capsules-button').hide();
+  $('#nav-my-capsules-button').hide();
 
   $('#status-bar').empty();
   $('#status-bar').append("View your time capsules");
