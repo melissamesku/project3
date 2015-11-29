@@ -43,7 +43,7 @@ $('#nav-edit-user-button').click(function() {
 var setUp = function() {
   console.log('setting up');
   $('#form-container').empty();
-  
+
   // dev buttons - to be removed once nav bar is working 100%
   $('#logout-button').show();
   $('#edit-user-button').show();
@@ -200,7 +200,7 @@ var loginForm = function() {
   // dev buttons - to be removed once nav bar is working 100%
   $('#logout-button').show();
   $('#edit-user-button').show();
-  $('#delete-user-button').show();    
+  $('#delete-user-button').show();
   $('#view-user-capsules-button').show();
   $('#sign-up').show();
   $('#log-in').show();
@@ -208,7 +208,7 @@ var loginForm = function() {
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  // status.append('Login!');
+  status.append('Login!');
 
   // showing login template
   var formContainer = $('#form-container');
@@ -221,13 +221,7 @@ var loginForm = function() {
 		console.log('clicked login-button');
 		loginPost();
 	});
-
-  // SIGN-UP BUTTON - through login form
-  $('#signup-through-login').click(function() {
-    console.log("clicked signup through login button");
-    signUpForm();
-  });
-}; // log in form
+}; // sign up form
 
 
 var loginPost = function() {
@@ -331,6 +325,7 @@ var renderQuestions = function(data) {
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
 
+<<<<<<< HEAD
     // nav bar for logged-in users
     $('#nav-view-user-capsules-button').show();
     $('#nav-edit-user-button').show();
@@ -353,11 +348,11 @@ var renderQuestions = function(data) {
     });
   }
   else {
+
     // nav bar for non-logged-in users
     $('#nav-login-button').show();
     $('#nav-signup-button').show();
     $('#nav-logout-button').hide();
-
     $('#nav-edit-user-button').hide();
     $('#nav-view-user-capsules-button').hide();
 
@@ -397,8 +392,6 @@ var showModal = function() {
 };
 
 
-
-
   // loads answer/submit template
 var renderTextInput = function(id, quest) {
   // $(this).addClass('inner-box-active');
@@ -433,8 +426,13 @@ var renderTextInput = function(id, quest) {
     console.log('clicked submit answer');
 
     var temp_id = id;
+    // console.log(quest);
+
+    // .parent('.outer-box-active').attr('id');
     var temp_q = quest;
     var temp_ans = $('#response').val();
+    //$('em').val();
+    // $('#inner-box-active').attr('data-id')
 
     var tempQA = {
       id: temp_id,
@@ -444,9 +442,6 @@ var renderTextInput = function(id, quest) {
 
     //clears answered box
     $(innerBoxById).empty();
-
-    // clears sidebar
-    answeredContainer.empty();
 
     console.log(tempQA);
 
@@ -477,6 +472,7 @@ var renderTextInput = function(id, quest) {
 //   return color;
 // }
 
+
 getRandomColor = function() {
   // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
   // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
@@ -505,11 +501,11 @@ $('#logout-button').click(function(){
   $('#status-bar').append("Successfully logged out");
 
   $('#nav-my-capsules-button').hide();
+
 });
 
-
-//////THIS IS WHERE MELISSA LEFT OFF!!! 
-// 
+//////THIS IS WHERE MELISSA LEFT OFF!!!
+//
 //
 //
 //
@@ -528,6 +524,8 @@ $('#nav-logout-button').click(function(){
 });
 // END LOGOUT -----------------------
 
+
+// END LOGOUT -----------------------
 
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
@@ -560,6 +558,7 @@ var editForm = function() {
   $('#log-in').show();
 
   // get user info to populate form
+
   $.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: "GET",
@@ -607,7 +606,7 @@ var editUser = function() {
 
 // DELETE USER -------------------------
 // delete button
-$('#delete-user-button').one("click", function() {
+$('#delete-user-button').click(function(){
   console.log('clicked delete user');
   $('#form-container').empty();
 
@@ -619,6 +618,7 @@ $('#delete-user-button').one("click", function() {
   // adds delete language to status bar
   $('#status-bar').empty();
   $('#status-bar').append("Would you like to delete your account?");
+
   areYouSure();
 });
 
@@ -640,8 +640,10 @@ var areYouSure = function() {
 
 var deleteUser = function() {
 	console.log("deleting user");
+
   $('#form-container').empty();
   $('#status-bar').empty();
+
 
 	$.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
@@ -651,7 +653,7 @@ var deleteUser = function() {
     Cookies.remove('loggedinID');
     console.log('Account deleted');
 
-  // confirms successful deletion of account  
+  // confirms successful deletion of account
   $('#status-bar').append("Account successfully deleted");
 
     // takes us back to beginning
@@ -679,13 +681,7 @@ var saveQuestion = function(tempQA) {
   //   answeredContainer.append("Answer some questions!");
   // } else {
 
-    ////////////////////
-    // copy handlebars stuff
-    // from Melissa's getQuestions
-    // iterate through answered_questions
-    ////////////////////
-
-    // console.log("answered questions: "+answeredQuestions);
+    answeredContainer.empty();
 
   	var template = Handlebars.compile($('#questions-template').html());
     for(var i=0;i<answeredQuestions.length;i++) {
@@ -698,16 +694,16 @@ var saveQuestion = function(tempQA) {
 
     // submit button
   	$('#submit-capsule').click(function(){
-  		console.log('submitted capsule');
-
+      //
       var capsuleData = {
         questions: answeredQuestions,
-        user: Cookies.get('loggedinId'),
+        // user: Cookies.get('loggedinId'),
         // date: $('#date').val(), // match date input id
       };
 
-      console.log(capsuleData);
+      // console.log(capsuleData);
   		newCapsule(capsuleData);
+
     }); // end
 	// }; // end submit capsule button
 }; // sign up form
@@ -717,16 +713,23 @@ var saveQuestion = function(tempQA) {
 // CREATE CAPSULES -----------------------
 var newCapsule = function(capsuleData) {
 	console.log("capsule created app side");
+  console.log(capsuleData);
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
-    dataType: 'json',
+    dataType: JSON,
+    processData: false,
 		data: capsuleData
 	}).done(function(data){
     console.log("sent capsule to server");
-    // returns "capsule creation complete"
+
     console.log(data);
+
+    formContainer.empty();
+  	var template = Handlebars.compile($('#capsules-template').html());
+    formContainer.append(template(data));
+
 	});
 }; // end newCapsule
 // END CREATE CAPSULES -------------------
