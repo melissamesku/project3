@@ -9,29 +9,27 @@
 
 <body>
 	<nav>
-		<h1 id="logo">time<em>capsule</em></h1>
+		<button id="logo"><h1>time<em>capsule</em><h1></button>
 		<ul>
-			<li id="nav-my-capsules-button">My Time Capsules</li>
-			<li id="nav-edit-user-button">My Account</li>
-			<li id="nav-signup-button">Sign up</li>
-			<li id="nav-login-button">Log in</li>
-			<li id="nav-logout-button">Log out</li>
+			<button id="nav-my-capsules-button">My Time Capsules</button>
+			<button id="nav-edit-user-button">My Account</button>
+			<button id="nav-signup-button">Sign up</button>
+			<button id="nav-login-button">Log in</button>
+			<button id="nav-logout-button">Log out</button>
 		</ul>
 	</nav>
 
-	<ul class="accordion" data-accordion>
+	<!-- <ul class="accordion" data-accordion>
 	  <li class="accordion-navigation" style="text-align:right;">
 	    <a href="#about">About</a>
 	    <div id="about" class="content">
-	      <em><span style="color:#4b3b4b">To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
+	      <em>To the future! Answer some questions. Then we'll seal them into a time capsule you can open again in five years.</span></em>
 	    </div>
-	</ul>
+	</ul> -->
 
 	<div class="container row">
 
 		<section class="small-12 large-9 columns">
-
-	    	<h2>main area</h2>
 				<!-- added a status bar that displays messages to user when action occur -->
 	    	<h3 id="status-bar">status bar</h3>
 
@@ -42,7 +40,6 @@
 
 		<section class="small-12 large-3 columns" id="sidebar-area">
 			<div>
-				<h2>sidebar area</h2>
 				<!-- <ul>
 					<li>first question</li>
 					<li>second question</li>
@@ -177,8 +174,8 @@
 		<!-- ACTIVE BOX ============ -->
         <template id="active-box-template">
             <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
-                <input type="text" id="response" placeholder="my response"></input>
-                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
+                <input type="text" id="response" placeholder="my response">
+                <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule">
             </div>
         </template>
 
@@ -186,7 +183,7 @@
 
 		<template id="questions-template">
 		  <div id="questions-container" data-id="{{_id}}">
-				<div class="list-questions">{{question}}</div><br>
+				<div class="list-questions"><em>{{question}}</em></div><br>
 
 		<!-- add date calendar field -->
 

@@ -401,26 +401,6 @@ var renderTextInput = function(id, quest) {
   var template = Handlebars.compile($('#active-box-template').html());
   innerBoxById.append(template);
 
-  // $('.outer-box').each(function(i) {
-  //     $(this).addClass('outer-box-active');
-  //   });
-
-  // $(this).animate({width:'toggle'},500); //USE THIS WHEN SENDING SUBMISSION
-
-
-  // innerBoxById.style.color = getRandomColor(); //this doesn't work
-  // innerBoxById.css("background-color", "#fff"); //this doesn't work either
-
-
-  // $('.inner-box').each(function(i){
-  //     // innerBox.css("font-color", "#fff")
-  //     this.style.color = getRandomColor();
-  //   });
-
-  // $('#testing0').click(function(){
-  //   console.log('FUCK YEAH index 0 was clicked');
-  // });
-
   $('#submit-answer').click(function(){
     console.log('clicked submit answer');
 
@@ -475,7 +455,7 @@ var renderTextInput = function(id, quest) {
 getRandomColor = function() {
   // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
   // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
-  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+  colors = ['#996600', '#b5b700',  '#666666', '#009999', '#99004c', '#859900', '#990097' ]
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 // END QUESTIONS --------------------
@@ -678,33 +658,38 @@ var saveQuestion = function(tempQA) {
   // if (answeredQuestions == 0) {
   //   // show "answer some questions instead of Date / submit buttons
   //   answeredContainer.append("Answer some questions!");
-  // } else {
+  // } else { ....
 
-    answeredContainer.empty();
+  answeredContainer.empty();
 
-  	var template = Handlebars.compile($('#questions-template').html());
-    for(var i=0;i<answeredQuestions.length;i++) {
-  	   answeredContainer.append(template(answeredQuestions[i]))
+	var template = Handlebars.compile($('#questions-template').html());
+  for(var i=0;i<answeredQuestions.length;i++) {
+    answeredContainer.append(template(answeredQuestions[i]));
+  };
+
+  // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
+  // var questionInList = $('.list-questions');
+  // var yellow = questionInList.css('color', '#666');
+  // var shortText = $.trim(questionInList).substring(0, 10).split(" ").slice(0, -1).join(" ") + "...";
+
+  ////// need date/calendar or button/input
+
+  answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
+
+  // submit button
+	$('#submit-capsule').click(function(){
+    //
+    var capsuleData = {
+      questions: answeredQuestions,
+      // user: Cookies.get('loggedinId'),
+      // date: $('#date').val(), // match date input id
     };
 
-    ////// need date/calendar or button/input
+    // console.log(capsuleData);
+		newCapsule(capsuleData);
 
-    answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
-
-    // submit button
-  	$('#submit-capsule').click(function(){
-      //
-      var capsuleData = {
-        questions: answeredQuestions,
-        // user: Cookies.get('loggedinId'),
-        // date: $('#date').val(), // match date input id
-      };
-
-      // console.log(capsuleData);
-  		newCapsule(capsuleData);
-
-    }); // end
-	// }; // end submit capsule button
+  }); // end
+// }; // end submit capsule button
 }; // sign up form
 // SAVE QUESTIONS -----------------------
 
@@ -796,3 +781,5 @@ var renderCapsules = function(data) {
 }; // end renderCapsules
 
 // END GET CAPSULES -----------------
+
+
