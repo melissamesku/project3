@@ -24,15 +24,13 @@ nav ul li {
 nav ul li:hover {
 	color: #000;
 	background-color: #eee;
+	cursor: pointer;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Playfair Display';
 	font-weight: 800;
 	color: #4b3b4b;
-}
-
-/*colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]*/
-  
+}  
 button {
 	background-color: transparent;
 	color: #660066;
@@ -42,6 +40,7 @@ button {
 .logo {
 	padding-left: 10px;
 	display: inline;
+	cursor: pointer;
 }
 #sidebar-area {
 	border-left: 1px solid #000;
@@ -52,6 +51,7 @@ button {
 	height: 163px;
 	overflow: hidden;
 	display: inline-block;
+	cursor: pointer;
 }
 .inner-box {
 	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
@@ -101,7 +101,9 @@ button {
 /*.inner-box {
 	background-color: #fff;
 }*/
-
+#answered-container {
+	font-size: .8em;
+}
 
 
 
@@ -145,6 +147,23 @@ button {
 #close {
 	font-size: 20px;
 	padding: 6px 14px 6px 14px;
+	position: relative;
+	margin: 0 30%;
+	background-color: white;
+	top: 150px;
+	width: 40%;
+}
+.modal-header {
+	position: absolute;
+	background-color: white;
+	width: 100%;
+}
+.modal-body {
+	position: absolute;
+	width: 100%;
+	top: 50px;
+	background-color: white;
+	border-top: 2px solid black;
 }
 
 

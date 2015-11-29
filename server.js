@@ -91,7 +91,7 @@ app.put('/user/:id', function(req, res) {
 
 console.log("got user edit request")
 
-	User.findOneAndUpdate( {_id: req.params.id},  req.body, function(err, user) {
+	User.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, user) {
     console.log('User Updated');
 		res.send(user);
 	});
@@ -136,23 +136,24 @@ app.get('/questions', function(req, res) {
 app.post('/capsules', function(req, res) {
 
 console.log("at capsules post");
+// console.log("THIS IS THE REQ: " + req);
+console.log(req.body.questions);
 
-  var capsule = new Capsule({
-    question: req.body.questions,
-    user: req.body.username,
-    // date: req.body.date,
-  });
+var capsule = new Capsule({
+  qa: req.body,
+  user: req.cookies.loggedinId,
+  // date: req.body.date,
+});
+// console.log("server capsule data: "+capsule);
 
-console.log("server capsule data: "+capsule);
-
-  capsule.save(function(err) {
+  capsule.save( function(err, capsule) {
     if (err) {
       console.log(err);
       res.statusCode = 503;
     } else {
-      console.log("capsule created server side");
+      console.log(capsule);
 
-      res.send("capsule creation complete");
+      res.send(capsule);
     }; // end if/else
   }); // end save
 }); // end post time-capsule

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 // SCHEMA
 var capsuleSchema = new mongoose.Schema({
-	question: Array,
+	qa: Array,
 	user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	date_of_return: Date,
 	created_at: { type: Date, default: Date.now }

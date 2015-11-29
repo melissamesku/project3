@@ -13,16 +13,24 @@ var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
 
+$('#logo').click(function(){
+  setUp();
+});
+
 // SETUP --------------
 var setUp = function() {
   console.log('setting up');
   $('#form-container').empty();
-  $('#edit-user-button').hide();
-  $('#delete-user-button').hide();
-  $('#logout-button').hide();
+
+  // dev buttons - to be removed once nav bar is working 100%
+  $('#logout-button').show();
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
   $('#sign-up').show();
   $('#log-in').show();
 
+  $('#nav-sign-up-button').show();
   $('#nav-log-in').show();
 
   if (Cookies.get("loggedinId") != undefined) {
@@ -31,9 +39,18 @@ var setUp = function() {
     formContainer.empty();
     $('#sign-up').hide();
     $('#log-in').hide();
+
+    // DUPLICATE NAV BAR BUTTONS
+    $('#nav-sign-up-button').hide();
+    $('#nav-log-in').hide();
+
     getQuestions();
   }
   else {
+    // nav bar for non-logged-in users
+    $('#nav-signup-button').show();
+    $('#nav-login-button').show();
+
     getQuestions();
 
     // SIGN-UP BUTTON
@@ -42,6 +59,9 @@ var setUp = function() {
       signUpForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').hide();
+      // $('#nav-log-in').hide();
     });
 
     // LOG-IN BUTTON
@@ -50,14 +70,25 @@ var setUp = function() {
       loginForm();
       $('#sign-up').hide();
       $('#log-in').hide();
+      // DUPLICATE NAV BUTTONS
+      $('#nav-sign-up-button').hide();
+      $('#nav-log-in').hide();
     });
 
     // DUPLICATE NAV BAR LOG-IN BUTTON
-    $('#nav-log-in').click(function(){
+    $('#nav-login-button').click(function(){
       console.log('clicked log-in');
       loginForm();
-      $('#sign-up').hide();
-      $('#log-in').hide();
+      // $('#sign-up').hide();
+      // $('#log-in').hide();
+    });
+    // DUPLICATE NAV BAR SIGN-UP BUTTON
+    $('#nav-sign-up-button').click(function(){
+      console.log('clicked sign-up');
+      signUpForm();
+      // DUPLICATE NAV BUTTONS
+      // $('#nav-sign-up-button').show();
+      // $('#nav-log-in').show();
     });
 
   };
@@ -67,6 +98,18 @@ var setUp = function() {
 // SIGN-UP -----------------------
 var signUpForm = function() {
 		console.log('showing sign up form');
+
+    // dev buttons - to be removed once nav bar is working 100%
+    $('#logout-button').show();
+    $('#edit-user-button').show();
+    $('#delete-user-button').show();
+    $('#view-user-capsules-button').show();
+    $('#sign-up').show();
+    $('#log-in').show();
+
+    // nav bar
+    $('#nav-login-button').hide();
+    $('#nav-signup-button').hide();
 
     // updating status bar
     var status = $('#status-bar');
@@ -83,8 +126,13 @@ var signUpForm = function() {
 			console.log('clicked register');
 			newUser();
 		});
-	}; // sign up form
 
+    // LOG-IN BUTTON - through signup form
+    $('#login-through-signup').click(function() {
+      console.log("clicked login through signup button");
+      loginForm();
+    });
+	}; // sign up form
 
 
 var newUser = function() {
@@ -128,10 +176,21 @@ var newUser = function() {
 var loginForm = function() {
 	console.log('showing login form');
 
+  $('#nav-login-button').hide();
+  $('#nav-signup-button').hide();
+
+  // dev buttons - to be removed once nav bar is working 100%
+  $('#logout-button').show();
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
+
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  // status.append('Login!');
+  status.append('Login!');
 
   // showing login template
   var formContainer = $('#form-container');
@@ -144,13 +203,7 @@ var loginForm = function() {
 		console.log('clicked login-button');
 		loginPost();
 	});
-
-  // SIGN-UP BUTTON - through login form
-  $('#signup-through-login').click(function() {
-    console.log("clicked signup through login button");
-    signUpForm();
-  });
-}; // log in form
+}; // sign up form
 
 
 var loginPost = function() {
@@ -187,10 +240,28 @@ var loginPost = function() {
 var getQuestions = function(){
 	console.log("getting questions");
 
+  // this conditional is only about which nav buttons to show
+  if (Cookies.get("loggedinId") != undefined) {
+    console.log("already logged in");
+    $('#nav-log-out-button').show();
+    $('#nav-edit-user-button').show();
+    $('#nav-sign-up-button').hide();
+  }
+  else {
+
+  }
+
   //showing edit/delete buttons
   $('#logout-button').show();
   $('#edit-user-button').show();
   $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
+
+  //DUPLICATE NAV BAR BUTTONS
+  $('#nav-log-out-button').show();
+  $('#nav-edit-user-button').show();
 
   // updating status bar
   var status = $('#status-bar');
@@ -213,6 +284,14 @@ var renderQuestions = function(data) {
 	formContainer.empty();
   console.log('trying to render questions');
 
+  // dev buttons - to be removed once nav bar is working 100%
+  $('#logout-button').show();
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
+
   var template = Handlebars.compile($('#boxes-template').html());
   for(var i=0;i<data.length;i++) {
     formContainer.append(template(data[i]));
@@ -234,7 +313,7 @@ var renderQuestions = function(data) {
     //showing DUPLICATE NAV BAR edit/delete buttons
     $('#nav-log-in').hide();
     $('#nav-edit-user-button').show();
-    $('#nav-logout-button').show();
+    $('#nav-log-out-button').show();
 
     $(".inner-box").one("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
@@ -251,12 +330,14 @@ var renderQuestions = function(data) {
     });
   }
   else {
+
     //hiding DUPLICATE NAV BAR edit/delete buttons
-    $('#nav-logout-button').hide();
+    $('#nav-log-out-button').hide();
     $('#nav-edit-user-button').hide();
+    $('#nav-view-user-capsules-button').hide();
+
 
     $(".inner-box").on("click", function() {
-      $('#form-container').empty();
       showModal();
       // $('#modal').toggle(); // this calls the login modal
     });
@@ -331,8 +412,13 @@ var renderTextInput = function(id, quest) {
     console.log('clicked submit answer');
 
     var temp_id = id;
+    // console.log(quest);
+
+    // .parent('.outer-box-active').attr('id');
     var temp_q = quest;
     var temp_ans = $('#response').val();
+    //$('em').val();
+    // $('#inner-box-active').attr('data-id')
 
     var tempQA = {
       id: temp_id,
@@ -342,9 +428,6 @@ var renderTextInput = function(id, quest) {
 
     //clears answered box
     $(innerBoxById).empty();
-
-    // clears sidebar
-    answeredContainer.empty();
 
     console.log(tempQA);
 
@@ -398,6 +481,21 @@ $('#logout-button').click(function(){
   console.log('cookie deleted, logged out');
   // takes us back to beginning
   setUp();
+});
+
+//////THIS IS WHERE MELISSA LEFT OFF!!!
+//
+//
+//
+//
+
+$('#nav-log-out-button').click(function(){
+  console.log('clicked logout');
+  //removes cookie
+  Cookies.remove('loggedinId');
+  console.log('cookie deleted, logged out');
+  // takes us back to beginning
+  setUp();
 
   // adds delete language to status bar
   $('#status-bar').empty();
@@ -406,8 +504,15 @@ $('#logout-button').click(function(){
 // END LOGOUT -----------------------
 
 
+// END LOGOUT -----------------------
+
 // EDIT USER -------------------------
 $('#edit-user-button').click(function(){
+  console.log('clicked edit user');
+  editForm();
+});
+//DUPLICATE EDIT USER BUTTON -- it's called 'MY PROFILE' in HTML
+$('#nav-edit-user-button').click(function(){
   console.log('clicked edit user');
   editForm();
 });
@@ -415,16 +520,24 @@ $('#edit-user-button').click(function(){
 var editForm = function() {
 	console.log('showing edit form');
 
+  $('#nav-view-user-capsules-button').show();
+  $('#nav-logout-button').show();
+
   // clean up
   $('#form-container').empty();
   $('#status-bar').empty();
   $('#status-bar').append("Edit your information");
 
+  // dev buttons - to be removed once nav bar is working 100%
   $('#logout-button').show();
-  $('#edit-user-button').hide();
+  $('#edit-user-button').show();
   $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
 
   // get user info to populate form
+
   $.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: "GET",
@@ -472,12 +585,19 @@ var editUser = function() {
 
 // DELETE USER -------------------------
 // delete button
-$('#delete-user-button').one("click", function() {
+$('#delete-user-button').click(function(){
   console.log('clicked delete user');
   $('#form-container').empty();
+
+  // nav bar
+  $('#nav-view-user-capsules-button').show();
+  $('#nav-edit-user-button').show();
+  $('#nav-logout-button').show();
+
   // adds delete language to status bar
   $('#status-bar').empty();
   $('#status-bar').append("Would you like to delete your account?");
+
   areYouSure();
 });
 
@@ -500,10 +620,10 @@ var areYouSure = function() {
 
 var deleteUser = function() {
 	console.log("deleting user");
-  $('#form-container').empty();
 
-  // confirms successful deletion of account
+  $('#form-container').empty();
   $('#status-bar').empty();
+
 
 	$.ajax({
 		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
@@ -513,6 +633,7 @@ var deleteUser = function() {
     Cookies.remove('loggedinID');
     console.log('Account deleted');
 
+  // confirms successful deletion of account
   $('#status-bar').append("Account successfully deleted");
 
     // takes us back to beginning
@@ -540,13 +661,7 @@ var saveQuestion = function(tempQA) {
   //   answeredContainer.append("Answer some questions!");
   // } else {
 
-    ////////////////////
-    // copy handlebars stuff
-    // from Melissa's getQuestions
-    // iterate through answered_questions
-    ////////////////////
-
-    // console.log("answered questions: "+answeredQuestions);
+    answeredContainer.empty();
 
   	var template = Handlebars.compile($('#questions-template').html());
     for(var i=0;i<answeredQuestions.length;i++) {
@@ -559,16 +674,16 @@ var saveQuestion = function(tempQA) {
 
     // submit button
   	$('#submit-capsule').click(function(){
-  		console.log('submitted capsule');
-
+      //
       var capsuleData = {
         questions: answeredQuestions,
-        user: Cookies.get('loggedinId'),
+        // user: Cookies.get('loggedinId'),
         // date: $('#date').val(), // match date input id
       };
 
-      console.log(capsuleData);
+      // console.log(capsuleData);
   		newCapsule(capsuleData);
+
     }); // end
 	// }; // end submit capsule button
 }; // sign up form
@@ -578,56 +693,87 @@ var saveQuestion = function(tempQA) {
 // CREATE CAPSULES -----------------------
 var newCapsule = function(capsuleData) {
 	console.log("capsule created app side");
+  console.log(capsuleData);
 
 	$.ajax({
 		url: "http://localhost:3000/capsules",
 		method: "POST",
-    dataType: 'json',
+    dataType: JSON,
+    processData: false,
 		data: capsuleData
 	}).done(function(data){
     console.log("sent capsule to server");
-    // returns "capsule creation complete"
+
     console.log(data);
+
+    formContainer.empty();
+  	var template = Handlebars.compile($('#capsules-template').html());
+    formContainer.append(template(data));
+
 	});
 }; // end newCapsule
 // END CREATE CAPSULES -------------------
 
 
 // GET CAPSULES  -------------------------
+$('#view-user-capsules-button').click(function() {
+    console.log("clicked view user capsules button");
+    getCapsules();
+});
+
 var getCapsules = function(){
 	console.log("getting capsules");
 
 	$.ajax({
-		url: 'http://localhost:3000/capsules',
+		// url: 'http://localhost:3000/users'
+    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
 		method: 'GET',
 		dataType: 'json'
 	}).done(function(data) {
-    console.log("capsules from database gotten");
-    // returns array of capsule objects
+    console.log("getting capsules from database");
     renderCapsules(data);
   });
 }; // end getCapsules
 
 var renderCapsules = function(data) {
-  var listContainer = $('#list-container');
-	listContainer.empty();
-  console.log('rendering capsules');
+  console.log("rendering a user's capsules");
 
-////////////////////
-// copy handlebars stuff
-// from Melissa's getQuestions
-////////////////////
+  var formContainer = $('#form-container');
+	formContainer.empty();
 
-  var template = Handlebars.compile($('#boxes-template').html());
-  for(var i=0;i<data.length;i++) {
+  // dev buttons - to be removed once nav bar is working 100%
+  $('#logout-button').show();
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
+
+  // nav bar for logged-in users
+  $('#nav-edit-user-button').show();
+  $('#nav-logout-button').show();
+  $('#nav-login-button').hide();
+  $('#nav-signup-button').hide();
+  $('#nav-view-user-capsules-button').hide();
+
+  $('#status-bar').empty();
+  $('#status-bar').append("View your time capsules");
+
+  var template = Handlebars.compile($('#view-user-capsules-template').html());
+  for(var i=0; i < data.length; i++) {
     formContainer.append(template(data[i]));
+    // $('#view-user-capsules-container').each(function(i) {
+
+    // })
   };
 
-  $(".inner-box").on("click", function() {
-    var id = $(this).parent('.outer-box').attr('id');
-    console.log("the id should be here: " + id);
-    render(id);
-  });
+  // FROM GET QUESTIONS
+  // $(".inner-box").on("click", function() {
+  //   var id = $(this).parent('.outer-box').attr('id');
+  //   console.log("the id should be here: " + id);
+  //   render(id);
+  // });
 
 }; // end renderCapsules
+
 // END GET CAPSULES -----------------

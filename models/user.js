@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
 	age: Number,
 	location: String,
 	time_capsules: [capsuleSchema],
+	// capsules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Capsule' }],
 	created_at: { type:Date, default: Date.now }
 });
 
