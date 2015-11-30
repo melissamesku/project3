@@ -10,6 +10,7 @@ nav {
 	background-color: #000;
 	opacity: 1;
 	font-family: 'Pontano Sans';
+	padding:0;
 }
 nav ul {
 	text-align: right; 
@@ -47,23 +48,39 @@ nav ul button {
 	color: #eee;
 	margin: 20px 20px 0 0;
 }
-button#logo {
+h1#logo {
 	padding: 0 0 0 10px;
 	cursor: pointer;
 	font-family: 'Playfair Display';
 	border: none;
+	display: inline;
 }
-button#logo:hover {
+h1#logo:hover {
+	color: #765e76;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-family: 'Pontano Sans';
+
+	margin: 0;
+	padding: 6px;
+	color: #666;
 	opacity: .8;
-	color: #fff;
-	background-color: #000;
+	font-size: .6em;
 }
-.content {
-	color:#4b3b4b;
-	line-height: 10px;
+#form-container {
+	padding-top: 40px;
+	margin: 0 0 40px 0;
 }
 #sidebar-area {
-	padding-top:50px;
+	padding-top:40px;
+}
+#accordion.content {
+	color:#4b3b4b;
+	line-height: 10px;
 }
 .outer-box {
 	border: 1px solid #000;
@@ -128,12 +145,37 @@ button#logo:hover {
 
 #signup-through-login {
 	float:right;
+	display: block;
+}
+#login-through-signup {
+	float:right;
+	display: block;
 }
 .list-questions {
 	height: 38px;
 	overflow: hidden;
 	opacity: .5;
 }
+.capsule-sent {
+	background-color: #000;
+}
+/*.capsule-sent:before {
+	content: "dude";
+	vertical-align: middle;
+	color: #eee;
+}*/
+#big-image {
+	padding: 0;
+	margin: 0;
+	/*background-image: url(http://melissamesku.com/images/nasa-time-capsule.jpg); */
+	background-color: #000;
+}
+#big-image-text {
+	margin: 0 auto;
+	text-align: center;
+	color: #ccc;
+}
+
 
 
 
@@ -150,23 +192,12 @@ button#logo:hover {
 }
 .modal-content {
 	position: relative;
+	padding: 30px 20px 0px 20px;
 	margin: 0 30%;
 	background-color: white;
 	top: 150px;
 	width: 35%;
-}
-.modal-header {
-	/*position: absolute;*/
 	background-color: white;
-	width: 100%;
-}
-.modal-body {
-	/*position: absolute;
-	width: 100%;
-	top: 50px;*/
-	background-color: white;
-	border-top: 1px solid #eee;
-	margin: 0 auto;
 	text-align: center;
 	display: block;
 }
@@ -175,13 +206,18 @@ button#logo:hover {
 	margin: 30px;
 }
 #close {
+	position: absolute;
+	top: 0px;
+	left:0px;
+	text-align: left;
 	font-size: 20px;
-	padding: 6px 14px 6px 14px;
-	position: relative;
-	margin: 0 30%;
+	padding: 0px 14px 6px 14px;
 	background-color: white;
-	top: 150px;
-	width: 40%;
+	border:none;
+	margin: 2px;
+}
+#close:hover {
+	color:#ccc;
 }
 .modal-header {
 	position: absolute;
@@ -189,12 +225,15 @@ button#logo:hover {
 	width: 100%;
 }
 .modal-body {
-	position: absolute;
 	width: 100%;
 	top: 50px;
 	background-color: white;
 	border-top: 2px solid black;
 }
+
+
+
+
 
 
 
