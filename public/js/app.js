@@ -485,18 +485,10 @@ var newCapsule = function(tempQA) {
     dataType: 'json',
     data: tempQA
   }).done(function(data){
-    console.log("sent capsule to server");
-
+    console.log("new capsule created in db");
+    submitCapsule();
 	}); // end ajax request
-
-  // deletes the current capsule cookie
-  $('#submit-capsule').click(function(){
-    console.log('submit capsule button clicked');
-    Cookies.remove('currentCapsule');
-    console.log('capsule cookie deleted');
-  });
 }; // end new capsule
-
 
 // QUESTION TO CURRENT CAPSULE -------------
 var existingCapsule = function(tempQA) {
@@ -506,18 +498,25 @@ var existingCapsule = function(tempQA) {
     dataType: 'json',
     data: tempQA
   }).done(function(data){
-    console.log("add question completed");
-    console.log(data);
+    console.log("question added to capsule");
+    submitCapsule();
   }); // end put
+}; // end existingCapsule
 
-  // deletes the current capsule cookie
+// deletes the current capsule cookie
+var submitCapsule = function(){
   $('#submit-capsule').click(function(){
     console.log('submit capsule button clicked');
     Cookies.remove('currentCapsule');
     console.log('capsule cookie deleted');
-  });
-}; // end existingCapsule
 
+    // empties sidebar/questions array
+    // leaves saved message
+    answeredContainer.empty();
+    answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+    answeredQuestions = [];
+  });
+};
 
 // GET CAPSULES  -------------------------
 $('#view-user-capsules-button').click(function() {
