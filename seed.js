@@ -15,17 +15,17 @@ var mongoose = require('mongoose'),
     Question = require('./models/question.js'),
     Capsule = require('./models/capsule.js');
 
-// DATABASE
+// // DATABASE
 
-var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
+// var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
 
-mongoose.createConnection(mongoUri), function(err) {
-	if(err) {
-		console.log('Connection error: ', err);
-	} else {
-		console.log('Connection successful');
-	}
-};
+// mongoose.connect(mongoUri), function(err) {
+// 	if(err) {
+// 		console.log('Connection error: ', err);
+// 	} else {
+// 		console.log('Connection successful');
+// 	}
+// };
 
 // SEED
 // create questions
