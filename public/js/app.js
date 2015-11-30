@@ -469,6 +469,13 @@ var submitCapsule = function(){
     // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
     answeredQuestions = [];
+
+    // snaps the box back to original color/shape
+    // not working
+    var innerBoxById = $('#' + id);
+    innerBoxById.empty();
+
+    $('.outer-box').removeClass('.outer-box-active');
   });
 };
 
@@ -515,7 +522,7 @@ var renderCapsules = function(data) {
   // call functionality for midlevel account buttons
   accountUpdateButton();
   accountDeleteAccount();
-  
+
 }; // end renderCapsules
 // END GET CAPSULES -----------------
 
@@ -667,7 +674,7 @@ var areYouSure = function() {
   var template = Handlebars.compile($('#delete-user-template').html());
   $('#form-container').empty();
   $('#form-container').append(template);
-  
+
   // call functionality for midlevel account buttons
   accountViewCapsules();
   accountUpdateButton();
@@ -745,4 +752,3 @@ var renderAbout = function() {
   } // end conditional
 }; // end renderAbout
 // END ABOUT -----------------------------
-
