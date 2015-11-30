@@ -160,9 +160,13 @@ var signUpForm = function() {
 
 
 var newUser = function() {
-  // turning age into a number :)
-  var ageNum = parseInt($('#age').val())
-   console.log(age);
+  // checks if age is a number, if not, then 0
+  var ageGot = $('#age').val();
+  if (parseInt(ageGot) != true) {
+    ageGot = 0;
+  } else {
+  var ageNum = parseInt(ageGot);
+  };
 
 	user = {
 		username: $('#username').val(),
