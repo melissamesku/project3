@@ -1,12 +1,7 @@
 $(function() {
   console.log('js loaded');
 
-  setUp();
-
-  var template = Handlebars.compile($('#after-capsule-sent').html());
-  bigImage.append(template);
-  bigImage.addClass('capsule-sent');
-  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+  landingPage();
 
 }); // end doc ready
 
@@ -46,6 +41,23 @@ $('#nav-my-account-button').click(function() {
   setupAccount();
 });
 
+$('#nav-try-it').click(function() {
+  bigImage.remove();
+  setUp();
+});
+
+// LANDING PAGE -----------------
+var landingPage = function() {
+ 
+  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+
+  $('#nav-try-it').show();
+  $('#nav-signup-button').show();
+  $('#nav-login-button').show();
+  $('#nav-my-capsules-button').hide();
+  $('#nav-my-account-button').hide();
+  $('#nav-logout-button').hide();
+};
 
 // SETUP --------------
 var setUp = function() {
@@ -71,6 +83,7 @@ var setUp = function() {
     // $('#log-in').hide();
 
     // nav bar for logged-in users
+    $('#nav-try-it').hide();
     $('#nav-my-capsules-button').show();
     $('#nav-my-account-button').show();
     $('#nav-logout-button').show();
@@ -81,6 +94,7 @@ var setUp = function() {
   }
   else {
     // nav bar for non-logged-in users
+    $('#nav-try-it').hide();
     $('#nav-signup-button').show();
     $('#nav-login-button').show();
     $('#nav-my-capsules-button').hide();
@@ -137,6 +151,7 @@ var signUpForm = function() {
     // $('#log-in').show();
 
     // nav bar for non-logged-in users
+    $('#nav-try-it').hide();
     $('#nav-signup-button').hide();
     $('#nav-login-button').hide();
     $('#nav-my-capsules-button').hide();
@@ -213,6 +228,7 @@ var loginForm = function() {
   console.log('showing login form');
 
   // nav bar for non-logged-in users
+  $('#nav-try-it').hide();
   $('#nav-signup-button').hide();
   $('#nav-login-button').hide();
   $('#nav-my-capsules-button').hide();
@@ -288,6 +304,7 @@ var getQuestions = function(){
   // this conditional is only about which nav buttons to show
   if (Cookies.get("loggedinId") != undefined) {
     console.log("already logged in");
+    $('#nav-try-it').hide();
     $('#nav-my-capsules-button').show();
     $('#nav-logout-button').show();
     $('#nav-my-account-button').show();
@@ -346,6 +363,7 @@ var renderQuestions = function(data) {
     console.log("already logged in");
 
     // nav bar for logged-in users
+    $('#nav-try-it').hide();
     $('#nav-view-user-capsules-button').show();
     $('#nav-my-account-button').show();
     $('#nav-logout-button').show();
@@ -369,6 +387,7 @@ var renderQuestions = function(data) {
   else {
 
     // nav bar for non-logged-in users
+    $('#nav-try-it').hide();
     $('#nav-login-button').show();
     $('#nav-signup-button').show();
     $('#nav-logout-button').hide();
@@ -532,7 +551,7 @@ var submitCapsule = function(){
     var template = Handlebars.compile($('#after-capsule-sent').html());
     bigImage.append(template);
     bigImage.addClass('capsule-sent');
-    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>")
+    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
 
     // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
@@ -574,6 +593,7 @@ var renderCapsules = function(data) {
   $('#log-in').show();
 
   // nav bar for logged-in users
+  $('#nav-try-it').hide();
   $('#nav-edit-user-button').show();
   $('#nav-logout-button').show();
   $('#nav-login-button').hide();
