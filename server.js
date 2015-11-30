@@ -20,8 +20,12 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(cookieParser());
 
-// DATABASE
-mongoose.connect('mongodb://localhost/timecapsule_app');
+// DATABASE FOR LOCAL OR HEROKU DEPLOYMENT
+var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
+mongoose.connect(mongoUri);
+
+// DATABASE SEED - RUN THIS THE FIRST TIME, THEN COMMENT IT OUT!
+var seed = require('./seed.js');
 
 // LISTENER
 app.listen(port);
