@@ -16,7 +16,9 @@ var mongoose = require('mongoose'),
     Capsule = require('./models/capsule.js');
 
 // DATABASE
-mongoose.connect('mongodb://localhost/timecapsule_app'), function(err) {
+var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
+
+mongoose.connect(mongoUri), function(err) {
 	if(err) {
 		console.log('Connection error: ', err);
 	} else {
