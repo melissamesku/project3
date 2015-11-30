@@ -175,8 +175,6 @@ app.get('/capsules/:id', function(req, res) {
 	Capsule.find({ 'user': req.params.id }).exec(function(err, capsules) {
 
     console.log('sending time capsules');
-    console.log(capsules);
-
 
 		res.send(capsules);
 	});

@@ -520,7 +520,7 @@ var getCapsules = function(){
     console.log("got capsules from database");
     console.log(data);
 
-    // renderCapsules(data);
+    renderCapsules(data);
   });
 }; // end getCapsules
 

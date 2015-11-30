@@ -140,11 +140,12 @@
 		<!--  VIEW USER CAPSULES ============= -->
 		<template id="view-user-capsules-template">
 			<div id="view-user-capsules-container" data-id="{{_id}}">
-				<h3>View your time capsules</h3>
-<!-- 				{{#each time_capsules}}
-					Created on: {{created_at}}
-					{{question}}
-				{{/each}} -->
+				<!-- <h3>View your time capsules</h3> -->
+				<h4>Created on: {{created_at}}</h4>
+				{{#each qa}}
+					<p syle="display: block">Question: {{question}}</p>
+					<p>Answer: {{answer}}</p><br>
+				{{/each}}
 
 			</div>
 		</template>
