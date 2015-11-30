@@ -11,10 +11,10 @@
   // create a variable for the API call parameters
   var params = {
       "message": {
-          "from_email":"ericdelin@me.com",
+          "from_email":"ericdevin@me.com",
           "to":[{"email":"ericdevlin@me.com"}],
           "subject": "Sending a text email from the Mandrill API",
-          "html": "I'm learning the Mandrill API at Codecademy."
+          "html": "I'm learning the Mandrill API."
       }
   };
 
