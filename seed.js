@@ -18,7 +18,7 @@ var mongoose = require('mongoose'),
 // DATABASE
 var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
 
-mongoose.createConnection(mongoUri), function(err) {
+mongoose.connect(mongoUri), function(err) {
 	if(err) {
 		console.log('Connection error: ', err);
 	} else {
