@@ -17,18 +17,18 @@ var User = require('./models/user');
 var Capsule = require('./models/capsule');
 var Question = require('./models/question');
 
-// MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.static('public'));
-app.use(cookieParser());
-
 // DATABASE FOR LOCAL OR HEROKU DEPLOYMENT
 var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
 mongoose.createConnection(mongoUri);
 
 // DATABASE SEED - RUN THIS THE FIRST TIME, THEN COMMENT IT OUT!
-var seed = require('/seed.js');
+var seed = require('./seed.js');
+
+// MIDDLEWARE
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.use(cookieParser());
 
 // LISTENER
 app.listen(port);
