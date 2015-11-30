@@ -3,12 +3,18 @@ $(function() {
 
   setUp();
 
+  var template = Handlebars.compile($('#after-capsule-sent').html());
+  bigImage.append(template);
+  bigImage.addClass('capsule-sent');
+  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+
 }); // end doc ready
 
 // GLOBAL VARIABLES --------------
 var user = null;
 var formContainer = $('#form-container');
 var answeredContainer = $('#answered-container');
+var bigImage = $('#big-image');
 var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
@@ -27,6 +33,7 @@ $('#nav-my-capsules-button').click(function() {
 });
 
 $('#nav-login-button').click(function() {
+  bigImage.remove();
   loginForm();
 });
 
@@ -35,6 +42,7 @@ $('#nav-logout-button').click(function() {
 });
 
 $('#nav-signup-button').click(function() {
+  bigImage.remove();
   signUpForm();
 });
 
@@ -88,7 +96,7 @@ var setUp = function() {
 
 // SIGN-UP -----------------------
 var signUpForm = function() {
-		console.log('showing sign up form');
+    console.log('showing sign up form');
 
     // nav bar for non-logged-in users
     $('#nav-signup-button').hide();
@@ -104,21 +112,21 @@ var signUpForm = function() {
 
     var formContainer = $('#form-container');
     formContainer.empty();
-		var template = Handlebars.compile($('#signup-template').html());
-		formContainer.append(template);
+    var template = Handlebars.compile($('#signup-template').html());
+    formContainer.append(template);
 
     // REGISTER BUTTON
-		$('#register-button').click(function(){
-			console.log('clicked register');
-			newUser();
-		});
+    $('#register-button').click(function(){
+      console.log('clicked register');
+      newUser();
+    });
 
     // LOG-IN BUTTON - through signup form
     $('#login-through-signup').click(function() {
       console.log("clicked login through signup button");
       loginForm();
     });
-	}; // sign up form
+  }; // sign up form
 
 
 var newUser = function() {
@@ -130,22 +138,22 @@ var newUser = function() {
   var ageNum = parseInt(ageGot);
   };
 
-	user = {
-		username: $('#username').val(),
-		password: $('#password').val(),
+  user = {
+    username: $('#username').val(),
+    password: $('#password').val(),
     email: $('#email').val(),
     age: ageNum,
     location: $('#location').val()
-	};
-	console.log(user.username+" created app side");
+  };
+  console.log(user.username+" created app side");
   console.log(user);
 
-	$.ajax({
-		url: "http://localhost:3000/users",
-		method: "POST",
+  $.ajax({
+    url: "http://localhost:3000/users",
+    method: "POST",
     dataType: 'json',
-		data: user
-	}).done(function(data){
+    data: user
+  }).done(function(data){
     console.log("sent sign-up info to server");
     console.log(data.username+" signup successful");
 
@@ -158,13 +166,13 @@ var newUser = function() {
     // setting cookie and back to questions
     user = Cookies.get("loggedinId");
     getQuestions();
-	}); // end ajax request
+  }); // end ajax request
 }; // end newUser
 // END SIGN-UP -----------------------
 
 // LOGIN ---------------------
 var loginForm = function() {
-	console.log('showing login form');
+  console.log('showing login form');
 
   // nav bar for non-logged-in users
   $('#nav-signup-button').hide();
@@ -180,9 +188,9 @@ var loginForm = function() {
 
   // showing login template
   var formContainer = $('#form-container');
-	formContainer.empty();
-	var template = Handlebars.compile($('#login-template').html());
-	formContainer.append(template);
+  formContainer.empty();
+  var template = Handlebars.compile($('#login-template').html());
+  formContainer.append(template);
 
   // SIGNUP button - referral button through login page
   $('#signup-through-login').click(function() {
@@ -196,21 +204,21 @@ var loginForm = function() {
 	});
 }; // end loginForm
 
-var loginPost = function() {
-	user = {
-		username: $('#username').val(),
-		password: $('#password').val(),
-	};
-console.log("before ajax");
 
-	$.ajax({
-		url: 'http://localhost:3000/login',
-		method: "POST",
-		dataType: 'json',
-		data: user
-	}).done(function(data) {
-		console.log("sent login info to server");
-		console.log(data.username+" login successful");
+var loginPost = function() {
+  user = {
+    username: $('#username').val(),
+    password: $('#password').val(),
+  };
+
+  $.ajax({
+    url: 'http://localhost:3000/login',
+    method: "POST",
+    dataType: 'json',
+    data: user
+  }).done(function(data) {
+    console.log("sent login info to server");
+    console.log(data.username+" login successful");
 
     var formContainer = $('#form-container');
     formContainer.empty();
@@ -219,17 +227,17 @@ console.log("before ajax");
     // loads main page
     getQuestions();
 
-	}).fail(function(){
-		var template = Handlebars.compile($('#status-template').html());
-		formContainer.append(template("try again"));
-	}); // end fail
+  }).fail(function(){
+    var template = Handlebars.compile($('#status-template').html());
+    formContainer.append(template("try again"));
+  }); // end fail
 }; //end loginPost
 // END LOGIN ---------------------
 
 
 // GET QUESTIONS ----------------------
 var getQuestions = function(){
-	console.log("getting questions");
+  console.log("getting questions");
 
   // this conditional is only about which nav buttons to show
   if (Cookies.get("loggedinId") != undefined) {
@@ -246,13 +254,12 @@ var getQuestions = function(){
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('time capsule main area');
 
-	$.ajax({
-		url: 'http://localhost:3000/questions',
-		method: 'GET',
-		dataType: 'json'
-	}).done(function(data) {
+  $.ajax({
+    url: 'http://localhost:3000/questions',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(data) {
     console.log("questions from database gotten");
     renderQuestions(data);
   });
@@ -261,7 +268,7 @@ var getQuestions = function(){
 
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
-	formContainer.empty();
+  formContainer.empty();
   console.log('trying to render questions');
 
   // puts questions in boxes with random colors
@@ -315,8 +322,12 @@ var renderQuestions = function(data) {
 
 
 // RANDOM COLORS --------------------
-getRandomColor = function() {
-  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+var getRandomColor = function() {
+  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
+  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
+  // colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
+  // colors = ['#a2774a', '#a48f78', '#a9a88d', '#caaf40', '#99a9ba', '#8e5c42', '#d6b74e', '#ceb9ae', '#cccccc', '#eeeeee' ]
+  colors = ['#846684', '#929dbb', '#92b3bb', '#92bba5', '#a6bb92', '#b6bb92', '#bbb392', '#bbae92', '#cccccc', '#eeeeee', '#bba492', '#929bbb', '#a79782', '#a78e82' ];
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 
@@ -389,16 +400,16 @@ var renderTextInput = function(id, quest) {
 // SHOW QUESTIONS -------------------
 // saves Q/A to temp array & appends to sidebar
 var showQuestions = function(tempQA) {
-	console.log('showing questions list');
+  console.log('showing questions list');
 
   // just showing answered questions in side
   answeredQuestions.push(tempQA);
   console.log(answeredQuestions);
   answeredContainer.empty();
 
-	var template = Handlebars.compile($('#questions-template').html());
+  var template = Handlebars.compile($('#questions-template').html());
   for(var i=0;i<answeredQuestions.length;i++) {
-	  answeredContainer.append(template(answeredQuestions[i]))
+    answeredContainer.append(template(answeredQuestions[i]))
   };
 
   // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
@@ -423,7 +434,7 @@ var newCapsule = function(tempQA) {
   }).done(function(data){
     console.log("new capsule created in db");
     submitCapsule();
-	}); // end ajax request
+  }); // end ajax request
 }; // end new capsule
 
 // QUESTION TO CURRENT CAPSULE -------------
@@ -449,7 +460,14 @@ var submitCapsule = function(){
     // empties sidebar/questions array
     // leaves saved message
     answeredContainer.empty();
-    answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+    formContainer.empty();
+    var template = Handlebars.compile($('#after-capsule-sent').html());
+    bigImage.append(template);
+    bigImage.addClass('capsule-sent');
+    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>")
+
+    // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+
     answeredQuestions = [];
   });
 };
@@ -461,12 +479,12 @@ $('#view-user-capsules-button').click(function() {
 });
 
 var getCapsules = function(){
-	console.log("getting capsules");
-	$.ajax({
+  console.log("getting capsules");
+  $.ajax({
     url: "http://localhost:3000/capsules/"+Cookies.get('loggedinId'),
-		method: 'GET',
-		dataType: 'json',
-	}).done(function(data) {
+    method: 'GET',
+    dataType: 'json',
+  }).done(function(data) {
     console.log("got capsules from database");
     console.log(data);
 
@@ -477,7 +495,7 @@ var getCapsules = function(){
 var renderCapsules = function(data) {
   console.log("rendering a user's capsules");
 
-	formContainer.empty();
+  formContainer.empty();
 
   // nav bar for logged-in users
   $('#nav-edit-user-button').show();
@@ -566,7 +584,7 @@ var setupAccount = function() {
 };
 
 var editForm = function() {
-	console.log('showing edit form');
+  console.log('showing edit form');
 
   $('#nav-view-user-capsules-button').show();
   $('#nav-logout-button').show();
@@ -578,10 +596,10 @@ var editForm = function() {
 
   // get user info to populate form
   $.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
-		method: "GET",
+    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    method: "GET",
     dataType: 'json',
-	}).done(function(data){
+  }).done(function(data){
     console.log(data);
     var template = Handlebars.compile($('#edit-user-template').html());
     $('#form-container').append(template(data));
@@ -600,21 +618,21 @@ var editForm = function() {
 
 
 var editUser = function() {
-	var user_edit = {
-		email: $('#email').val(),
-		age: $('#age').val(),
+  var user_edit = {
+    email: $('#email').val(),
+    age: $('#age').val(),
     location: $('#location').val(),
-	};
+  };
 
   console.log(user_edit);
-	console.log("user edit sending");
+  console.log("user edit sending");
 
-	$.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
-		method: "PUT",
+  $.ajax({
+    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    method: "PUT",
     dataType: 'json',
-		data: user_edit
-	}).done(function(data){
+    data: user_edit
+  }).done(function(data){
     // returns string "User updated"
     console.log("edit ajax completed")
     console.log("from server: "+data);
@@ -664,15 +682,15 @@ var areYouSure = function() {
 
 // DELETE method
 var deleteUser = function() {
-	console.log("deleting user");
+  console.log("deleting user");
 
   $('#form-container').empty();
   $('#status-bar').empty();
 
-	$.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
-		method: "DELETE",
-	}).done(function(){
+  $.ajax({
+    url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
+    method: "DELETE",
+  }).done(function(){
     //removes cookie
     Cookies.remove('loggedinID');
     console.log('Account deleted');
@@ -727,3 +745,4 @@ var renderAbout = function() {
   } // end conditional
 }; // end renderAbout
 // END ABOUT -----------------------------
+
