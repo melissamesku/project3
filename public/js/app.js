@@ -3,12 +3,18 @@ $(function() {
 
   setUp();
 
+  var template = Handlebars.compile($('#after-capsule-sent').html());
+  bigImage.append(template);
+  bigImage.addClass('capsule-sent');
+  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+
 }); // end doc ready
 
 // GLOBAL VARIABLES --------------
 var user = null;
 var formContainer = $('#form-container');
 var answeredContainer = $('#answered-container');
+var bigImage = $('#big-image');
 var statusBar = $('#status-bar');
 var answeredQuestions = [];
   // {question: answer}, {question: answer}
@@ -23,6 +29,7 @@ $('#nav-my-capsules-button').click(function() {
 });
 
 $('#nav-login-button').click(function() {
+  bigImage.remove();
   loginForm();
 });
 
@@ -31,6 +38,7 @@ $('#nav-logout-button').click(function() {
 });
 
 $('#nav-signup-button').click(function() {
+  bigImage.remove();
   signUpForm();
 });
 
@@ -300,7 +308,6 @@ var getQuestions = function(){
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('time capsule main area');
 
   $.ajax({
     url: 'http://localhost:3000/questions',
@@ -377,8 +384,12 @@ var renderQuestions = function(data) {
 
 
 // RANDOM COLORS --------------------
-getRandomColor = function() {
-  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+var getRandomColor = function() {
+  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
+  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
+  // colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
+  // colors = ['#a2774a', '#a48f78', '#a9a88d', '#caaf40', '#99a9ba', '#8e5c42', '#d6b74e', '#ceb9ae', '#cccccc', '#eeeeee' ]
+  colors = ['#846684', '#929dbb', '#92b3bb', '#92bba5', '#a6bb92', '#b6bb92', '#bbb392', '#bbae92', '#cccccc', '#eeeeee', '#bba492', '#929bbb', '#a79782', '#a78e82' ];
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 
@@ -517,7 +528,14 @@ var submitCapsule = function(){
     // empties sidebar/questions array
     // leaves saved message
     answeredContainer.empty();
-    answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+    formContainer.empty();
+    var template = Handlebars.compile($('#after-capsule-sent').html());
+    bigImage.append(template);
+    bigImage.addClass('capsule-sent');
+    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>")
+
+    // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+
     answeredQuestions = [];
   });
 };
