@@ -22,15 +22,10 @@ app.use(cookieParser());
 
 // DATABASE FOR LOCAL OR HEROKU DEPLOYMENT
 var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
-console.log('----------------------------------')
-console.log('----------------------------------')
-console.log(mongoUri)
-console.log('----------------------------------')
-console.log('----------------------------------')
 mongoose.connect(mongoUri);
 
 // DATABASE SEED - RUN THIS THE FIRST TIME, THEN COMMENT IT OUT!
-// var seed = require('./seed.js');
+var seed = require('./seed.js');
 
 // LISTENER
 app.listen(port);
