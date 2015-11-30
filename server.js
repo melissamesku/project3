@@ -116,14 +116,6 @@ app.get('/questions', function(req, res) {
 
 	Question.find().then(function(questions) {
 
-// randomization code BONUS
-    // var shuffle = function(a) {
-    //   for(var j, x, i = a.length; i; j = Math.floor(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x);
-    //   return a;
-    // };
-    // shuffledDeck = deckOfCards.slice(0);
-    // shuffle(shuffledDeck);
-
     console.log("sending "+questions.length+" questions");
 
 		res.send(questions);
@@ -132,12 +124,12 @@ app.get('/questions', function(req, res) {
 
 
 // need to correct with foreign keys
-// POST TIME-CAPSULES --------------
+// NEW CAPSULE --------------
 app.post('/capsules', function(req, res) {
 
-console.log("at capsules post");
+console.log("making new capsule");
 // console.log("THIS IS THE REQ: " + req);
-console.log(req.body.questions);
+console.log(req.body);
 
 var capsule = new Capsule({
   qa: req.body,
@@ -151,20 +143,39 @@ var capsule = new Capsule({
       console.log(err);
       res.statusCode = 503;
     } else {
-      console.log(capsule);
+      console.log('after save');
+
+      //setting capsule cookie
+      res.cookie("currentCapsule", capsule.id);
 
       res.send(capsule);
     }; // end if/else
   }); // end save
 }); // end post time-capsule
 
+// ADD TO CAPSULE ---------------
+app.put('/capsules/:id', function(req, res) {
+
+console.log("adding to current capsule");
+
+	Capsule.findByIdAndUpdate(
+    req.params.id,
+    {$push: {qa: req.body}},
+    {safe: true, upsert: true},
+    function(err, capsule) {
+    console.log(capsule);
+		res.send(capsule);
+	});
+});
 
 // GET TIME-CAPSULES ---------------
-app.get('/capsules', function(req, res) {
+app.get('/capsules/:id', function(req, res) {
   console.log('got time capsules request');
 
-	Capsules.find().then(function(capsules) {
+	Capsule.find({ 'user': req.params.id }).exec(function(err, capsules) {
+
+    console.log('sending time capsules');
+
 		res.send(capsules);
 	});
 });
-// END GET TIME-CAPSULES ------------

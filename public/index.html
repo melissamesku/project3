@@ -105,7 +105,7 @@
   			<p>* Required</p>
 
   			<button id="register-button" data-id="{{_id}}">Register!</button>
-  		
+
   		</div>
 
   	</template>
@@ -129,13 +129,13 @@
 		<div id="edit-user-container" data-id="{{_id}}">
 
 			<label for="email">Email</label><br/>
-		    <input type="text" id="email" placeholder="{{{email}}}"/><br>
+		    <input type="text" id="email" placeholder="{{{email}}}" value="{{{email}}}"/><br>
 
 		    <label for="age">Age</label><br/>
-		    <input type="text" id="age" placeholder="{{{age}}}"/><br>
+		    <input type="text" id="age" placeholder="{{{age}}}" value="{{{age}}}"/><br>
 
 		    <label for="location">Location</label><br/>
-		    <input type="text" id="location" placeholder="{{{location}}}"/><br>
+		    <input type="text" id="location" placeholder="{{{location}}}" value="{{{location}}}"/><br>
 
 		    <button id="update-user-button" data-id="{{{_id}}}">Update</button>
 
@@ -148,17 +148,20 @@
 		<div id="delete-user-container" data-id="{{_id}}">
 			<h3>Are you sure?</h3>
 		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
-		 </div>
+
+		</div>
 	</template>
 
-	<!--  VIEW USER CAPSULES ============= -->
-	<template id="view-my-capsules-template">
-		<div id="view-my-capsules-container" data-id="{{_id}}">
-			<h3>View your time capsules</h3>
-			{{#each time_capsules}}
-			Created on: {{created_at}}
-			{{qa}}
+		<!--  VIEW USER CAPSULES ============= -->
+	<template id="view-user-capsules-template">
+		<div id="view-user-capsules-container" data-id="{{_id}}">
+			<!-- <h3>View your time capsules</h3> -->
+			<h4>Created on: {{created_at}}</h4>
+			{{#each qa}}
+				<p syle="display: block">Question: {{question}}</p>
+				<p>Answer: {{answer}}</p><br>
 			{{/each}}
+
 		</div>
 	</template>
 
@@ -172,12 +175,12 @@
 	</template>
 
 	<!-- ACTIVE BOX ============ -->
-    <template id="active-box-template">
-        <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
-            <input type="text" id="response" placeholder="my response"></input>
-            <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
-        </div>
-    </template>
+  <template id="active-box-template">
+      <div class="active-box-container" id="{{_id}}" data-id="{{_id}}">
+          <input type="text" id="response" placeholder="my response"></input>
+          <input type="submit" id="submit-answer" data-id="{{_id}}" value="Add to time capsule"></input>
+      </div>
+  </template>
 
 	<!--  QUESTIONS LIST ============= -->
 	<template id="questions-template">
@@ -202,7 +205,7 @@
 		</div>
 	</template>
 
-	<!-- DISPLAY CAPSULES ============= -->
+	<!-- AFTER THE CAPSULE IS SENT ============= -->
 	<template id="after-capsule-sent">
 
 		<div id="big-image-text">
