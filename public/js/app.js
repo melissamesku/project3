@@ -18,6 +18,10 @@ $('#logo').click(function() {
   setUp();
 });
 
+$('#nav-home-button').click(function() {
+  setUp();
+})
+
 $('#nav-my-capsules-button').click(function() {
   getCapsules();
 });
@@ -742,4 +746,46 @@ var deleteUser = function() {
     setUp();
   });
 }; // end deleteUser
-// END DELETE UESR -----------------------
+// END DELETE USER -----------------------
+
+
+// ABOUT ---------------------------------
+$('#nav-about-button').click(function() {
+  console.log("clicked about button");
+  renderAbout();
+});
+
+var renderAbout = function() {
+  // updating status bar
+  var status = $('#status-bar');
+  status.empty();
+  status.append('About TimeCapsule');
+
+  // clearing form container
+  var formContainer = $('#form-container');
+  formContainer.empty();
+
+  // Handlebars
+  var template = Handlebars.compile($('#about-template').html());
+  formContainer.append(template);
+
+  if (Cookies.get("loggedinId") != undefined) {
+  console.log("already logged in");
+
+    // nav bar for logged-in users
+    $('#nav-my-capsules-button').show();
+    $('#nav-my-account-button').show();
+    $('#nav-logout-button').show();
+    $('#nav-login-button').hide();
+    $('#nav-signup-button').hide();
+  }
+  else {
+    // nav bar for non-logged-in users
+    $('#nav-login-button').show();
+    $('#nav-signup-button').show();
+    $('#nav-logout-button').hide();
+    $('#nav-my-account-button').hide();
+    $('#nav-my-capsules-button').hide();
+  } // end conditional
+}; // end renderAbout
+// END ABOUT -----------------------------
