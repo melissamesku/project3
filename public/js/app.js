@@ -160,9 +160,13 @@ var signUpForm = function() {
 
 
 var newUser = function() {
-  // turning age into a number :)
-  var ageNum = parseInt($('#age').val())
-   console.log(age);
+  // checks if age is a number, if not, then 0
+  var ageGot = $('#age').val();
+  if (parseInt(ageGot) != true) {
+    ageGot = 0;
+  } else {
+  var ageNum = parseInt(ageGot);
+  };
 
 	user = {
 		username: $('#username').val(),
@@ -322,18 +326,13 @@ var renderQuestions = function(data) {
   // $('#sign-up').show();
   // $('#log-in').show();
 
+  // puts questions in boxes with random colors
   var template = Handlebars.compile($('#boxes-template').html());
   for(var i=0;i<data.length;i++) {
     formContainer.append(template(data[i]));
-    // $('.outer-box').each(function(i){
-    //    this.style.backgroundColor = getRandomColor();
-    // });
     $('.inner-box').each(function(i){
-      // this.addClass('random-background-color');
-      // ('random-background-color').css(getRandomColor());
       this.style.backgroundColor = getRandomColor();
     });
-    // $('.inner-box').css('background-color', getRandomColor()); // this makes all the boxes turn a random color
   }
 
   if (Cookies.get("loggedinId") != undefined) {
@@ -376,35 +375,44 @@ var renderQuestions = function(data) {
   };
 }; // end renderQuestions
 
+
+// RANDOM COLORS --------------------
+getRandomColor = function() {
+  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+  return colors[Math.floor(Math.random()*colors.length)];
+}; // end getRandomColor
+
+
+// LOGIN MODAL ----------------------
 var showModal = function() {
-  // LOGIN MODAL ----------------------
 
-    $('#modal').toggle(); // this calls the login modal
+  $('#modal').toggle(); // this calls the login modal
 
-    $('#close').on('click', function(){
-      $('#modal').toggle();
-    });
+  $('#close').on('click', function(){
+    $('#modal').toggle();
+  });
 
-    $('#modal-sign-up').click(function(){
-      console.log('clicked sign-up');
-      signUpForm();
-      $('#modal').toggle();
-      // $('#sign-up').hide();
-      // $('#log-in').hide();
-    });
+  $('#modal-sign-up').click(function(){
+    console.log('clicked sign-up');
+    signUpForm();
+    $('#modal').toggle();
+    // $('#sign-up').hide();
+    // $('#log-in').hide();
+  });
 
-    $('#modal-log-in').click(function(){
-      console.log('clicked log-in');
-      loginForm();
-      $('#modal').toggle();
-      // $('#sign-up').hide();
-      // $('#log-in').hide();
-    });
-
-    // END LOGIN MODAL ----------------------
+  $('#modal-log-in').click(function(){
+    console.log('clicked log-in');
+    loginForm();
+    $('#modal').toggle();
+    // $('#sign-up').hide();
+    // $('#log-in').hide();
+  });
+  // $('#sign-up').hide();
+  // $('#log-in').hide();
 };
 
 
+// SHOW INPUT BOXES --------------
   // loads answer/submit template
 var renderTextInput = function(id, quest) {
   // $(this).addClass('inner-box-active');
@@ -418,16 +426,12 @@ var renderTextInput = function(id, quest) {
   $('#submit-answer').click(function(){
     console.log('clicked submit answer');
 
+    var tempQA = {};
     var temp_id = id;
-    // console.log(quest);
-
-    // .parent('.outer-box-active').attr('id');
     var temp_q = quest;
     var temp_ans = $('#response').val();
-    //$('em').val();
-    // $('#inner-box-active').attr('data-id')
 
-    var tempQA = {
+    tempQA = {
       id: temp_id,
       question: temp_q,
       answer: temp_ans
@@ -436,57 +440,145 @@ var renderTextInput = function(id, quest) {
     //clears answered box
     $(innerBoxById).empty();
 
-    console.log(tempQA);
+    // show questions in sidebar
+    showQuestions(tempQA);
 
-    saveQuestion(tempQA);
-  });
-
+    // make capsules
+    if (Cookies.get("currentCapsule") == undefined) {
+      newCapsule(tempQA);
+    } else {
+      existingCapsule(tempQA);
+    }; // end if/else
+  }); //end submit answer
 }; // end renderTextInput
-
-// clicking on a question box replaces it with the active box template
-
-// users answer the question and click send
-
-// ‘send' click event activates function that gets:
-// the question _id
-// the answer
-// and saves that into a global variable
-
-// assign to RenderQuestions an id or counter for each item in array
-// S.0. assign same click event
-
-
-// function getRandomColor() {
-//   var letters = '0123456789ABCDEF'.split('');
-//   var color = '#';
-//   for (var i = 0; i < 6; i++ ) {
-//       color += letters[Math.floor(Math.random() * 12)]; //could put up to 16, but I prefer these hues
-//   }
-//   return color;
-// }
-
-
-var getRandomColor = function() {
-  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
-  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
-  colors = ['#996600', '#b5b700',  '#666666', '#009999', '#99004c', '#859900', '#990097' ]
-  return colors[Math.floor(Math.random()*colors.length)];
-}; // end getRandomColor
 // END QUESTIONS --------------------
 
 
-// GET ANSWERS ----------------------
+// SHOW QUESTIONS -------------------
+// saves Q/A to temp array & appends to sidebar
+var showQuestions = function(tempQA) {
+	console.log('showing questions list');
 
-// END ANSWERS ----------------------
+  // just showing answered questions in side
+  answeredQuestions.push(tempQA);
+  console.log(answeredQuestions);
+  answeredContainer.empty();
 
+	var template = Handlebars.compile($('#questions-template').html());
+  for(var i=0;i<answeredQuestions.length;i++) {
+	  answeredContainer.append(template(answeredQuestions[i]))
+  };
+
+  // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
+  // var questionInList = $('.list-questions');
+  // var yellow = questionInList.css('color', '#666');
+  // var shortText = $.trim(questionInList).substring(0, 10).split(" ").slice(0, -1).join(" ") + "...";
+
+  ////// need date/calendar or button/input
+
+  answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
+}; // end show question
+
+
+// QUESTION TO NEW CAPSULE -------------------
+var newCapsule = function(tempQA) {
+  // saving to new capsule
+  $.ajax({
+    url: "http://localhost:3000/capsules",
+    method: "POST",
+    dataType: 'json',
+    data: tempQA
+  }).done(function(data){
+    console.log("new capsule created in db");
+    submitCapsule();
+	}); // end ajax request
+}; // end new capsule
+
+// QUESTION TO CURRENT CAPSULE -------------
+var existingCapsule = function(tempQA) {
+  $.ajax({
+    url: "http://localhost:3000/capsules/"+Cookies.get('currentCapsule'),
+    method: "PUT",
+    dataType: 'json',
+    data: tempQA
+  }).done(function(data){
+    console.log("question added to capsule");
+    submitCapsule();
+  }); // end put
+}; // end existingCapsule
+
+// deletes the current capsule cookie
+var submitCapsule = function(){
+  $('#submit-capsule').click(function(){
+    console.log('submit capsule button clicked');
+    Cookies.remove('currentCapsule');
+    console.log('capsule cookie deleted');
+
+    // empties sidebar/questions array
+    // leaves saved message
+    answeredContainer.empty();
+    answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+    answeredQuestions = [];
+  });
+};
+
+// GET CAPSULES  -------------------------
+$('#view-user-capsules-button').click(function() {
+  console.log("clicked view user capsules button");
+  getCapsules();
+});
+
+var getCapsules = function(){
+	console.log("getting capsules");
+	$.ajax({
+    url: "http://localhost:3000/capsules/"+Cookies.get('loggedinId'),
+		method: 'GET',
+		dataType: 'json',
+	}).done(function(data) {
+    console.log("got capsules from database");
+    console.log(data);
+
+    renderCapsules(data);
+  });
+}; // end getCapsules
+
+var renderCapsules = function(data) {
+  console.log("rendering a user's capsules");
+
+	formContainer.empty();
+
+  // dev buttons - to be removed once nav bar is working 100%
+  $('#logout-button').show();
+  $('#edit-user-button').show();
+  $('#delete-user-button').show();
+  $('#view-user-capsules-button').show();
+  $('#sign-up').show();
+  $('#log-in').show();
+
+  // nav bar for logged-in users
+  $('#nav-edit-user-button').show();
+  $('#nav-logout-button').show();
+  $('#nav-login-button').hide();
+  $('#nav-signup-button').hide();
+  $('#nav-my-capsules-button').hide();
+
+  $('#status-bar').empty();
+  $('#status-bar').append("View your time capsules");
+
+  var template = Handlebars.compile($('#view-user-capsules-template').html());
+  for(var i=0; i < data.length; i++) {
+    formContainer.append(template(data[i]));
+  };
+}; // end renderCapsules
+// END GET CAPSULES -----------------
 
 // LOGOUT ---------------------------
 $('#nav-logout-button').click(function() {
   console.log('clicked logout');
   //removes cookie
   Cookies.remove('loggedinId');
-  console.log('cookie deleted, logged out');
-
+  console.log('user cookie deleted, logged out');
+  // takes us back to beginning
   // adds delete language to status bar
   $('#status-bar').empty();
   $('#status-bar').append("Successfully logged out");
@@ -578,7 +670,6 @@ var editUser = function() {
 	};
 
   console.log(user_edit);
-
 	console.log("user edit sending");
 
 	$.ajax({
@@ -593,8 +684,7 @@ var editUser = function() {
     getQuestions();
   }); // end put
 }; // end editUser
-
-// END EDIT UESR ---------------------
+// END EDIT USER ---------------------
 
 
 // DELETE USER -------------------------
@@ -653,141 +743,3 @@ var deleteUser = function() {
   });
 }; // end deleteUser
 // END DELETE UESR -----------------------
-
-
-// SAVE QUESTIONS -----------------------
-// saves Q/A to temp array & appends to sidebar
-var saveQuestion = function(tempQA) {
-	console.log('showing questions list');
-
-  // console.log(tempQA);
-
-	var answeredContainer = $('#answered-container');
-
-  answeredQuestions.push(tempQA);
-
-  console.log(answeredQuestions);
-
-  // if (answeredQuestions == 0) {
-  //   // show "answer some questions instead of Date / submit buttons
-  //   answeredContainer.append("Answer some questions!");
-  // } else { ....
-
-  answeredContainer.empty();
-
-	var template = Handlebars.compile($('#questions-template').html());
-  for(var i=0;i<answeredQuestions.length;i++) {
-    answeredContainer.append(template(answeredQuestions[i]));
-  };
-
-  // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
-  // var questionInList = $('.list-questions');
-  // var yellow = questionInList.css('color', '#666');
-  // var shortText = $.trim(questionInList).substring(0, 10).split(" ").slice(0, -1).join(" ") + "...";
-
-  ////// need date/calendar or button/input
-
-  answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
-
-  // submit button
-	$('#submit-capsule').click(function(){
-    //
-    var capsuleData = {
-      questions: answeredQuestions,
-      // user: Cookies.get('loggedinId'),
-      // date: $('#date').val(), // match date input id
-    };
-
-    // console.log(capsuleData);
-		newCapsule(capsuleData);
-
-  }); // end
-// }; // end submit capsule button
-}; // sign up form
-// SAVE QUESTIONS -----------------------
-
-
-// CREATE CAPSULES -----------------------
-var newCapsule = function(capsuleData) {
-	console.log("capsule created app side");
-  console.log(capsuleData);
-
-	$.ajax({
-		url: "http://localhost:3000/capsules",
-		method: "POST",
-    dataType: JSON,
-    processData: false,
-		data: capsuleData
-	}).done(function(data){
-    console.log("sent capsule to server");
-
-    console.log(data);
-
-    formContainer.empty();
-  	var template = Handlebars.compile($('#capsules-template').html());
-    formContainer.append(template(data));
-
-	});
-}; // end newCapsule
-// END CREATE CAPSULES -------------------
-
-
-// VIEW USER'S CAPSULES  -------------------------
-// click nav button
-$('#nav-my-capsules-button').click(function() {
-    console.log("clicked my capsules button");
-    getCapsules();
-});
-
-// GET capsules data
-var getCapsules = function(data){
-	console.log("trying to view user's capsules");
-  console.log(data);
-
-	$.ajax({
-		// url: 'http://localhost:3000/capsules'
-    url: "http://localhost:3000/users/"+Cookies.get('loggedinId')+"/capsules",
-		method: 'GET',
-		dataType: 'json'
-	}).done(function(data) {
-    console.log("retrieving capsules data");
-    console.log(data);
-    renderCapsules(data);
-  })
-}; // end getQuestions
-
-// render capsules data
-var renderCapsules = function(data) {
-  console.log("rendering a user's capsules");
-
-  var formContainer = $('#form-container');
-	formContainer.empty();
-
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
-
-  // nav bar for logged-in users
-  $('#nav-my-account-button').show();
-  $('#nav-logout-button').show();
-  $('#nav-login-button').hide();
-  $('#nav-signup-button').hide();
-  $('#nav-my-capsules-button').hide();
-
-  $('#status-bar').empty();
-  $('#status-bar').append("View your time capsules");
-
-  var template = Handlebars.compile($('#view-my-capsules-template').html());
-  // for(var i=0; i < data.length; i++) {
-  //   formContainer.append(template(data[i]));
-    // $('#view-user-capsules-container').each(function(i) {
-
-    // })
-}; // end renderCapsules
-
-// END GET CAPSULES -----------------
-
