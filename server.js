@@ -4,7 +4,9 @@ var express      = require('express'),
     bodyParser   = require('body-parser'),
     md5          = require('md5'),
     cookieParser = require('cookie-parser'),
-    morgan = require('morgan');
+    morgan       = require('morgan');
+    var mandrill = require('node-mandrill')('ErC_Pp1x5G3LBsNSbDgQLw');
+
     // var mandrill_client = new mandrill.Mandrill('ErC_Pp1x5G3LBsNSbDgQLw');
 
 var port         = process.env.PORT || 3000;
