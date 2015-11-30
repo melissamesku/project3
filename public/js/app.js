@@ -3,6 +3,11 @@ $(function() {
 
   setUp();
 
+  var template = Handlebars.compile($('#after-capsule-sent').html());
+  bigImage.append(template);
+  bigImage.addClass('capsule-sent');
+  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+
 }); // end doc ready
 
 // GLOBAL VARIABLES --------------
@@ -24,6 +29,7 @@ $('#nav-my-capsules-button').click(function() {
 });
 
 $('#nav-login-button').click(function() {
+  bigImage.remove();
   loginForm();
 });
 
@@ -32,6 +38,7 @@ $('#nav-logout-button').click(function() {
 });
 
 $('#nav-signup-button').click(function() {
+  bigImage.remove();
   signUpForm();
 });
 
@@ -119,7 +126,7 @@ var setUp = function() {
 
 // SIGN-UP -----------------------
 var signUpForm = function() {
-		console.log('showing sign up form');
+    console.log('showing sign up form');
 
     // dev buttons - to be removed once nav bar is working 100%
     // $('#logout-button').show();
@@ -143,21 +150,21 @@ var signUpForm = function() {
 
     var formContainer = $('#form-container');
     formContainer.empty();
-		var template = Handlebars.compile($('#signup-template').html());
-		formContainer.append(template);
+    var template = Handlebars.compile($('#signup-template').html());
+    formContainer.append(template);
 
     // REGISTER BUTTON
-		$('#register-button').click(function(){
-			console.log('clicked register');
-			newUser();
-		});
+    $('#register-button').click(function(){
+      console.log('clicked register');
+      newUser();
+    });
 
     // LOG-IN BUTTON - through signup form
     $('#login-through-signup').click(function() {
       console.log("clicked login through signup button");
       loginForm();
     });
-	}; // sign up form
+  }; // sign up form
 
 
 var newUser = function() {
@@ -169,22 +176,22 @@ var newUser = function() {
   var ageNum = parseInt(ageGot);
   };
 
-	user = {
-		username: $('#username').val(),
-		password: $('#password').val(),
+  user = {
+    username: $('#username').val(),
+    password: $('#password').val(),
     email: $('#email').val(),
     age: ageNum,
     location: $('#location').val()
-	};
-	console.log(user.username+" created app side");
+  };
+  console.log(user.username+" created app side");
   console.log(user);
 
-	$.ajax({
-		url: "http://localhost:3000/users",
-		method: "POST",
+  $.ajax({
+    url: "http://localhost:3000/users",
+    method: "POST",
     dataType: 'json',
-		data: user
-	}).done(function(data){
+    data: user
+  }).done(function(data){
     console.log("sent sign-up info to server");
     console.log(data.username+" signup successful");
 
@@ -197,13 +204,13 @@ var newUser = function() {
     // setting cookie and back to questions
     user = Cookies.get("loggedinId");
     getQuestions();
-	}); // end ajax request
+  }); // end ajax request
 }; // end newUser
 // END SIGN-UP -----------------------
 
 // LOGIN ---------------------
 var loginForm = function() {
-	console.log('showing login form');
+  console.log('showing login form');
 
   // nav bar for non-logged-in users
   $('#nav-signup-button').hide();
@@ -227,9 +234,9 @@ var loginForm = function() {
 
   // showing login template
   var formContainer = $('#form-container');
-	formContainer.empty();
-	var template = Handlebars.compile($('#login-template').html());
-	formContainer.append(template);
+  formContainer.empty();
+  var template = Handlebars.compile($('#login-template').html());
+  formContainer.append(template);
 
   // SIGNUP button - referral button through login page
   $('#signup-through-login').click(function() {
@@ -237,27 +244,27 @@ var loginForm = function() {
   })
 
   // LOGIN BUTTON - the one on the actual form
-	$('#login-button').click(function(){
-		console.log('clicked login-button');
-		loginPost();
-	});
+  $('#login-button').click(function(){
+    console.log('clicked login-button');
+    loginPost();
+  });
 }; // sign up form
 
 
 var loginPost = function() {
-	user = {
-		username: $('#username').val(),
-		password: $('#password').val(),
-	};
+  user = {
+    username: $('#username').val(),
+    password: $('#password').val(),
+  };
 
-	$.ajax({
-		url: 'http://localhost:3000/login',
-		method: "POST",
-		dataType: 'json',
-		data: user
-	}).done(function(data) {
-		console.log("sent login info to server");
-		console.log(data.username+" login successful");
+  $.ajax({
+    url: 'http://localhost:3000/login',
+    method: "POST",
+    dataType: 'json',
+    data: user
+  }).done(function(data) {
+    console.log("sent login info to server");
+    console.log(data.username+" login successful");
 
     var formContainer = $('#form-container');
     formContainer.empty();
@@ -266,17 +273,17 @@ var loginPost = function() {
     // loads main page
     getQuestions();
 
-	}).fail(function(){
-		var template = Handlebars.compile($('#status-template').html());
-		formContainer.append(template("try again"));
-	}); // end fail
+  }).fail(function(){
+    var template = Handlebars.compile($('#status-template').html());
+    formContainer.append(template("try again"));
+  }); // end fail
 }; //end loginPost
 // END LOGIN ---------------------
 
 
 // GET QUESTIONS ----------------------
 var getQuestions = function(){
-	console.log("getting questions");
+  console.log("getting questions");
 
   // this conditional is only about which nav buttons to show
   if (Cookies.get("loggedinId") != undefined) {
@@ -301,13 +308,12 @@ var getQuestions = function(){
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  // status.append('time capsule main area');
 
-	$.ajax({
-		url: 'http://localhost:3000/questions',
-		method: 'GET',
-		dataType: 'json'
-	}).done(function(data) {
+  $.ajax({
+    url: 'http://localhost:3000/questions',
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(data) {
     console.log("questions from database gotten");
     renderQuestions(data);
   });
@@ -316,7 +322,7 @@ var getQuestions = function(){
 
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
-	formContainer.empty();
+  formContainer.empty();
   console.log('trying to render questions');
 
   // dev buttons - to be removed once nav bar is working 100%
@@ -378,8 +384,12 @@ var renderQuestions = function(data) {
 
 
 // RANDOM COLORS --------------------
-getRandomColor = function() {
-  colors = ['#999900', '#996600', '#eeeeee', '#660066', '#666666', '#009999', '#99004c', ]
+var getRandomColor = function() {
+  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
+  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
+  // colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
+  // colors = ['#a2774a', '#a48f78', '#a9a88d', '#caaf40', '#99a9ba', '#8e5c42', '#d6b74e', '#ceb9ae', '#cccccc', '#eeeeee' ]
+  colors = ['#846684', '#929dbb', '#92b3bb', '#92bba5', '#a6bb92', '#b6bb92', '#bbb392', '#bbae92', '#cccccc', '#eeeeee', '#bba492', '#929bbb', '#a79782', '#a78e82' ];
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 
@@ -458,16 +468,16 @@ var renderTextInput = function(id, quest) {
 // SHOW QUESTIONS -------------------
 // saves Q/A to temp array & appends to sidebar
 var showQuestions = function(tempQA) {
-	console.log('showing questions list');
+  console.log('showing questions list');
 
   // just showing answered questions in side
   answeredQuestions.push(tempQA);
   console.log(answeredQuestions);
   answeredContainer.empty();
 
-	var template = Handlebars.compile($('#questions-template').html());
+  var template = Handlebars.compile($('#questions-template').html());
   for(var i=0;i<answeredQuestions.length;i++) {
-	  answeredContainer.append(template(answeredQuestions[i]))
+    answeredContainer.append(template(answeredQuestions[i]))
   };
 
   // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
@@ -481,16 +491,6 @@ var showQuestions = function(tempQA) {
 }; // end show question
 
 
-var getRandomColor = function() {
-  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
-  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
-  // colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
-  // colors = ['#a2774a', '#a48f78', '#a9a88d', '#caaf40', '#99a9ba', '#8e5c42', '#d6b74e', '#ceb9ae', '#cccccc', '#eeeeee' ]
-  colors = ['#846684', '#929dbb', '#92b3bb', '#92bba5', '#a6bb92', '#b6bb92', '#bbb392', '#bbae92', '#cccccc', '#eeeeee', '#bba492', '#929bbb', '#a79782', '#a78e82' ];
-  return colors[Math.floor(Math.random()*colors.length)];
-}; // end getRandomColor
-// END QUESTIONS --------------------
-
 // QUESTION TO NEW CAPSULE -------------------
 var newCapsule = function(tempQA) {
   // saving to new capsule
@@ -502,7 +502,7 @@ var newCapsule = function(tempQA) {
   }).done(function(data){
     console.log("new capsule created in db");
     submitCapsule();
-	}); // end ajax request
+  }); // end ajax request
 }; // end new capsule
 
 // QUESTION TO CURRENT CAPSULE -------------
@@ -528,7 +528,14 @@ var submitCapsule = function(){
     // empties sidebar/questions array
     // leaves saved message
     answeredContainer.empty();
-    answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+    formContainer.empty();
+    var template = Handlebars.compile($('#after-capsule-sent').html());
+    bigImage.append(template);
+    bigImage.addClass('capsule-sent');
+    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>")
+
+    // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
+
     answeredQuestions = [];
   });
 };
@@ -539,14 +546,13 @@ $('#view-user-capsules-button').click(function() {
   getCapsules();
 });
 
-
 var getCapsules = function(){
-	console.log("getting capsules");
-	$.ajax({
+  console.log("getting capsules");
+  $.ajax({
     url: "http://localhost:3000/capsules/"+Cookies.get('loggedinId'),
-		method: 'GET',
-		dataType: 'json',
-	}).done(function(data) {
+    method: 'GET',
+    dataType: 'json',
+  }).done(function(data) {
     console.log("got capsules from database");
     console.log(data);
 
@@ -557,7 +563,7 @@ var getCapsules = function(){
 var renderCapsules = function(data) {
   console.log("rendering a user's capsules");
 
-	formContainer.empty();
+  formContainer.empty();
 
   // dev buttons - to be removed once nav bar is working 100%
   $('#logout-button').show();
@@ -637,7 +643,7 @@ var setupAccount = function() {
 };
 
 var editForm = function() {
-	console.log('showing edit form');
+  console.log('showing edit form');
 
   $('#nav-view-user-capsules-button').show();
   $('#nav-logout-button').show();
@@ -657,10 +663,10 @@ var editForm = function() {
 
   // get user info to populate form
   $.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
-		method: "GET",
+    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    method: "GET",
     dataType: 'json',
-	}).done(function(data){
+  }).done(function(data){
     console.log(data);
     var template = Handlebars.compile($('#edit-user-template').html());
     $('#form-container').append(template(data));
@@ -675,21 +681,21 @@ var editForm = function() {
 
 
 var editUser = function() {
-	var user_edit = {
-		email: $('#email').val(),
-		age: $('#age').val(),
+  var user_edit = {
+    email: $('#email').val(),
+    age: $('#age').val(),
     location: $('#location').val(),
-	};
+  };
 
   console.log(user_edit);
-	console.log("user edit sending");
+  console.log("user edit sending");
 
-	$.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
-		method: "PUT",
+  $.ajax({
+    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    method: "PUT",
     dataType: 'json',
-		data: user_edit
-	}).done(function(data){
+    data: user_edit
+  }).done(function(data){
     // returns string "User updated"
     console.log("edit ajax completed")
     console.log("from server: "+data);
@@ -734,15 +740,15 @@ var areYouSure = function() {
 
 // DELETE method
 var deleteUser = function() {
-	console.log("deleting user");
+  console.log("deleting user");
 
   $('#form-container').empty();
   $('#status-bar').empty();
 
-	$.ajax({
-		url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
-		method: "DELETE",
-	}).done(function(){
+  $.ajax({
+    url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
+    method: "DELETE",
+  }).done(function(){
     //removes cookie
     Cookies.remove('loggedinID');
     console.log('Account deleted');
@@ -755,151 +761,3 @@ var deleteUser = function() {
   });
 }; // end deleteUser
 // END DELETE UESR -----------------------
-
-
-// SAVE QUESTIONS -----------------------
-// saves Q/A to temp array & appends to sidebar
-var saveQuestion = function(tempQA) {
-	console.log('showing questions list');
-
-  // console.log(tempQA);
-
-	var answeredContainer = $('#answered-container');
-
-  answeredQuestions.push(tempQA);
-
-  console.log(answeredQuestions);
-
-  // if (answeredQuestions == 0) {
-  //   // show "answer some questions instead of Date / submit buttons
-  //   answeredContainer.append("Answer some questions!");
-  // } else { ....
-
-  answeredContainer.empty();
-
-	var template = Handlebars.compile($('#questions-template').html());
-  for(var i=0;i<answeredQuestions.length;i++) {
-    answeredContainer.append(template(answeredQuestions[i]));
-  };
-
-  // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
-  // var questionInList = $('.list-questions');
-  // var yellow = questionInList.css('color', '#666');
-  // var shortText = $.trim(questionInList).substring(0, 10).split(" ").slice(0, -1).join(" ") + "...";
-
-  ////// need date/calendar or button/input
-
-  answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
-
-  // submit button
-	$('#submit-capsule').click(function(){
-    //
-    var capsuleData = {
-      questions: answeredQuestions,
-      // user: Cookies.get('loggedinId'),
-      // date: $('#date').val(), // match date input id
-    };
-
-    formContainer.empty();
-    answeredContainer.empty();
-
-    var template = Handlebars.compile($('#after-capsule-sent').html());
-    $('#big-image').append(template);
-
-    bigImage.addClass('capsule-sent');
-    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>")
-
-
-    // console.log(capsuleData);
-		newCapsule(capsuleData);
-
-  }); // end
-// }; // end submit capsule button
-}; // sign up form
-// SAVE QUESTIONS -----------------------
-
-
-// CREATE CAPSULES -----------------------
-var newCapsule = function(capsuleData) {
-	console.log("capsule created app side");
-  console.log(capsuleData);
-
-	$.ajax({
-		url: "http://localhost:3000/capsules",
-		method: "POST",
-    dataType: JSON,
-    processData: false,
-		data: capsuleData
-	}).done(function(data){
-    console.log("sent capsule to server");
-
-    console.log(data);
-
-    formContainer.empty();
-  	var template = Handlebars.compile($('#capsules-template').html());
-    formContainer.append(template(data));
-
-	});
-}; // end newCapsule
-// END CREATE CAPSULES -------------------
-
-
-// VIEW USER'S CAPSULES  -------------------------
-// click nav button
-$('#nav-my-capsules-button').click(function() {
-    console.log("clicked my capsules button");
-    getCapsules();
-});
-
-// GET capsules data
-var getCapsules = function(data){
-	console.log("trying to view user's capsules");
-  console.log(data);
-
-	$.ajax({
-		// url: 'http://localhost:3000/capsules'
-    url: "http://localhost:3000/users/"+Cookies.get('loggedinId')+"/capsules",
-		method: 'GET',
-		dataType: 'json'
-	}).done(function(data) {
-    console.log("retrieving capsules data");
-    console.log(data);
-    renderCapsules(data);
-  })
-}; // end getQuestions
-
-// render capsules data
-var renderCapsules = function(data) {
-  console.log("rendering a user's capsules");
-
-  var formContainer = $('#form-container');
-	formContainer.empty();
-
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
-
-  // nav bar for logged-in users
-  $('#nav-my-account-button').show();
-  $('#nav-logout-button').show();
-  $('#nav-login-button').hide();
-  $('#nav-signup-button').hide();
-  $('#nav-my-capsules-button').hide();
-
-  $('#status-bar').empty();
-  $('#status-bar').append("View your time capsules");
-
-  var template = Handlebars.compile($('#view-my-capsules-template').html());
-  // for(var i=0; i < data.length; i++) {
-  //   formContainer.append(template(data[i]));
-    // $('#view-user-capsules-container').each(function(i) {
-
-    // })
-}; // end renderCapsules
-
-// END GET CAPSULES -----------------
-
