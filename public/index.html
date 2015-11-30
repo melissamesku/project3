@@ -112,11 +112,11 @@
   	<template id="account-info-template">
   		<div id="account-info-container" data-id={{_id}}>
 
-  			<button id="toplevel-view-capsules-button" data-id="{{_id}}">View my time capsules</button><br>
+  			<button id="account-view-capsules-button">View my time capsules</button><br>
 
-  			<button id="toplevel-update-user-info-button" data-id="{{_id}}">Update account information</button><br>
+  			<button id="account-update-button">Update account information</button><br>
 
-  			<button id="toplevel-delete-account-button" data-id="{{_id}}">Delete account</button>
+  			<button id="account-delete-button">Delete account</button>
 
   		</div>
   	</template>
@@ -125,6 +125,9 @@
 	<template id="edit-user-template">
 
 		<div id="edit-user-container" data-id="{{_id}}">
+			<button id="account-view-capsules-button">View my time capsules</button><br>
+
+			<button id="account-delete-button">Delete account</button><br>
 
 			<label for="email">Email</label><br/>
 		    <input type="text" id="email" placeholder="{{{email}}}" value="{{{email}}}"/><br>
@@ -144,6 +147,10 @@
 	<!--  DELETE USER ============= -->
 	<template id="delete-user-template">
 		<div id="delete-user-container" data-id="{{_id}}">
+			<button id="account-view-capsules-button">View my time capsules</button><br>
+
+			<button id="account-update-button">Update account information</button><br>
+
 			<h3>Are you sure?</h3>
 		    <button id="delete-user-confirm-button" data-id="{{_id}}">Yes, Delete</button>
 
@@ -153,7 +160,10 @@
 	<!--  VIEW USER CAPSULES ============= -->
 	<template id="view-user-capsules-template">
 		<div id="view-user-capsules-container" data-id="{{_id}}">
-			<!-- <h3>View your time capsules</h3> -->
+			<button id="account-update-button">Update account information</button><br>
+
+			<button id="account-delete-button">Delete account</button><br>
+
 			<h4>Created on: {{created_at}}</h4>
 			{{#each qa}}
 				<p syle="display: block">Question: {{question}}</p>
