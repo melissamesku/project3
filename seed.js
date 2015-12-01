@@ -31,15 +31,15 @@ var question1 = new Question({
 });
 
 var question2 = new Question({
-	question: "What style or fashion trend do you enjoy now but will probably be embarrassed to look back on in the future?"
+	question: "What style trend will embarrass you in the future?"
 });
 
 var question3 = new Question({
-	question: "What's the biggest domestic political issue your country is facing? How do you think it will turn out?"
+	question: "What's the biggest current domestic political issue?"
 });
 
 var question4 = new Question({
-	question: "What's the biggest international political issue your country is facing? How do you think it will turn out?"
+	question: "What's the biggest current international political issue?"
 });
 
 var question5 = new Question({
@@ -67,11 +67,11 @@ var question10 = new Question({
 });
 
 var question11 = new Question({
-	question: "What work of art or beauty do you expect will remain important to you in the future?"
+	question: "What work of art will remain important to you in the future?"
 });
 
 var question12 = new Question({
-	question: "Who is your favorite musical artist, and what's your favorite song by them?"
+	question: "What musical artist will surely still be around in five years?"
 });
 
 var question13 = new Question({
@@ -83,11 +83,11 @@ var question14 = new Question({
 });
 
 var question15 = new Question({
-	question: "Would you like to remain where you live now or move somewhere else?"
+	question: "Do you hope to stay where you are now or move somewhere else?"
 });
 
 var question16 = new Question({
-	question: "Is there anything that's now illegal that you predict will become legal in the future? What about something legal that will be made illegal?"
+	question: "What do you predict will be made legal in the future?"
 });
 
 var question17 = new Question({
@@ -99,7 +99,7 @@ var question18 = new Question({
 });
 
 var question19 = new Question({
-	question: "What's something you should really throw away, but probably never will?"
+	question: "What should you throw away, but probably never will?"
 });
 
 var question20 = new Question({
@@ -111,11 +111,11 @@ var question21 = new Question({
 });
 
 var question22 = new Question({
-	question: "What did you do last Saturday night? What do you want to do next Saturday?"
+	question: "How was last Saturday night? Any plans for next Saturday?"
 });
 
 var question23 = new Question({
-	question: "What is the most important historical event that's happened in your lifetime?"
+	question: "What's an important historical event you've lived through?"
 });
 
 var question24 = new Question({
