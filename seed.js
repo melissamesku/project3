@@ -15,18 +15,6 @@ var mongoose = require('mongoose'),
     Question = require('./models/question.js'),
     Capsule = require('./models/capsule.js');
 
-// // DATABASE
-
-// var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
-
-// mongoose.connect(mongoUri), function(err) {
-// 	if(err) {
-// 		console.log('Connection error: ', err);
-// 	} else {
-// 		console.log('Connection successful');
-// 	}
-// };
-
 // SEED
 // create questions
 var question1 = new Question({
