@@ -19,9 +19,9 @@ $('#logo').click(function() {
   setUp();
 });
 
-$('#nav-home-button').click(function() {
-  setUp();
-})
+// $('#nav-home-button').click(function() {
+//   setUp();
+// })
 
 $('#nav-my-capsules-button').click(function() {
   getCapsules();
@@ -53,7 +53,7 @@ $('#nav-try-it').click(function() {
 // LANDING PAGE -----------------
 var landingPage = function() {
  
-  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+  // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
 
   $('#nav-try-it').show();
   $('#nav-signup-button').show();
@@ -529,7 +529,7 @@ var renderCapsules = function(data) {
   $('#nav-logout-button').show();
   $('#nav-login-button').hide();
   $('#nav-signup-button').hide();
-  $('#nav-my-capsules-button').hide();
+  $('#nav-my-capsules-button').show();
 
   $('#status-bar').empty();
   $('#status-bar').append("View your time capsules");
