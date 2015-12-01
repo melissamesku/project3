@@ -19,16 +19,15 @@ $('#logo').click(function() {
   setUp();
 });
 
-$('#nav-home-button').click(function() {
-  setUp();
-})
+// $('#nav-home-button').click(function() {
+//   setUp();
+// })
 
 $('#nav-my-capsules-button').click(function() {
   getCapsules();
 });
 
 $('#nav-login-button').click(function() {
-  bigImage.remove();
   loginForm();
 });
 
@@ -37,7 +36,6 @@ $('#nav-logout-button').click(function() {
 });
 
 $('#nav-signup-button').click(function() {
-  bigImage.remove();
   signUpForm();
 });
 
@@ -46,14 +44,18 @@ $('#nav-my-account-button').click(function() {
 });
 
 $('#nav-try-it').click(function() {
-  bigImage.remove();
+  setUp();
+});
+
+$('#refresh').click(function() {
+  formContainer.empty();
   setUp();
 });
 
 // LANDING PAGE -----------------
 var landingPage = function() {
  
-  bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+  // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
 
   $('#nav-try-it').show();
   $('#nav-signup-button').show();
@@ -286,7 +288,12 @@ var getQuestions = function(){
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
   formContainer.empty();
-  console.log('trying to render questions');
+  formContainer.prepend('<img src="http://melissamesku.com/images/time-capsule-refresh.png" id="refresh" width="30px"/><br/>');
+
+  $('#refresh').click(function() {
+  formContainer.empty();
+  setUp();
+});
 
   // puts questions in boxes with random colors
   var template = Handlebars.compile($('#boxes-template').html());
@@ -481,9 +488,9 @@ var submitCapsule = function(){
     answeredContainer.empty();
     formContainer.empty();
     var template = Handlebars.compile($('#after-capsule-sent').html());
-    bigImage.append(template);
-    bigImage.addClass('capsule-sent');
-    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+    formContainer.append(template);
+    // bigImage.addClass('capsule-sent');
+    // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
 
     // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
@@ -529,10 +536,10 @@ var renderCapsules = function(data) {
   $('#nav-logout-button').show();
   $('#nav-login-button').hide();
   $('#nav-signup-button').hide();
-  $('#nav-my-capsules-button').hide();
+  $('#nav-my-capsules-button').show();
 
   $('#status-bar').empty();
-  $('#status-bar').append("View your time capsules");
+  $('#status-bar').append("My time capsules");
 
   formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
 
@@ -744,7 +751,7 @@ var renderAbout = function() {
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('About TimeCapsule');
+  status.append('About');
 
   // clearing form container
   var formContainer = $('#form-container');

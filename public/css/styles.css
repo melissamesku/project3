@@ -4,17 +4,22 @@
 body {
 	font-family: 'Playfair Display', sans-serif;
 	background-color: #eee;
+	background: url(http://melissamesku.com/images/nasa-time-capsule-bkg.jpg) no-repeat fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover; 
 }
 nav {
 	width: 100%;
-	background-color: #000;
+	background-color: rgba(0,0,0,.7);
 	opacity: 1;
 	font-family: 'Pontano Sans';
 	padding:0;
 }
 nav ul {
 	text-align: right; 
-	padding-bottom: 20px;
+	padding-bottom: 0px;
 	display: inline;
 	float:right;
 }
@@ -34,15 +39,27 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 800;
 	color: #4b3b4b;
 }  
+h2, h3, h4, h5, h6 {
+	color: #eee;
+	text-shadow: 1px 1px 1px #000;
+}
 button {
-	background-color: transparent;
-	color: #4b3b4b;
+	background-color: rgba(0,0,0,.6);
+	color: #eee;
+	border-color: #eee;
+	border: 1px solid #eee;
 	padding: 9px 11px;
-	border: 1px solid #4b3b4b;
 	font-family: 'Pontano Sans';
 }
-button:hover {
+nav button {
+	background-color: transparent;
+	color: #4b3b4b;
+	border-color: #4b3b4b;
+	border: 1px solid #4b3b4b;
+}
+button:focus, button:active, button:hover, button:target {
 	background-color: #4b3b4b;
+	outline:none;
 }
 nav ul button {
 	color: #eee;
@@ -57,6 +74,10 @@ h1#logo {
 }
 h1#logo:hover {
 	color: #765e76;
+}
+p {
+	font-size: 24px;
+	text-shadow: 1px 1px 1px #000;
 }
 footer {
 	position: fixed;
@@ -74,6 +95,7 @@ footer {
 #form-container {
 	padding-top: 40px;
 	margin: 0 0 40px 0;
+	color: #fff;
 }
 #sidebar-area {
 	padding-top:40px;
@@ -94,10 +116,12 @@ footer {
 	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
 	padding: 10px;
 	height: 163px;
+	opacity: .3;
 }
 .inner-box p {
 	font-size: 1.4em;
 	line-height: 1.3em;
+	text-shadow: none;
 }
 .inner-box:hover {
 	color: #000;   /* part 2 of 2: see the questions ONLY when you hover */
@@ -113,6 +137,12 @@ footer {
 	color: #000;
 	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
 	padding: 5px;
+}
+
+label {
+	color: #fff;
+	font-size: 20px;
+	text-shadow: 1px 1px 1px #000;
 }
 .active-box-container {
 	background-color: none; /*  this class works but this line doesn't work */
@@ -131,6 +161,8 @@ footer {
 .active-box-container input[type=submit] {
 	background-color: transparent;
 	margin: 5px;
+	border: 1px solid #eee;
+	color: #eee;
 }
 .active-box-container input[type=submit]:hover {
 	background-color: #4b3b4b;
@@ -154,27 +186,29 @@ footer {
 .list-questions {
 	height: 38px;
 	overflow: hidden;
+	color: #eee;
+	text-shadow: 1px 1px 1px #000;
+	opacity: .8;
+}
+#refresh {
+	padding: 4px;
 	opacity: .5;
 }
-.capsule-sent {
+
+/*.capsule-sent {
 	background-color: #000;
 }
-/*.capsule-sent:before {
-	content: "dude";
-	vertical-align: middle;
-	color: #eee;
-}*/
 #big-image {
 	padding: 0;
 	margin: 0;
-	/*background-image: url(http://melissamesku.com/images/nasa-time-capsule.jpg); */
+	background-image: url(http://melissamesku.com/images/nasa-time-capsule.jpg); 
 	background-color: #000;
 }
 #big-image-text {
 	margin: 0 auto;
 	text-align: center;
 	color: #ccc;
-}
+}*/
 
 
 

@@ -12,7 +12,7 @@
 		<h1 id="logo">time<em>capsule</em></h1>
 		<ul>
 			<button id="nav-try-it">Check it out</button>
-			<button id="nav-home-button">Home</button>
+<!-- 			<button id="nav-home-button">Home</button> -->			
 			<button id="nav-about-button">About</button>
 			<button id="nav-my-capsules-button">My Time Capsules</button>
 			<button id="nav-my-account-button">My Account</button>
@@ -38,7 +38,7 @@
 
 		<section class="small-12 large-9 columns">
 				<!-- added a status bar that displays messages to user when action occur -->
-	    	<h3 id="status-bar">status bar</h3>
+	    	<h3 id="status-bar"></h3>
 
 		    <div id="form-container">
 		    </div>
@@ -67,7 +67,7 @@
 
 				<!-- <button id="submit-capsule">Submit Capsule!</button><br> -->
 
-				<button id="email">Email Test</button><br>
+				<!-- <button id="email">Email Test</button><br> -->
 
 			</div>
 		</section>
@@ -168,12 +168,17 @@
 	<template id="view-user-capsules-template">
 		<div id="view-user-capsules-container" data-id="{{_id}}">
 
-			<h4>Created on: {{created_at}}</h4>
-			{{#each qa}}
-				<p syle="display: block">Question: {{question}}</p>
-				<p>Answer: {{answer}}</p><br>
-			{{/each}}
-
+			<p>
+				<span style="font-size:0.6em; color:#ccc">The exact space-time this capsule was created: {{created_at}}</span>
+				<br/>
+				{{#each qa}}
+					Question: <em>{{question}}</em>
+					<br/>
+					Answer: <em>{{answer}}</em>
+					<br/>
+				{{/each}}
+			</p>
+			<br/>
 		</div>
 	</template>
 
@@ -197,7 +202,7 @@
 	<!--  QUESTIONS LIST ============= -->
 	<template id="questions-template">
 		<div id="questions-container" data-id="{{_id}}">
-			<div class="list-questions">{{question}}</div><br>
+			<div class="list-questions"><em>{{question}}</em></div><br>
 		<!-- add date calendar field -->
 		 </div>
 	</template>
@@ -205,10 +210,10 @@
 
 	<!--  ABOUT ============= -->
 	<template id="about-template">
-		<div id="about-container" data-id="{{_id}}">
-			<p>Select a square, speak your mind, and add your response to a time capsule. Then answer some more questions!</p>
-			<p>Once you've had your say, submit your time capsule and we'll email it back to you in five years.</p>
-			<p>How have you changed? How have you stayed the same?</p>
+		<div id="about-container">
+			<p>A time capsule for planet earth was sent into deep space with the Voyager 1 space probe in 1977. You might have missed that one, but don't worry – you can save your own online time capsule right here. </p>
+			<p>This is meant to be a snapshot of how you see the world right now. Select a question, speak your mind, and your response will be added to your personal time capsule. Then answer some more questions!</p>
+			<p>Once you've had your say, submit your time capsule. We'll email it back to you in five years.</p>
 		</div>
 	</template>
 
@@ -231,7 +236,9 @@
 	<template id="after-capsule-sent">
 
 		<div id="big-image-text">
-			
+			<h3>Congratulations! </h3>
+			<p>Your time capsule has been saved for posterity. It will be sent to you via email in five years.*</p>
+			<p>*If email still exists, of course</p>
 		</div>
 
   	</template>
