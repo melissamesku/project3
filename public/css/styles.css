@@ -39,15 +39,20 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 800;
 	color: #4b3b4b;
 }  
+h2, h3, h4, h5, h6 {
+	color: #eee;
+}
 button {
 	background-color: transparent;
 	color: #4b3b4b;
+	border-color: #4b3b4b;
 	padding: 9px 11px;
 	border: 1px solid #4b3b4b;
 	font-family: 'Pontano Sans';
 }
-button:hover {
+button:focus, button:active, button:hover, button:target {
 	background-color: #4b3b4b;
+	outline:none;
 }
 nav ul button {
 	color: #eee;
@@ -79,6 +84,7 @@ footer {
 #form-container {
 	padding-top: 40px;
 	margin: 0 0 40px 0;
+	color: #fff;
 }
 #sidebar-area {
 	padding-top:40px;
