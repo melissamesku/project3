@@ -116,6 +116,7 @@ footer {
 	color: transparent;  /* part 1 of 2: see the questions ONLY when you hover */
 	padding: 10px;
 	height: 163px;
+	opacity: .3;
 }
 .inner-box p {
 	font-size: 1.4em;

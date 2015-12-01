@@ -168,14 +168,17 @@
 	<template id="view-user-capsules-template">
 		<div id="view-user-capsules-container" data-id="{{_id}}">
 
-			<h3>My time capsules</h3>
-
-			<h4>The exact space-time capsule was created: {{created_at}}</h4>
-			{{#each qa}}
-				<p syle="display: block">Question: {{question}}</p>
-				<p>Answer: {{answer}}</p><br>
-			{{/each}}
-
+			<p>
+				<span style="font-size:0.6em; color:#ccc">The exact space-time this capsule was created: {{created_at}}</span>
+				<br/>
+				{{#each qa}}
+					Question: <em>{{question}}</em>
+					<br/>
+					Answer: <em>{{answer}}</em>
+					<br/>
+				{{/each}}
+			</p>
+			<br/>
 		</div>
 	</template>
 

@@ -532,6 +532,7 @@ var renderCapsules = function(data) {
   $('#nav-my-capsules-button').show();
 
   $('#status-bar').empty();
+  $('#status-bar').append("My time capsules");
 
   formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
 
