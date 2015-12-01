@@ -6,7 +6,7 @@ var express      = require('express'),
     cookieParser = require('cookie-parser'),
     morgan       = require('morgan');
     // mandrill     = require('node-mandrill')('ErC_Pp1x5G3LBsNSbDgQLw');
-    // var mandrill = require('mandrill-api/mandrill');
+    mandrill = require('mandrill-api/mandrill');
 
     // var mandrill_client = new mandrill.Mandrill('ErC_Pp1x5G3LBsNSbDgQLw');
 
