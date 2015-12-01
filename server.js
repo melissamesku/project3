@@ -8,8 +8,6 @@ var express      = require('express'),
     // mandrill     = require('node-mandrill')('ErC_Pp1x5G3LBsNSbDgQLw');
     mandrill = require('mandrill-api/mandrill');
 
-    // var mandrill_client = new mandrill.Mandrill('ErC_Pp1x5G3LBsNSbDgQLw');
-
 var port         = process.env.PORT || 3000;
 var app          = express();
 
