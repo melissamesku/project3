@@ -481,9 +481,9 @@ var submitCapsule = function(){
     answeredContainer.empty();
     formContainer.empty();
     var template = Handlebars.compile($('#after-capsule-sent').html());
-    bigImage.append(template);
-    bigImage.addClass('capsule-sent');
-    bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+    formContainer.append(template);
+    // bigImage.addClass('capsule-sent');
+    // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
 
     // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
@@ -532,7 +532,6 @@ var renderCapsules = function(data) {
   $('#nav-my-capsules-button').show();
 
   $('#status-bar').empty();
-  $('#status-bar').append("View your time capsules");
 
   formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
 
@@ -744,7 +743,7 @@ var renderAbout = function() {
   // updating status bar
   var status = $('#status-bar');
   status.empty();
-  status.append('About TimeCapsule');
+  status.append('About');
 
   // clearing form container
   var formContainer = $('#form-container');

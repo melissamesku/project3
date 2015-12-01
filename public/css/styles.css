@@ -41,14 +41,21 @@ h1, h2, h3, h4, h5, h6 {
 }  
 h2, h3, h4, h5, h6 {
 	color: #eee;
+	text-shadow: 1px 1px 1px #000;
 }
 button {
+	background-color: rgba(0,0,0,.5);
+	color: #eee;
+	border-color: #eee;
+	border: 1px solid #eee;
+	padding: 9px 11px;
+	font-family: 'Pontano Sans';
+}
+nav button {
 	background-color: transparent;
 	color: #4b3b4b;
 	border-color: #4b3b4b;
-	padding: 9px 11px;
 	border: 1px solid #4b3b4b;
-	font-family: 'Pontano Sans';
 }
 button:focus, button:active, button:hover, button:target {
 	background-color: #4b3b4b;
@@ -67,6 +74,10 @@ h1#logo {
 }
 h1#logo:hover {
 	color: #765e76;
+}
+p {
+	font-size: 24px;
+	text-shadow: 1px 1px 1px #000;
 }
 footer {
 	position: fixed;
@@ -109,6 +120,7 @@ footer {
 .inner-box p {
 	font-size: 1.4em;
 	line-height: 1.3em;
+	text-shadow: none;
 }
 .inner-box:hover {
 	color: #000;   /* part 2 of 2: see the questions ONLY when you hover */
@@ -124,6 +136,12 @@ footer {
 	color: #000;
 	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
 	padding: 5px;
+}
+
+label {
+	color: #fff;
+	font-size: 20px;
+	text-shadow: 1px 1px 1px #000;
 }
 .active-box-container {
 	background-color: none; /*  this class works but this line doesn't work */

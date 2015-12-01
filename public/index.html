@@ -168,7 +168,9 @@
 	<template id="view-user-capsules-template">
 		<div id="view-user-capsules-container" data-id="{{_id}}">
 
-			<h4>Created on: {{created_at}}</h4>
+			<h3>My time capsules</h3>
+
+			<h4>The exact space-time capsule was created: {{created_at}}</h4>
 			{{#each qa}}
 				<p syle="display: block">Question: {{question}}</p>
 				<p>Answer: {{answer}}</p><br>
@@ -231,7 +233,9 @@
 	<template id="after-capsule-sent">
 
 		<div id="big-image-text">
-			
+			<h3>Congratulations! </h3>
+			<p>Your time capsule has been saved for posterity. It will be sent to you via email in five years.*</p>
+			<p>*If email still exists, of course</p>
 		</div>
 
   	</template>
