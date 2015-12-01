@@ -3,8 +3,10 @@ var express      = require('express'),
     mongoose     = require('mongoose'),
     bodyParser   = require('body-parser'),
     md5          = require('md5'),
-    cookieParser = require('cookie-parser');
-    morgan = require('morgan');
+    cookieParser = require('cookie-parser'),
+    morgan       = require('morgan');
+    // mandrill     = require('node-mandrill')('ErC_Pp1x5G3LBsNSbDgQLw');
+    mandrill = require('mandrill-api/mandrill');
 
 var port         = process.env.PORT || 3000;
 var app          = express();
@@ -19,8 +21,12 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(cookieParser());
 
-// DATABASE
-mongoose.connect('mongodb://localhost/timecapsule_app');
+// DATABASE FOR LOCAL OR HEROKU DEPLOYMENT
+var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/timecapsule_app';
+mongoose.connect(mongoUri);
+
+// DATABASE SEED - RUN THIS THE FIRST TIME, THEN COMMENT IT OUT!
+// var seed = require('./seed.js');
 
 // LISTENER
 app.listen(port);

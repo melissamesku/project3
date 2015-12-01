@@ -19,6 +19,10 @@ $('#logo').click(function() {
   setUp();
 });
 
+$('#nav-home-button').click(function() {
+  setUp();
+})
+
 $('#nav-my-capsules-button').click(function() {
   getCapsules();
 });
@@ -79,8 +83,6 @@ var setUp = function() {
     console.log("already logged in");
     var formContainer = $('#form-container');
     formContainer.empty();
-    // $('#sign-up').hide();
-    // $('#log-in').hide();
 
     // nav bar for logged-in users
     $('#nav-try-it').hide();
@@ -102,38 +104,6 @@ var setUp = function() {
     $('#nav-logout-button').hide();
 
     getQuestions();
-
-    // // SIGN-UP BUTTON
-    // $('#sign-up').click(function(){
-    //   console.log('clicked sign-up');
-    //   signUpForm();
-    //   $('#sign-up').hide();
-    //   $('#log-in').hide();
-    // });
-
-    // // LOG-IN BUTTON
-    // $('#log-in').click(function(){
-    //   console.log('clicked log-in');
-    //   loginForm();
-    //   $('#sign-up').hide();
-    //   $('#log-in').hide();
-    //   // DUPLICATE NAV BUTTONS
-    //   $('#nav-signup-button').hide();
-    //   $('#nav-login-button').hide();
-    // });
-
-    // // DUPLICATE NAV BAR LOG-IN BUTTON
-    // $('#nav-login-button').click(function(){
-    //   console.log('clicked log-in');
-    //   loginForm();
-    // });
-
-    // // DUPLICATE NAV BAR SIGN-UP BUTTON
-    // $('#nav-signup-button').click(function(){
-    //   console.log('clicked sign-up');
-    //   signUpForm();
-    // });
-
   };
 }; // end setUp
 
@@ -141,14 +111,6 @@ var setUp = function() {
 // SIGN-UP -----------------------
 var signUpForm = function() {
     console.log('showing sign up form');
-
-    // dev buttons - to be removed once nav bar is working 100%
-    // $('#logout-button').show();
-    // $('#edit-user-button').show();
-    // $('#delete-user-button').show();
-    // $('#view-user-capsules-button').show();
-    // $('#sign-up').show();
-    // $('#log-in').show();
 
     // nav bar for non-logged-in users
     $('#nav-try-it').hide();
@@ -202,7 +164,7 @@ var newUser = function() {
   console.log(user);
 
   $.ajax({
-    url: "http://localhost:3000/users",
+    url: "/users",
     method: "POST",
     dataType: 'json',
     data: user
@@ -235,14 +197,6 @@ var loginForm = function() {
   $('#nav-my-account-button').hide();
   $('#nav-logout-button').hide();
 
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
-
   // updating status bar
   var status = $('#status-bar');
   status.empty();
@@ -260,11 +214,11 @@ var loginForm = function() {
   })
 
   // LOGIN BUTTON - the one on the actual form
-  $('#login-button').click(function(){
-    console.log('clicked login-button');
-    loginPost();
-  });
-}; // sign up form
+	$('#login-button').click(function(){
+		console.log('clicked login-button');
+		loginPost();
+	});
+}; // end loginForm
 
 
 var loginPost = function() {
@@ -274,7 +228,7 @@ var loginPost = function() {
   };
 
   $.ajax({
-    url: 'http://localhost:3000/login',
+    url: '/login',
     method: "POST",
     dataType: 'json',
     data: user
@@ -314,20 +268,12 @@ var getQuestions = function(){
 
   }
 
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
-
   // updating status bar
   var status = $('#status-bar');
   status.empty();
 
   $.ajax({
-    url: 'http://localhost:3000/questions',
+    url: '/questions',
     method: 'GET',
     dataType: 'json'
   }).done(function(data) {
@@ -341,14 +287,6 @@ var renderQuestions = function(data) {
   var formContainer = $('#form-container');
   formContainer.empty();
   console.log('trying to render questions');
-
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
 
   // puts questions in boxes with random colors
   var template = Handlebars.compile($('#boxes-template').html());
@@ -426,24 +364,18 @@ var showModal = function() {
     console.log('clicked sign-up');
     signUpForm();
     $('#modal').toggle();
-    // $('#sign-up').hide();
-    // $('#log-in').hide();
   });
 
   $('#modal-log-in').click(function(){
     console.log('clicked log-in');
     loginForm();
     $('#modal').toggle();
-    // $('#sign-up').hide();
-    // $('#log-in').hide();
   });
-  // $('#sign-up').hide();
-  // $('#log-in').hide();
 };
 
 
 // SHOW INPUT BOXES --------------
-  // loads answer/submit template
+// loads answer/submit template
 var renderTextInput = function(id, quest) {
   // $(this).addClass('inner-box-active');
   // $(this).removeClass('inner-box');
@@ -514,7 +446,7 @@ var showQuestions = function(tempQA) {
 var newCapsule = function(tempQA) {
   // saving to new capsule
   $.ajax({
-    url: "http://localhost:3000/capsules",
+    url: "/capsules",
     method: "POST",
     dataType: 'json',
     data: tempQA
@@ -527,7 +459,7 @@ var newCapsule = function(tempQA) {
 // QUESTION TO CURRENT CAPSULE -------------
 var existingCapsule = function(tempQA) {
   $.ajax({
-    url: "http://localhost:3000/capsules/"+Cookies.get('currentCapsule'),
+    url: "/capsules/"+Cookies.get('currentCapsule'),
     method: "PUT",
     dataType: 'json',
     data: tempQA
@@ -556,6 +488,13 @@ var submitCapsule = function(){
     // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
     answeredQuestions = [];
+
+    // snaps the box back to original color/shape
+    // not working
+    var innerBoxById = $('#' + id);
+    innerBoxById.empty();
+
+    $('.outer-box').removeClass('.outer-box-active');
   });
 };
 
@@ -568,7 +507,7 @@ $('#view-user-capsules-button').click(function() {
 var getCapsules = function(){
   console.log("getting capsules");
   $.ajax({
-    url: "http://localhost:3000/capsules/"+Cookies.get('loggedinId'),
+    url: "/capsules/"+Cookies.get('loggedinId'),
     method: 'GET',
     dataType: 'json',
   }).done(function(data) {
@@ -584,14 +523,6 @@ var renderCapsules = function(data) {
 
   formContainer.empty();
 
-  // dev buttons - to be removed once nav bar is working 100%
-  $('#logout-button').show();
-  $('#edit-user-button').show();
-  $('#delete-user-button').show();
-  $('#view-user-capsules-button').show();
-  $('#sign-up').show();
-  $('#log-in').show();
-
   // nav bar for logged-in users
   $('#nav-try-it').hide();
   $('#nav-edit-user-button').show();
@@ -603,12 +534,20 @@ var renderCapsules = function(data) {
   $('#status-bar').empty();
   $('#status-bar').append("View your time capsules");
 
+  formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
+
   var template = Handlebars.compile($('#view-user-capsules-template').html());
   for(var i=0; i < data.length; i++) {
     formContainer.append(template(data[i]));
-  };
+  }; // end Handlebars
+
+  // call functionality for midlevel account buttons
+  accountUpdateButton();
+  accountDeleteAccount();
+
 }; // end renderCapsules
 // END GET CAPSULES -----------------
+
 
 // LOGOUT ---------------------------
 $('#nav-logout-button').click(function() {
@@ -628,12 +567,34 @@ $('#nav-logout-button').click(function() {
 
 
 // EDIT USER -------------------------
-// click account info in nav, go to account splash
+// click account info in nav, go to account subsection
 $('#nav-my-account-button').click(function() {
   console.log("clicked nav edit user");
-  $('#form-container').empty();
+  // $('#form-container').empty();
   setupAccount();
 });
+
+// subsection buttons
+var accountViewCapsules = function() {
+  $('#account-view-capsules-button').click(function() {
+    console.log("clicked view capsules");
+    getCapsules();
+  })
+};
+
+var accountUpdateButton = function() {
+  $('#account-update-button').click(function() {
+    console.log("clicked update user info");
+    editForm();
+  })
+};
+
+var accountDeleteAccount = function() {
+  $('#account-delete-button').click(function() {
+    console.log("clicked delete account");
+    areYouSure();
+  })
+};
 
 var setupAccount = function() {
   console.log("toplevel edit page");
@@ -643,23 +604,12 @@ var setupAccount = function() {
   $('#form-container').empty();
   $('#form-container').append(template);
 
-  $('#toplevel-view-capsules-button').click(function() {
-    console.log("clicked view capsules");
-    $('#form-container').empty();
-    getCapsules();
-  })
+  // midlevel account buttons
+  accountViewCapsules();
 
- $('#toplevel-update-user-info-button').click(function() {
-    console.log("clicked update user info");
-    $('#form-container').empty();
-    editForm();
-  })
+  accountUpdateButton();
 
-  $('#toplevel-delete-account-button').click(function() {
-    console.log("clicked delete account");
-    $('#form-container').empty();
-    areYouSure();
-  })
+  accountDeleteAccount();
 };
 
 var editForm = function() {
@@ -673,17 +623,9 @@ var editForm = function() {
   $('#status-bar').empty();
   $('#status-bar').append("Manage my account");
 
-  // dev buttons - to be removed once nav bar is working 100%
-  // $('#logout-button').show();
-  // $('#edit-user-button').show();
-  // $('#delete-user-button').show();
-  // $('#view-user-capsules-button').show();
-  // $('#sign-up').show();
-  // $('#log-in').show();
-
   // get user info to populate form
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    url: "/user/"+Cookies.get('loggedinId'),
     method: "GET",
     dataType: 'json',
   }).done(function(data){
@@ -691,11 +633,15 @@ var editForm = function() {
     var template = Handlebars.compile($('#edit-user-template').html());
     $('#form-container').append(template(data));
 
+    // call functionality for midlevel account buttons
+    accountViewCapsules();
+    accountDeleteAccount();
+
     // update button
     $('#update-user-button').click(function(){
       console.log('clicked update user');
       editUser();
-    });
+    }); // end update button
   }); // end ajax
 }; // end editForm
 
@@ -711,7 +657,7 @@ var editUser = function() {
   console.log("user edit sending");
 
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    url: "/user/"+Cookies.get('loggedinId'),
     method: "PUT",
     dataType: 'json',
     data: user_edit
@@ -748,7 +694,12 @@ var areYouSure = function() {
   console.log('showing delete form');
 
   var template = Handlebars.compile($('#delete-user-template').html());
+  $('#form-container').empty();
   $('#form-container').append(template);
+
+  // call functionality for midlevel account buttons
+  accountViewCapsules();
+  accountUpdateButton();
 
   // delete user confirm button
   $('#delete-user-confirm-button').click(function(){
@@ -766,7 +717,7 @@ var deleteUser = function() {
   $('#status-bar').empty();
 
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
+    url: "/user/"+Cookies.get("loggedinId"),
     method: "DELETE",
   }).done(function(){
     //removes cookie
@@ -780,4 +731,46 @@ var deleteUser = function() {
     setUp();
   });
 }; // end deleteUser
-// END DELETE UESR -----------------------
+// END DELETE USER -----------------------
+
+
+// ABOUT ---------------------------------
+$('#nav-about-button').click(function() {
+  console.log("clicked about button");
+  renderAbout();
+});
+
+var renderAbout = function() {
+  // updating status bar
+  var status = $('#status-bar');
+  status.empty();
+  status.append('About TimeCapsule');
+
+  // clearing form container
+  var formContainer = $('#form-container');
+  formContainer.empty();
+
+  // Handlebars
+  var template = Handlebars.compile($('#about-template').html());
+  formContainer.append(template);
+
+  if (Cookies.get("loggedinId") != undefined) {
+  console.log("already logged in");
+
+    // nav bar for logged-in users
+    $('#nav-my-capsules-button').show();
+    $('#nav-my-account-button').show();
+    $('#nav-logout-button').show();
+    $('#nav-login-button').hide();
+    $('#nav-signup-button').hide();
+  }
+  else {
+    // nav bar for non-logged-in users
+    $('#nav-login-button').show();
+    $('#nav-signup-button').show();
+    $('#nav-logout-button').hide();
+    $('#nav-my-account-button').hide();
+    $('#nav-my-capsules-button').hide();
+  } // end conditional
+}; // end renderAbout
+// END ABOUT -----------------------------

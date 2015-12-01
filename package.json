@@ -21,6 +21,8 @@
     "body-parser": "^1.14.1",
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
+    "mandrill": "^0.1.0",
+    "mandrill-api": "^1.0.45",
     "md5": "^2.0.0",
     "mongoose": "^4.2.7",
     "morgan": "^1.6.1"
