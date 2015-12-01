@@ -19,7 +19,7 @@ nav {
 }
 nav ul {
 	text-align: right; 
-	padding-bottom: 20px;
+	padding-bottom: 0px;
 	display: inline;
 	float:right;
 }
@@ -44,7 +44,7 @@ h2, h3, h4, h5, h6 {
 	text-shadow: 1px 1px 1px #000;
 }
 button {
-	background-color: rgba(0,0,0,.5);
+	background-color: rgba(0,0,0,.6);
 	color: #eee;
 	border-color: #eee;
 	border: 1px solid #eee;
@@ -161,6 +161,8 @@ label {
 .active-box-container input[type=submit] {
 	background-color: transparent;
 	margin: 5px;
+	border: 1px solid #eee;
+	color: #eee;
 }
 .active-box-container input[type=submit]:hover {
 	background-color: #4b3b4b;
@@ -184,8 +186,15 @@ label {
 .list-questions {
 	height: 38px;
 	overflow: hidden;
+	color: #eee;
+	text-shadow: 1px 1px 1px #000;
+	opacity: .8;
+}
+#refresh {
+	padding: 4px;
 	opacity: .5;
 }
+
 /*.capsule-sent {
 	background-color: #000;
 }

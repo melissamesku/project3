@@ -28,7 +28,6 @@ $('#nav-my-capsules-button').click(function() {
 });
 
 $('#nav-login-button').click(function() {
-  bigImage.remove();
   loginForm();
 });
 
@@ -37,7 +36,6 @@ $('#nav-logout-button').click(function() {
 });
 
 $('#nav-signup-button').click(function() {
-  bigImage.remove();
   signUpForm();
 });
 
@@ -46,7 +44,11 @@ $('#nav-my-account-button').click(function() {
 });
 
 $('#nav-try-it').click(function() {
-  bigImage.remove();
+  setUp();
+});
+
+$('#refresh').click(function() {
+  formContainer.empty();
   setUp();
 });
 
@@ -286,7 +288,12 @@ var getQuestions = function(){
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
   formContainer.empty();
-  console.log('trying to render questions');
+  formContainer.prepend('<img src="http://melissamesku.com/images/time-capsule-refresh.png" id="refresh" width="30px"/><br/>');
+
+  $('#refresh').click(function() {
+  formContainer.empty();
+  setUp();
+});
 
   // puts questions in boxes with random colors
   var template = Handlebars.compile($('#boxes-template').html());
