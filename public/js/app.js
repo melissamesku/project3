@@ -149,7 +149,7 @@ var newUser = function() {
   console.log(user);
 
   $.ajax({
-    url: "http://localhost:3000/users",
+    url: "/users",
     method: "POST",
     dataType: 'json',
     data: user
@@ -212,7 +212,7 @@ var loginPost = function() {
   };
 
   $.ajax({
-    url: 'http://localhost:3000/login',
+    url: '/login',
     method: "POST",
     dataType: 'json',
     data: user
@@ -256,7 +256,7 @@ var getQuestions = function(){
   status.empty();
 
   $.ajax({
-    url: 'http://localhost:3000/questions',
+    url: '/questions',
     method: 'GET',
     dataType: 'json'
   }).done(function(data) {
@@ -427,7 +427,7 @@ var showQuestions = function(tempQA) {
 var newCapsule = function(tempQA) {
   // saving to new capsule
   $.ajax({
-    url: "http://localhost:3000/capsules",
+    url: "/capsules",
     method: "POST",
     dataType: 'json',
     data: tempQA
@@ -440,7 +440,7 @@ var newCapsule = function(tempQA) {
 // QUESTION TO CURRENT CAPSULE -------------
 var existingCapsule = function(tempQA) {
   $.ajax({
-    url: "http://localhost:3000/capsules/"+Cookies.get('currentCapsule'),
+    url: "/capsules/"+Cookies.get('currentCapsule'),
     method: "PUT",
     dataType: 'json',
     data: tempQA
@@ -488,7 +488,7 @@ $('#view-user-capsules-button').click(function() {
 var getCapsules = function(){
   console.log("getting capsules");
   $.ajax({
-    url: "http://localhost:3000/capsules/"+Cookies.get('loggedinId'),
+    url: "/capsules/"+Cookies.get('loggedinId'),
     method: 'GET',
     dataType: 'json',
   }).done(function(data) {
@@ -513,6 +513,8 @@ var renderCapsules = function(data) {
 
   $('#status-bar').empty();
   $('#status-bar').append("View your time capsules");
+
+  formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
 
   var template = Handlebars.compile($('#view-user-capsules-template').html());
   for(var i=0; i < data.length; i++) {
@@ -603,7 +605,7 @@ var editForm = function() {
 
   // get user info to populate form
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    url: "/user/"+Cookies.get('loggedinId'),
     method: "GET",
     dataType: 'json',
   }).done(function(data){
@@ -635,7 +637,7 @@ var editUser = function() {
   console.log("user edit sending");
 
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get('loggedinId'),
+    url: "/user/"+Cookies.get('loggedinId'),
     method: "PUT",
     dataType: 'json',
     data: user_edit
@@ -695,7 +697,7 @@ var deleteUser = function() {
   $('#status-bar').empty();
 
   $.ajax({
-    url: "http://localhost:3000/user/"+Cookies.get("loggedinId"),
+    url: "/user/"+Cookies.get("loggedinId"),
     method: "DELETE",
   }).done(function(){
     //removes cookie

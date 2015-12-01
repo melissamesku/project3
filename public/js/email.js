@@ -6,7 +6,7 @@ function log(obj) {
 }
 
 // create a new instance of the Mandrill class with your API key
-var m = new mandrill.Mandrill('API KEY');
+var m = new mandrill.Mandrill('ErC_Pp1x5G3LBsNSbDgQLw');
 
 // create a variable for the API call parameters
 var params = {
