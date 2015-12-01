@@ -514,6 +514,8 @@ var renderCapsules = function(data) {
   $('#status-bar').empty();
   $('#status-bar').append("View your time capsules");
 
+  formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
+
   var template = Handlebars.compile($('#view-user-capsules-template').html());
   for(var i=0; i < data.length; i++) {
     formContainer.append(template(data[i]));
