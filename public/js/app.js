@@ -1,27 +1,24 @@
 $(function() {
   console.log('js loaded');
-
   landingPage();
+}); // end document.ready
 
-}); // end doc ready
-
-// GLOBAL VARIABLES --------------
+// #################################################
+// GLOBAL VARIABLES 
+// #################################################
 var user = null;
 var formContainer = $('#form-container');
 var answeredContainer = $('#answered-container');
-var bigImage = $('#big-image');
 var statusBar = $('#status-bar');
 var answeredQuestions = [];
-  // {question: answer}, {question: answer}
 
-// NAV BAR LINK FUNCTIONS
+// #################################################
+// NAV BAR LINKS 
+// #################################################
+
 $('#logo').click(function() {
   setUp();
 });
-
-// $('#nav-home-button').click(function() {
-//   setUp();
-// })
 
 $('#nav-my-capsules-button').click(function() {
   getCapsules();
@@ -52,20 +49,29 @@ $('#refresh').click(function() {
   setUp();
 });
 
-// LANDING PAGE -----------------
-var landingPage = function() {
- 
-  // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
+$('#view-user-capsules-button').click(function() {
+  getCapsules();
+});
 
+// #################################################
+// LANDING PAGE
+// #################################################
+var landingPage = function() {
   $('#nav-try-it').show();
   $('#nav-signup-button').show();
   $('#nav-login-button').show();
   $('#nav-my-capsules-button').hide();
   $('#nav-my-account-button').hide();
   $('#nav-logout-button').hide();
+
+  formContainer.empty();
+  var template = Handlebars.compile($('#landing-template').html());
+  formContainer.append(template);
 };
 
-// SETUP --------------
+// #################################################
+// SETUP 
+// #################################################
 var setUp = function() {
   console.log('setting up');
   $('#form-container').empty();
@@ -109,42 +115,40 @@ var setUp = function() {
   };
 }; // end setUp
 
-
-// SIGN-UP -----------------------
+// #################################################
+// SIGN-UP 
+// #################################################
 var signUpForm = function() {
-    console.log('showing sign up form');
+  // nav bar for non-logged-in users
+  $('#nav-try-it').hide();
+  $('#nav-signup-button').hide();
+  $('#nav-login-button').hide();
+  $('#nav-my-capsules-button').hide();
+  $('#nav-my-account-button').hide();
+  $('#nav-logout-button').hide();
 
-    // nav bar for non-logged-in users
-    $('#nav-try-it').hide();
-    $('#nav-signup-button').hide();
-    $('#nav-login-button').hide();
-    $('#nav-my-capsules-button').hide();
-    $('#nav-my-account-button').hide();
-    $('#nav-logout-button').hide();
+  // updating status bar
+  var status = $('#status-bar');
+  status.empty();
+  status.append('Sign Up!');
 
-    // updating status bar
-    var status = $('#status-bar');
-    status.empty();
-    status.append('Sign Up!');
+  var formContainer = $('#form-container');
+  formContainer.empty();
+  var template = Handlebars.compile($('#signup-template').html());
+  formContainer.append(template);
 
-    var formContainer = $('#form-container');
-    formContainer.empty();
-    var template = Handlebars.compile($('#signup-template').html());
-    formContainer.append(template);
+  // REGISTER BUTTON
+  $('#register-button').click(function(){
+    console.log('clicked register');
+    newUser();
+  });
 
-    // REGISTER BUTTON
-    $('#register-button').click(function(){
-      console.log('clicked register');
-      newUser();
-    });
-
-    // LOG-IN BUTTON - through signup form
-    $('#login-through-signup').click(function() {
-      console.log("clicked login through signup button");
-      loginForm();
-    });
-  }; // sign up form
-
+  // LOG-IN BUTTON - through signup form
+  $('#login-through-signup').click(function() {
+    console.log("clicked login through signup button");
+    loginForm();
+  });
+}; // sign up form
 
 var newUser = function() {
   // checks if age is a number, if not, then 0
@@ -187,7 +191,9 @@ var newUser = function() {
 }; // end newUser
 // END SIGN-UP -----------------------
 
-// LOGIN ---------------------
+// #################################################
+// LOGIN 
+// #################################################
 var loginForm = function() {
   console.log('showing login form');
 
@@ -252,8 +258,9 @@ var loginPost = function() {
 }; //end loginPost
 // END LOGIN ---------------------
 
-
-// GET QUESTIONS ----------------------
+// #################################################
+// GET QUESTIONS 
+// #################################################
 var getQuestions = function(){
   console.log("getting questions");
 
@@ -265,10 +272,7 @@ var getQuestions = function(){
     $('#nav-logout-button').show();
     $('#nav-my-account-button').show();
     $('#nav-signup-button').hide();
-  }
-  else {
-
-  }
+  };
 
   // updating status bar
   var status = $('#status-bar');
@@ -284,18 +288,18 @@ var getQuestions = function(){
   });
 }; // end getQuestions
 
-
 var renderQuestions = function(data) {
   var formContainer = $('#form-container');
   formContainer.empty();
-  formContainer.prepend('<img src="http://melissamesku.com/images/time-capsule-refresh.png" id="refresh" width="30px"/><br/>');
 
+  // small refresh button that appears before question boxes
+  formContainer.prepend('<img src="http://melissamesku.com/images/time-capsule-refresh.png" id="refresh" width="30px"/><br/>');
   $('#refresh').click(function() {
   formContainer.empty();
   setUp();
 });
 
-  // puts questions in boxes with random colors
+  // puts questions in boxes and assigns random colors
   var template = Handlebars.compile($('#boxes-template').html());
   for(var i=0;i<data.length;i++) {
     formContainer.append(template(data[i]));
@@ -341,24 +345,21 @@ var renderQuestions = function(data) {
 
     $(".inner-box").on("click", function() {
       showModal();
-      // $('#modal').toggle(); // this calls the login modal
     });
   };
 }; // end renderQuestions
 
-
-// RANDOM COLORS --------------------
+// #################################################
+// RANDOM COLORS 
+// #################################################
 var getRandomColor = function() {
-  // colors = ['#cc33cc', '#9933cc', '#3333cc', '#3366cc', '#3399cc', '#33cccc', '#33cc99', '#33cc66', '#66cc33', '#99cc33', '#cccc33', '#cc9933', '#cc6633', '#cc3333', '#cc3366', '#999933', '#cccc00', '#99cc00']
-  // colors = ['#ba321a', '#ba7f1a', '#3333cc', '#bab21a', '#a7ba1a', '#1aba8d', '#1aafba', '#1a6fba', '#521aba', '#721aba', '#921aba', '#a51aba', '#7a0202', '#cc3366', '#7a0250', '#027a58', '#7a6a02']
-  // colors = ['#996600', '#b5b700',  '#666666', '#16aca0', '#99004c', '#859900', '#990097', '#1687ac', '#cccccc' ]
-  // colors = ['#a2774a', '#a48f78', '#a9a88d', '#caaf40', '#99a9ba', '#8e5c42', '#d6b74e', '#ceb9ae', '#cccccc', '#eeeeee' ]
   colors = ['#846684', '#929dbb', '#92b3bb', '#92bba5', '#a6bb92', '#b6bb92', '#bbb392', '#bbae92', '#cccccc', '#eeeeee', '#bba492', '#929bbb', '#a79782', '#a78e82' ];
   return colors[Math.floor(Math.random()*colors.length)];
 }; // end getRandomColor
 
-
-// LOGIN MODAL ----------------------
+// #################################################
+// LOGIN MODAL 
+// #################################################
 var showModal = function() {
 
   $('#modal').toggle(); // this calls the login modal
@@ -380,15 +381,13 @@ var showModal = function() {
   });
 };
 
-
-// SHOW INPUT BOXES --------------
+// #################################################
+// SHOW INPUT BOXES 
+// #################################################
 // loads answer/submit template
 var renderTextInput = function(id, quest) {
-  // $(this).addClass('inner-box-active');
-  // $(this).removeClass('inner-box');
   console.log("I'm just console logging the id: " + id);
   var innerBoxById = $('#' + id);
-  // innerBoxById.empty();
   var template = Handlebars.compile($('#active-box-template').html());
   innerBoxById.append(template);
 
@@ -422,13 +421,11 @@ var renderTextInput = function(id, quest) {
 }; // end renderTextInput
 // END QUESTIONS --------------------
 
-
-// SHOW QUESTIONS -------------------
-// saves Q/A to temp array & appends to sidebar
+// #################################################
+// SHOW QUESTIONS 
+// #################################################
+// shows questions in sidebar-area
 var showQuestions = function(tempQA) {
-  console.log('showing questions list');
-
-  // just showing answered questions in side
   answeredQuestions.push(tempQA);
   console.log(answeredQuestions);
   answeredContainer.empty();
@@ -438,18 +435,12 @@ var showQuestions = function(tempQA) {
     answeredContainer.append(template(answeredQuestions[i]))
   };
 
-  // MELISSA'S GRAVEYARD OF TRYING TO TRUNCATE THE STRINGS IN SIDEBAR;
-  // var questionInList = $('.list-questions');
-  // var yellow = questionInList.css('color', '#666');
-  // var shortText = $.trim(questionInList).substring(0, 10).split(" ").slice(0, -1).join(" ") + "...";
-
-  ////// need date/calendar or button/input
-
   answeredContainer.append("<button id='submit-capsule' data-id='{{_id}}'>Create Time Capsule!</button>");
 }; // end show question
 
-
-// QUESTION TO NEW CAPSULE -------------------
+// #################################################
+// QUESTION TO NEW CAPSULE 
+// #################################################
 var newCapsule = function(tempQA) {
   // saving to new capsule
   $.ajax({
@@ -463,7 +454,11 @@ var newCapsule = function(tempQA) {
   }); // end ajax request
 }; // end new capsule
 
-// QUESTION TO CURRENT CAPSULE -------------
+
+// #################################################
+// QUESTION TO CURRENT CAPSULE 
+// #################################################
+
 var existingCapsule = function(tempQA) {
   $.ajax({
     url: "/capsules/"+Cookies.get('currentCapsule'),
@@ -484,32 +479,26 @@ var submitCapsule = function(){
     console.log('capsule cookie deleted');
 
     // empties sidebar/questions array
-    // leaves saved message
     answeredContainer.empty();
     formContainer.empty();
     var template = Handlebars.compile($('#after-capsule-sent').html());
     formContainer.append(template);
-    // bigImage.addClass('capsule-sent');
-    // bigImage.append("<img src='http://melissamesku.com/images/nasa-time-capsule.jpg'>");
-
-    // answeredContainer.append("<div class='list-questions'>Capsule Saved!</div>");
 
     answeredQuestions = [];
 
     // snaps the box back to original color/shape
     // not working
-    var innerBoxById = $('#' + id);
-    innerBoxById.empty();
+    // var innerBoxById = $('#' + id);
+    // innerBoxById.empty();
 
     $('.outer-box').removeClass('.outer-box-active');
   });
 };
 
-// GET CAPSULES  -------------------------
-$('#view-user-capsules-button').click(function() {
-  console.log("clicked view user capsules button");
-  getCapsules();
-});
+
+// #################################################
+// GET CAPSULES 
+// #################################################
 
 var getCapsules = function(){
   console.log("getting capsules");
@@ -526,8 +515,6 @@ var getCapsules = function(){
 }; // end getCapsules
 
 var renderCapsules = function(data) {
-  console.log("rendering a user's capsules");
-
   formContainer.empty();
 
   // nav bar for logged-in users
@@ -540,7 +527,6 @@ var renderCapsules = function(data) {
 
   $('#status-bar').empty();
   $('#status-bar').append("My time capsules");
-
   formContainer.prepend("<button id='account-update-button'>Update account information</button><br><button id='account-delete-button'>Delete account</button><br>");
 
   var template = Handlebars.compile($('#view-user-capsules-template').html());
@@ -556,10 +542,11 @@ var renderCapsules = function(data) {
 // END GET CAPSULES -----------------
 
 
-// LOGOUT ---------------------------
+// #################################################
+// LOGOUT 
+// #################################################
+
 $('#nav-logout-button').click(function() {
-  console.log('clicked logout');
-  //removes cookie
   Cookies.remove('loggedinId');
   console.log('user cookie deleted, logged out');
   // takes us back to beginning
@@ -573,25 +560,24 @@ $('#nav-logout-button').click(function() {
 // END LOGOUT -----------------------
 
 
-// EDIT USER -------------------------
+// #################################################
+// EDIT USER 
+// #################################################
+
 // click account info in nav, go to account subsection
 $('#nav-my-account-button').click(function() {
-  console.log("clicked nav edit user");
-  // $('#form-container').empty();
   setupAccount();
 });
 
 // subsection buttons
 var accountViewCapsules = function() {
   $('#account-view-capsules-button').click(function() {
-    console.log("clicked view capsules");
     getCapsules();
   })
 };
 
 var accountUpdateButton = function() {
   $('#account-update-button').click(function() {
-    console.log("clicked update user info");
     editForm();
   })
 };
@@ -620,8 +606,7 @@ var setupAccount = function() {
 };
 
 var editForm = function() {
-  console.log('showing edit form');
-
+  // nav bar
   $('#nav-view-user-capsules-button').show();
   $('#nav-logout-button').show();
 
@@ -652,7 +637,6 @@ var editForm = function() {
   }); // end ajax
 }; // end editForm
 
-
 var editUser = function() {
   var user_edit = {
     email: $('#email').val(),
@@ -669,19 +653,19 @@ var editUser = function() {
     dataType: 'json',
     data: user_edit
   }).done(function(data){
-    // returns string "User updated"
-    console.log("edit ajax completed")
-    console.log("from server: "+data);
+    console.log("edited! from server: "+data);
     getQuestions();
   }); // end put
 }; // end editUser
 // END EDIT USER ---------------------
 
 
-// DELETE USER -------------------------
+// #################################################
+// DELETE USER 
+// #################################################
+
 // delete button
 $('#toplevel-delete-account-button').click(function(){
-  console.log('clicked delete user');
   $('#form-container').empty();
 
   // nav bar
@@ -696,7 +680,7 @@ $('#toplevel-delete-account-button').click(function(){
   areYouSure();
 });
 
-// double checks if wants to delete
+// double check if user wants to delete
 var areYouSure = function() {
   console.log('showing delete form');
 
@@ -712,7 +696,7 @@ var areYouSure = function() {
   $('#delete-user-confirm-button').click(function(){
     console.log('clicked confirm delete user');
     deleteUser();
-    delContainer.empty();
+    $('#form-container').empty();
   });
 }; // end areYouSure
 
@@ -741,7 +725,10 @@ var deleteUser = function() {
 // END DELETE USER -----------------------
 
 
-// ABOUT ---------------------------------
+// #################################################
+// ABOUT 
+// #################################################
+
 $('#nav-about-button').click(function() {
   console.log("clicked about button");
   renderAbout();
