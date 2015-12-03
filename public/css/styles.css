@@ -3,7 +3,6 @@
 
 body {
 	font-family: 'Playfair Display', sans-serif;
-	background-color: #eee;
 	background: url(http://melissamesku.com/images/nasa-time-capsule-bkg.jpg) no-repeat fixed; 
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -13,13 +12,10 @@ body {
 nav {
 	width: 100%;
 	background-color: rgba(0,0,0,.7);
-	opacity: 1;
 	font-family: 'Pontano Sans';
-	padding:0;
 }
 nav ul {
 	text-align: right; 
-	padding-bottom: 0px;
 	display: inline;
 	float:right;
 }
@@ -79,6 +75,9 @@ p {
 	font-size: 24px;
 	text-shadow: 1px 1px 1px #000;
 }
+p.small-text {
+	font-size: .9em;
+}
 footer {
 	position: fixed;
 	bottom: 0;
@@ -90,6 +89,9 @@ footer {
 	color: #eee;
 	opacity: .8;
 	font-size: .7em;
+}
+.landing {
+	font-size: 3em;
 }
 #form-container {
 	padding-top: 40px;
@@ -137,7 +139,6 @@ footer {
 	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
 	padding: 5px;
 }
-
 label {
 	color: #fff;
 	font-size: 20px;
@@ -167,9 +168,6 @@ label {
 	background-color: #4b3b4b;
 	color:#eee;
 }
-/*.inner-box {
-	background-color: #fff;
-}*/
 #answered-container {
 	font-size: .8em;
 }
@@ -193,23 +191,6 @@ label {
 	padding: 4px;
 	opacity: .5;
 }
-
-/*.capsule-sent {
-	background-color: #000;
-}
-#big-image {
-	padding: 0;
-	margin: 0;
-	background-image: url(http://melissamesku.com/images/nasa-time-capsule.jpg); 
-	background-color: #000;
-}
-#big-image-text {
-	margin: 0 auto;
-	text-align: center;
-	color: #ccc;
-}*/
-
-
 
 
 /* MODAL */
@@ -244,7 +225,6 @@ label {
 	text-align: left;
 	font-size: 20px;
 	padding: 0px 14px 6px 14px;
-/*	background-color: none;*/
 	border:none;
 	margin: 2px;
 }
