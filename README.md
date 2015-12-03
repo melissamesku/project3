@@ -70,6 +70,15 @@ DELETE ACCOUNT
 3. if user selects delete account, a secondary view renders asking the user if he or she is sure; if the confirmation button is clicked, the account, including time capsules, is deleted
 4.question boxes render
 
+============
+CHALLENGES
+============
+
+On the backend side, we ran into a challenge where we were trying to have each answer be saved as an object in array on the front end with the other answers. Then having the entire array be passed to the  server in an ajax request. Ajax, however, won’t take a complex array-of-objects data structure. It removes the ‘object' wrapping each piece of data and changes it into a giant object with each key being an array index. We tried to play with some of the ajax settings (such as processData:false, etc.) but were unsuccessful.
+
+We ended up simplifying the data passed to the ajax, by just passing each answer at a time. The first answer passed creates a time capsule and passes it’s ID into a cookie. With each subsequent answer, the front end uses an if statement to see if a capsule cookie exists, and if so, saves it into the same capsule via a query using the capsule cookie. Then when the user clicks ‘submit capsule’, the cookie is deleted. Essentially it’s a session just for a capsule.
+
+
 
 
 
