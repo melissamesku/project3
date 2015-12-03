@@ -78,6 +78,8 @@ On the backend side, we ran into a challenge where we were trying to have each a
 
 We ended up simplifying the data passed to the ajax, by just passing each answer at a time. The first answer passed creates a time capsule and passes it’s ID into a cookie. With each subsequent answer, the front end uses an if statement to see if a capsule cookie exists, and if so, saves it into the same capsule via a query using the capsule cookie. Then when the user clicks ‘submit capsule’, the cookie is deleted. Essentially it’s a session just for a capsule.
 
+Late in the process, we tried to implement Moment.js to manipulate the display format of dates. Given more time, this could have been implemented, but the clock ran out. Luckily, the data science-y default date/time fit into the theme of the app, so a user wouldn't necessarily notice.
+
 
 
 
