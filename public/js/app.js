@@ -319,7 +319,7 @@ var renderQuestions = function(data) {
     $('#nav-login-button').hide();
     $('#nav-signup-button').hide();
 
-    $(".inner-box").one("click", function() {
+    $(".inner-box").on("click", function() {
       $(this).parent('.outer-box').addClass('outer-box-active');
 
       var id = $(this).parent('.outer-box').attr('id');
